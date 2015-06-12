@@ -1,1 +1,43 @@
-{}
+{
+  "albums":[
+    {
+      "title": "Robby Valentine"
+    },
+    {
+      "title": "The Magic Infinity"
+    },
+    {
+      "title": "Valentine"
+    },
+    {
+      "title": "Valentine 4: United"
+    },
+    {
+      "title": "No Sugar Added"
+    },
+    {
+      "title": "Believing Is Seeing"
+    },
+    {
+      "title": "The Most Beautiful Pain"
+    },
+    {
+      "title": "Falling Down In Misanthropolis"
+    },
+    {
+      "title": "Androgenius"
+    },
+    {
+      "title": "A Tribute To Queen"
+    },
+    {
+      "title": "A Tribute To Queen 2"
+    },
+    {
+      "title": "The Queen Album"
+    },
+    {
+      "title": "Bizarro World"
+    }
+  ]
+}
