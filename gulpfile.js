@@ -20,7 +20,20 @@ var paths = {
     sass: './src/static/scss',
     css: './src/static/css',
     content: './content/pages',
-    www: './www'
+    www: './www',
+    templates: './src/templates',
+    tmp: './tmp'
+};
+
+// regex
+var regex = {
+    template: "{\\% extends '[a-z]+\\.swig' \\%}"
+};
+
+// strings to replace
+var strings = {
+    templateStart: "{% extends '",
+    templateEnd: "' %}"
 };
 
 function writeFile (path, contents, cb) {
@@ -58,19 +71,37 @@ function getFileName(file){
     return path.basename(file);
 }
 
+function getTemplateNameFromFile(file){
+
+    // read file
+    var data = fs.readFileSync(file, { encoding: 'utf-8' });
+
+    // check for template string
+    var reg = new RegExp(regex.template),
+        string = reg.exec(data);
+
+    if(string){
+        return string[0].replace(strings.templateStart, '').replace(strings.templateEnd, '');
+    }
+
+    return false;
+
+}
+
 function getData(){
-    var data = {};
+    var data = {
+        data: {}
+    };
 
     // get data files
-    var files = walk('content/data', function(path, stat){
+    walk('content/data', function(path, stat){
 
         var name = stripExtension(getFileName(path)),
             ext = getExtension(path);
 
         if(ext === 'json'){
-
             // read file
-            data[name] = JSON.parse(fs.readFileSync(path, 'utf8'));
+            data.data[name] = JSON.parse(fs.readFileSync(path, 'utf8'));
         }
 
     });
@@ -95,45 +126,87 @@ gulp.task('swig', function(){
 
     var swigFiles = [];
 
-    // loop through all files
-    walk('content/pages/', function(path, stat){
+    // copy all files to temp
+    fse.copy(paths.content, paths.tmp, function(err, success){
 
-        var ext = getExtension(path);
-
-        switch(ext){
-            case 'swig':
-                swigFiles.push(path);
+        if(err){
+            return;
         }
+
+        // loop through all files
+        walk(paths.tmp, function(path, stat){
+
+            var ext = getExtension(path);
+
+            switch(ext){
+                case 'swig':
+                    swigFiles.push(path);
+            }
+
+        });
+
+        // loop through all swig files
+        swigFiles.forEach(function(file){
+
+            // strip extension from file
+            var name = file.substr(0, file.indexOf('.swig')),
+                json = name + '.json';
+
+            // get site-wide data
+            var data = getData();
+
+            // check is a JSON file exists with the same file
+            var page = fse.readJsonSync(json, { throws: false });
+
+            if(page){
+                data.data[page] = page;
+            }
+
+            // invalidate the swig cache
+            swig.invalidateCache();
+
+            // get template file name
+            var template = getTemplateNameFromFile(file);
+
+            if(!template){
+                console.log("No template defined in file: ."  + file);
+                return;
+            }
+
+            // get relative template path
+            var pathToTemplate = paths.templates + '/' + template;
+
+            // replace extends statement in file
+            var text = fs.readFile(file, 'utf8', function(err, content){
+
+                if(err){
+                    console.log('Cannot read file: ' + file);
+                }
+
+                // replace
+                content = content.replace(template, path.relative(file.substr(0, file.lastIndexOf('/')), pathToTemplate));
+
+                // write relative template path to temp file
+                writeFile(file, content, function(err){
+                    if(err){
+                        console.log('Unable to write file:' + file);
+                    }
+
+                    // render template using swig
+                    var swiggedContent = swig.renderFile(file, data);
+
+                    // write rendered template to file
+                    writeFile(paths.www + '/' + name + '.html', swiggedContent, function(){});
+
+                });
+
+            });
+
+        });
+
 
     });
 
-    // loop through all swig files
-    swigFiles.forEach(function(file, index){
-
-        // strip extension from file
-        var name = file.substr(0, file.indexOf('.swig')),
-            json = name + '.json';
-
-        // get site-wide data
-        var data = getData();
-
-        // check is a JSON file exists with the same file
-        var page = fse.readJsonSync(json, { throws: false });
-
-        if(page){
-            data.page = page;
-        }
-
-        // invalidate the swig cache, otherwise the templates get cached and output using the same layout
-        swig.invalidateCache();
-
-        // render template using swig
-        var swiggedContent = swig.renderFile(file, data);
-
-        // write rendered template to file
-        writeFile(paths.www + '/' + name + '.html', swiggedContent, function(){});
-
-    });
 
 });
 

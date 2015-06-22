@@ -1,4 +1,4 @@
-﻿﻿{% extends '../../src/templates/default.swig' %}
+﻿﻿{% extends 'default.swig' %}
 
 {% block content %}
         Index.
