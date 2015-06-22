@@ -44,6 +44,41 @@ function walk(currentDirPath, callback) {
     });
 }
 
+function getExtension(file){
+    return file.substr((~-file.lastIndexOf(".") >>> 0) + 2);
+}
+
+function stripExtension(file){
+    var ext = '.' + getExtension(file);
+    return file.replace(ext, '');
+}
+
+function getFileName(file){
+    // remove extension
+    return path.basename(file);
+}
+
+function getData(){
+    var data = {};
+
+    // get data files
+    var files = walk('content/data', function(path, stat){
+
+        var name = stripExtension(getFileName(path)),
+            ext = getExtension(path);
+
+        if(ext === 'json'){
+
+            // read file
+            data[name] = JSON.parse(fs.readFileSync(path, 'utf8'));
+        }
+
+    });
+
+    return data;
+
+}
+
 // sass
 gulp.task('sass', function() {
     return gulp.src(paths.sass + '/screen.scss')
@@ -57,10 +92,6 @@ gulp.task('sass', function() {
 
 // swig
 gulp.task('swig', function(){
-
-    var getExtension = function(file){
-        return file.substr((~-file.lastIndexOf(".") >>> 0) + 2);
-    };
 
     var swigFiles = [];
 
@@ -77,17 +108,14 @@ gulp.task('swig', function(){
     });
 
     // loop through all swig files
-    swigFiles.forEach(function(file){
+    swigFiles.forEach(function(file, index){
 
         // strip extension from file
         var name = file.substr(0, file.indexOf('.swig')),
             json = name + '.json';
 
         // get site-wide data
-        var data = {
-            "blaat": "1",
-            "lorem": "2"
-        };
+        var data = getData();
 
         // check is a JSON file exists with the same file
         var page = fse.readJsonSync(json, { throws: false });
