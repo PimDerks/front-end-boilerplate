@@ -1,10 +1,11 @@
 {
-  "name": "RobbyValentine.nl",
+  "name": "Front-end boilerplate",
   "version": "0.0.1",
-  "description": "Official website for Robby Valentine",
+  "description": "Boilerplate for FED",
   "devDependencies": {
     "browser-sync": "^2.7.6",
     "fs-extra": "^0.19.0",
+    "fs-promise": "^0.3.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.0",
     "gulp-connect": "^2.2.0",
