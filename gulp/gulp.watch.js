@@ -15,6 +15,9 @@ module.exports = function(browserSync) {
         // watch sass files
         gulp.watch(config.paths.sass + '/**/*', ['sass']);
 
+        // watch www
+        gulp.watch(config.paths.www + '/**/*').on('change', browserSync.reload);
+
     };
 
 };

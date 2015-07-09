@@ -14,6 +14,11 @@ module.exports = (function(){
             tmp: './tmp'
         },
 
+        // server
+        server: {
+            port: 4444
+        },
+
         // regex
         regex: {
             template: "{\\% extends '[a-z]+\\.swig' \\%}"
