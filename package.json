@@ -17,6 +17,7 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-swig": "^0.7.4",
     "gulp-watch": "^4.2.4",
+    "jshint-stylish": "^2.0.1",
     "json-file": "^0.1.0",
     "lodash": "^3.9.3",
     "mkdirp": "^0.5.1",
