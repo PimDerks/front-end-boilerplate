@@ -15,3 +15,7 @@ Lorem ipsum
 * BEM
 * AutoPrefixer
 * Node.JS
+
+## Icons
+
+Favicons can be generated at http://realfavicongenerator.net/. They are put in the /src/icons/-directory.
