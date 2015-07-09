@@ -6,6 +6,7 @@ module.exports = (function(){
         paths: {
             sass: './src/static/scss',
             css: './src/static/css',
+            js: './src/static/js',
             content: './content/pages',
             www: './www',
             templates: './src/templates',
