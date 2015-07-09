@@ -9,8 +9,11 @@ module.exports = function(browserSync) {
         // watch content
         gulp.watch(config.paths.content + '/**/*', ['swig']);
 
+        // watch data
+        gulp.watch(config.paths.data + '/**/*', ['swig']);
+
         // watch sass files
-        gulp.watch(config.paths.sass + '/**/*',['sass']);
+        gulp.watch(config.paths.sass + '/**/*', ['sass']);
 
     };
 

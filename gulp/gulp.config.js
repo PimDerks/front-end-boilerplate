@@ -7,6 +7,7 @@ module.exports = (function(){
             sass: './src/static/scss',
             css: './src/static/css',
             js: './src/static/js',
+            data: './content/data',
             content: './content/pages',
             www: './www',
             templates: './src/templates',
