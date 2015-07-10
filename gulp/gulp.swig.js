@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    cache = require('gulp-cached');
     swig = require('swig'),
     path = require('path'),
     config = require('./gulp.config'),

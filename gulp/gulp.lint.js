@@ -1,7 +1,9 @@
 var gulp = require('gulp'),
     scsslint = require('gulp-scss-lint'),
     jshint = require('gulp-jshint'),
-    config = require('./gulp.config');
+    config = require('./gulp.config'),
+    htmlhint = require("gulp-htmlhint"),
+    w3cjs = require('gulp-w3cjs');
 
 gulp.task('jshint', function() {
     return gulp.src(config.paths.js + '/**/*.js')
@@ -19,4 +21,19 @@ gulp.task('scsslint', function() {
 
 });
 
-module.exports = ['jshint', 'scsslint'];
+gulp.task('w3c', function () {
+
+    return gulp.src(config.paths.www + '/**/*.html')
+        .pipe(w3cjs());
+
+});
+
+gulp.task('htmlhint', function () {
+
+    return gulp.src(config.paths.www + '/**/*.html')
+        .pipe(htmlhint())
+        .pipe(htmlhint.failReporter());
+
+});
+
+module.exports = ['jshint', 'scsslint', 'htmlhint', 'w3c'];
