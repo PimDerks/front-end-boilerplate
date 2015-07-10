@@ -22,21 +22,17 @@ Lorem ipsum
 
 Default task which you would normally use.
 
-### gulp dev --prod
-
-Use minified code for all static resources (CSS, JavaScript, images).
-
 ### gulp lint
 
 Lint the code-base (SCSS, JavaScript, HTML).
 
 ### gulp build
 
-Build target. This is just a call to gulp dev --prod which gets copied to the /dest/ folder (for now).
+Build target. This runs the gulp dev command, copies the /www/ directory to /dest/ and minifies the CSS/JS/images.
 
 ### gulp deploy
 
-Uploads the /www/ directory to the configured FTP-server.
+Uploads the /build/ directory to the configured FTP-server.
 
 ## Icons
 
