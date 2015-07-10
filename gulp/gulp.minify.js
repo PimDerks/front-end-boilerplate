@@ -1,7 +1,23 @@
 var gulp = require('gulp'),
     util = require('gulp-util'),
     imagemin = require('gulp-imagemin'),
-    pngquant = require('imagemin-pngquant');
+    pngquant = require('imagemin-pngquant'),
+    uglify = require('gulp-uglify');
+
+gulp.task('uglify', function() {
+
+    gulp.task('compress', function() {
+
+        var src = config.roots.www + '/' + config.paths.static + '/' + config.paths.js + '/*',
+            dest = config.roots.www + '/' + config.paths.staticMin + '/' + config.paths.js;
+
+        return gulp.src(src)
+            .pipe(uglify())
+            .pipe(gulp.dest(dest));
+
+    });
+
+});
 
 gulp.task('imagemin', function () {
 
@@ -15,4 +31,4 @@ gulp.task('imagemin', function () {
 
 });
 
-module.exports = ['imagemin'];
+module.exports = ['imagemin', 'uglify'];
