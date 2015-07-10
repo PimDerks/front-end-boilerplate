@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns#">
     <head>
         <title>Blaat.</title>
         <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-touch-icon-57x57.png">
@@ -21,6 +22,14 @@
         <meta name="msapplication-TileImage" content="/icons/mstile-144x144.png">
         <meta name="msapplication-config" content="/icons/browserconfig.xml">
         <meta name="theme-color" content="#ffffff">
+
+        <!-- Open Graph Data -->
+        <meta property="og:title" content="" />
+        <meta property="og:type" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:image" content="" />
+        <!-- /Open Graph Data -->
+        
     </head>
     <body>
         <p>Template</p>
