@@ -56,5 +56,29 @@
 
         <p>Template</p>
 
+        <script>
+            var require = { // require js configuration
+                "urlArgs": "v=0.0.0.2"
+            };
+        </script>
+        <script>
+            (function(){
+
+                var d = document;
+
+                if (!('querySelector' in d && 'addEventListener' in window)) {return;}
+
+                d.addEventListener('DOMContentLoaded', function() {
+
+                    // load requirejs
+                    var s = d.createElement('script');
+                    s.setAttribute('src', '/static/js/vendor/jrburke/require.js');
+                    s.setAttribute('data-main', '/static/js/main');
+                    d.body.appendChild(s);
+
+                });
+
+            }());
+        </script>
     </body>
 </html>
