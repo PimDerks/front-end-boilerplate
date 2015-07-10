@@ -9,6 +9,7 @@ module.exports = (function(){
             js: './src/static/js',
             data: './content/data',
             content: './content/pages',
+            assets: './src/static/assets/img',
             www: './www',
             templates: './src/templates',
             tmp: './tmp'
