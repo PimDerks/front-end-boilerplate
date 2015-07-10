@@ -29,7 +29,7 @@ var methods = {
 
         var result = [];
 
-        utils.walk(config.paths.tmp, function(path){
+        utils.walk(config.roots.tmp, function(path){
 
             var ext = utils.getExtension(path);
 
@@ -51,7 +51,7 @@ var methods = {
         };
 
         // get data files
-        utils.walk('content/data', function(path){
+        utils.walk(config.roots.content + '/' + config.content.data, function(path){
 
             var name = utils.stripExtension(utils.getFileName(path)),
                 ext = utils.getExtension(path);
@@ -89,7 +89,7 @@ var methods = {
     getRelativeTemplatePath: function(file, template){
 
         // get relative template path
-        var pathToTemplate = config.paths.templates + '/' + template;
+        var pathToTemplate = config.roots.src + '/' + config.paths.templates + '/' + template;
 
         // return relative path
         return path.relative(file.substr(0, file.lastIndexOf('/')), pathToTemplate)
@@ -215,8 +215,12 @@ var methods = {
         // render template using swig
         var swiggedContent = swig.renderFile(src, data);
 
+        // strip /tmp/ dir from filename
+        var removeDir = config.roots.tmp.replace('./','');
+        name = name.replace(removeDir + '/', '');
+
         // write rendered template to file
-        utils.writeFile(config.paths.www + '/' + name + '.html', swiggedContent, function(err){
+        utils.writeFile(config.roots.www + '/' + name + '.html', swiggedContent, function(err){
             if(err){
                 console.log("Unable to render page: " + src);
                 return;
@@ -234,7 +238,7 @@ module.exports = function() {
     var swigFiles = [];
 
     // copy all files to temp
-    methods.copy(config.paths.content, config.paths.tmp).then(function() {
+    methods.copy(config.roots.content + '/' + config.content.pages, config.roots.tmp).then(function() {
 
         methods.setMasterPagePaths().then(function () {
 

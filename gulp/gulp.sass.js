@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    util = require('gulp-util'),
     watch = require('gulp-watch'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -7,10 +8,11 @@ var gulp = require('gulp'),
 
 module.exports = function() {
 
-    return gulp.src([config.paths.sass + '/screen.scss'])
+    return gulp.src([config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/screen.scss'])
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(autoprefixer('last 1 version', '> 5%', 'ie 9'))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(config.paths.css));
+        .pipe(gulp.dest(config.roots.www + '/' + config.paths.static + '/' + config.paths.css));
+
 };

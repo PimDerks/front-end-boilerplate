@@ -2,17 +2,31 @@ module.exports = (function(){
 
     return {
 
+        // roots
+        roots: {
+            src: './src',
+            www: './www',
+            tmp: './tmp',
+            dest: './dest',
+            content: './content'
+        },
+
+        // data
+        content: {
+            pages: 'pages', // becomes roots.content + this
+            data: 'data' // becomes roots.content + this
+        },
+
         // path
         paths: {
-            sass: './src/static/scss',
-            css: './src/static/css',
-            js: './src/static/js',
-            data: './content/data',
-            content: './content/pages',
-            assets: './src/static/assets/img',
-            www: './www',
-            templates: './src/templates',
-            tmp: './tmp'
+            static: 'static',
+            staticMin: 'static-min',
+            sass: 'scss',
+            css: 'css',
+            js: 'js',
+            img: 'assets/img',
+            fonts: 'assets/fonts',
+            templates: 'templates'
         },
 
         // server
@@ -28,7 +42,7 @@ module.exports = (function(){
         // strings to replace
         strings: {
             templateStart: "{% extends '",
-                templateEnd: "' %}"
+            templateEnd: "' %}"
         }
 
     }
