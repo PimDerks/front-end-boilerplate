@@ -3,10 +3,14 @@ var gulp = require('gulp'),
 
 module.exports = function(browserSync){
 
-    browserSync.init({
-        server: {
-            baseDir: config.paths.www
-        }
-    });
+    return function(){
+
+        browserSync.init({
+            server: {
+                baseDir: config.paths.www
+            }
+        });
+
+    }
 
 };
