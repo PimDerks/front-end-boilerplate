@@ -4,13 +4,19 @@ var gulp = require('gulp'),
     jshint = require('gulp-jshint'),
     config = require('./gulp.config'),
     htmlhint = require("gulp-htmlhint"),
-    w3cjs = require('gulp-w3cjs');
+    w3cjs = require('gulp-w3cjs'),
+    jscs = require('gulp-jscs');
 
 gulp.task('jshint', function() {
     return gulp.src(config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*.js')
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('jscs', function () {
+    return gulp.src(config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*.js')
+        .pipe(jscs());
 });
 
 gulp.task('scsslint', function() {
@@ -37,4 +43,4 @@ gulp.task('htmlhint', function () {
 
 });
 
-module.exports = ['jshint', 'scsslint', 'htmlhint', 'w3c'];
+module.exports = ['jshint', 'jscs', 'scsslint', 'htmlhint', 'w3c'];
