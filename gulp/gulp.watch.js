@@ -13,6 +13,10 @@ module.exports = function(browserSync) {
         // watch data
         gulp.watch(config.roots.content + '/' + config.content.data + '/**/*', ['swig']);
 
+        // watch swig
+        gulp.watch(config.roots.src + '/' + config.paths.templates + '/**/*', ['swig']);
+        gulp.watch(config.roots.src + '/' + config.paths.includes + '/**/*', ['swig']);
+
         // watch sass files
         gulp.watch(config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/**/*', ['sass']);
 

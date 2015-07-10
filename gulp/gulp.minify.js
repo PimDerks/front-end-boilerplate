@@ -3,7 +3,9 @@ var gulp = require('gulp'),
     imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant'),
     uglify = require('gulp-uglify'),
-    minifyCss = require('gulp-minify-css');
+    minifyCss = require('gulp-minify-css'),
+    concat = require('gulp-concat'),
+    amdOptimize = require('gulp-amd-optimize');
 
 gulp.task('minify-css', function() {
 
@@ -12,6 +14,23 @@ gulp.task('minify-css', function() {
 
     return gulp.src(src)
         .pipe(minifyCss({compatibility: 'ie8'}))
+        .pipe(gulp.dest(dest));
+
+});
+
+gulp.task('amdOptimize', function(){
+
+    var src = config.roots.www + '/' + config.paths.static + '/' + config.paths.js + '/**/*',
+        dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.js;
+
+    return gulp.src(src)
+        .pipe(amdOptimize("main", {
+            "paths": {
+                "conditioner": 'vendor/rikschennink/conditioner',
+                "modernizr": 'vendor/paulirish/modernizr'
+            }
+        }))
+        .pipe(concat("index.js"))
         .pipe(gulp.dest(dest));
 
 });
@@ -39,4 +58,4 @@ gulp.task('imagemin', function () {
 
 });
 
-module.exports = ['imagemin', 'uglify', 'minify-css'];
+module.exports = ['imagemin', 'uglify', 'minify-css', 'amdOptimize'];

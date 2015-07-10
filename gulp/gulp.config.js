@@ -25,6 +25,7 @@ module.exports = (function(){
             css: 'css',
             js: 'js',
             assets: 'assets',
+            includes: '_includes',
             img: 'assets/img',
             fonts: 'assets/fonts',
             templates: 'templates'

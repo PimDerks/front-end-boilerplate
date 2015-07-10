@@ -13,7 +13,6 @@
     });
 
     require(['config', 'modernizr', 'conditioner'], function(config, Modernizr, Conditioner){
-        console.log('init!', config, new Date());
         Conditioner.init(config);
     });
 

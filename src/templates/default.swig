@@ -56,6 +56,7 @@
 
         <p>Template</p>
 
+        <div data-module="ui/Test"></div>
         <script>
             var require = { // require js configuration
                 "urlArgs": "v=0.0.0.2"
