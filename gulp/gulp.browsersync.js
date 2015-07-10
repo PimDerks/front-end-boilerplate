@@ -7,7 +7,7 @@ module.exports = function(browserSync){
 
         browserSync.init({
             server: {
-                baseDir: config.paths.www
+                baseDir: config.roots.www
             }
         });
 
