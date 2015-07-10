@@ -9,9 +9,8 @@ gulp.task('sass', require('./gulp/gulp.sass'));
 gulp.task('swig', require('./gulp/gulp.swig'));
 gulp.task('minify', require('./gulp/gulp.minify'));
 gulp.task('lint', require('./gulp/gulp.lint'));
+gulp.task('copy', require('./gulp/gulp.copy'));
 gulp.task('browser-sync', require('./gulp/gulp.browsersync')(browserSync));
 
 // dev
-gulp.task('dev', ['watch', 'browser-sync']);
-
-console.log(util.env);
+gulp.task('dev', ['copy', 'sass', 'swig', 'watch', 'browser-sync']);

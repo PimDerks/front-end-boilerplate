@@ -24,6 +24,7 @@ module.exports = (function(){
             sass: 'scss',
             css: 'css',
             js: 'js',
+            assets: 'assets',
             img: 'assets/img',
             fonts: 'assets/fonts',
             templates: 'templates'
