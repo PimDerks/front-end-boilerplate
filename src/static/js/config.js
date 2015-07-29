@@ -1,6 +1,5 @@
 define('config', function () {
 
-
     return {
         'paths': {
             'monitors': './vendor/rikschennink/monitors/'
@@ -11,4 +10,3 @@ define('config', function () {
     };
 
 });
-

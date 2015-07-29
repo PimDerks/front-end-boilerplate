@@ -62,14 +62,48 @@
         <p>Template</p>
 
         <div data-module="ui/Test"></div>
-        <script>
-            var require = { // require js configuration
-                "urlArgs": "v=0.0.0.2"
-            };
-        </script>
         <script src="/static/js/vendor/filamentgroup/loadcss.js"></script>
         <script>
-            (function( window, undefined ) {
+
+            var config = {
+
+                // cache bust
+                version: (new Date().getTime()),
+
+                // location of conditioner config
+                conditioner: "/static/js/config",
+
+                // location of asynchronously loaded fonts
+                fonts: {
+                    ttf: "/static/css/ttf.css",
+                    woff: "/static/css/woff.css",
+                    woff2: "/static/css/woff2.css"
+                },
+
+                // location of asynchronously loaded scripts
+                scripts: {
+                    requirejs: "/static/js/vendor/jrburke/require.js", // src of requirejs lib
+                    dir: "/static/js/", // root of all scripts loaded via requirejs
+                    main: "main" // gets prefixed with scripts.dir
+                }
+
+            },
+
+            // global var 'require' is automatically used for requireJS initialisation
+            require = {
+                "baseUrl": config.scripts.dir,
+                "urlArgs": "bust=" +  config.version,
+                "paths":{
+                    "config": config.conditioner
+                },
+                "shim": {
+                    "conditioner": {
+                        "deps": ["config"]
+                    }
+                }
+            };
+
+            (function(window, undefined){
 
                 var d = window.document;
 
@@ -83,19 +117,19 @@
                     if(!("FontFace" in win)) {
                         return false;
                     }
-                    var f = new win.FontFace( "t", 'url( "data:application/font-woff2," ) format( "woff2" )', {} );
+                    var f = new win.FontFace( "t", 'url("data:application/font-woff2,") format("woff2")', {} );
                     f.load().catch(function() {});
                     return f.status == 'loading';
                 })(window);
 
                 // load font (woff)
                 var ua = navigator.userAgent,
-                    fontFileUrl = "/static/css/woff.css";
+                    fontFileUrl = config.fonts.woff;;
 
                 if(supportsWoff2) {
-                    fontFileUrl = "/static/css/woff2.css";
+                    fontFileUrl = config.fonts.woff2;
                 } else if( ua.indexOf( "Android" ) > -1 && ua.indexOf( "like Gecko" ) > -1 && ua.indexOf( "Chrome" ) === -1 ){
-                    fontFileUrl = "/static/css/ttf.css";
+                    fontFileUrl = config.fonts.ttf;
                 }
 
                 loadCSS(fontFileUrl);
@@ -105,8 +139,8 @@
 
                     // load requirejs
                     var s = d.createElement('script');
-                    s.setAttribute('src', '/static/js/vendor/jrburke/require.js');
-                    s.setAttribute('data-main', '/static/js/main');
+                    s.setAttribute('src', config.scripts.requirejs);
+                    s.setAttribute('data-main', 'main');
                     d.body.appendChild(s);
 
                 });
