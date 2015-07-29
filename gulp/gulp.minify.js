@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     uglify = require('gulp-uglify'),
     minifyCss = require('gulp-minify-css'),
     concat = require('gulp-concat'),
-    amdOptimize = require('gulp-amd-optimize');
+    amdOptimize = require('gulp-amd-optimize'),
+    base64 = require('gulp-base64');
 
 gulp.task('minify-css', function() {
 
@@ -58,4 +59,17 @@ gulp.task('imagemin', function () {
 
 });
 
-module.exports = ['imagemin', 'uglify', 'minify-css', 'amdOptimize'];
+gulp.task('base64', function(){
+
+    var dir = config.roots.www + '/' + config.paths.static + '/' + config.paths.css;
+
+    return gulp.src(dir + '/*.css')
+        .pipe(base64({
+            extensions: ['ttf', 'woff', 'woff2'],
+            maxImageSize: 1024*1024 // max size in bytes
+        }))
+        .pipe(gulp.dest(dir));
+
+})
+
+module.exports = ['imagemin', 'uglify', 'minify-css', 'amdOptimize', 'base64'];

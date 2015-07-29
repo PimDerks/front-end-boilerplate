@@ -32,6 +32,11 @@
         <meta property="og:image" content="" />
         <!-- /Open Graph Data -->
 
+        <style>
+            * {
+                font-family: Roboto, "Comic Sans MS", serif;
+            }
+        </style>
     </head>
     <body>
         <p>Template</p>
@@ -62,13 +67,40 @@
                 "urlArgs": "v=0.0.0.2"
             };
         </script>
+        <script src="/static/js/vendor/filamentgroup/loadcss.js"></script>
         <script>
-            (function(){
+            (function( window, undefined ) {
 
-                var d = document;
+                var d = window.document;
 
-                if (!('querySelector' in d && 'addEventListener' in window)) {return;}
+                // cutting da mustardz
+                if (!('querySelector' in d && 'addEventListener' in window)) {
+                    return;
+                }
 
+                // Custom font loading to avoid FOUT: https://www.filamentgroup.com/lab/font-loading.html
+                var supportsWoff2 = (function(win){
+                    if(!("FontFace" in win)) {
+                        return false;
+                    }
+                    var f = new win.FontFace( "t", 'url( "data:application/font-woff2," ) format( "woff2" )', {} );
+                    f.load().catch(function() {});
+                    return f.status == 'loading';
+                })(window);
+
+                // load font (woff)
+                var ua = navigator.userAgent,
+                    fontFileUrl = "/static/css/woff.css";
+
+                if(supportsWoff2) {
+                    fontFileUrl = "/static/css/woff2.css";
+                } else if( ua.indexOf( "Android" ) > -1 && ua.indexOf( "like Gecko" ) > -1 && ua.indexOf( "Chrome" ) === -1 ){
+                    fontFileUrl = "/static/css/ttf.css";
+                }
+
+                loadCSS(fontFileUrl);
+
+                // insert requireJS
                 d.addEventListener('DOMContentLoaded', function() {
 
                     // load requirejs
@@ -79,7 +111,7 @@
 
                 });
 
-            }());
+            }(this));
         </script>
     </body>
 </html>

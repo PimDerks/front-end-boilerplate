@@ -1,5 +1,5 @@
 ﻿{% extends 'default.swig' %}
 
 {% block content %}
-    About.
+    About. Test. Blaat.
 {% endblock %}

@@ -1,5 +1,5 @@
 ﻿﻿{% extends 'default.swig' %}
 
 {% block content %}
-        Index.
+        Index. Blaat.
 {% endblock %}

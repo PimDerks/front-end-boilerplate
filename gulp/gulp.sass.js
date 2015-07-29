@@ -4,11 +4,12 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
-    config = require('./gulp.config');
+    config = require('./gulp.config')
 
 module.exports = function() {
 
-    return gulp.src([config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/screen.scss'])
+    // all files in root of /scss/
+    return gulp.src([config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/**.scss'])
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(autoprefixer('last 1 version', '> 5%', 'ie 9'))
