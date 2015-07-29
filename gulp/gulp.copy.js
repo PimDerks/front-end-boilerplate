@@ -1,7 +1,6 @@
-var gulp = require('gulp'),
-    util = require('gulp-util');
+var gulp = require('gulp');
 
-gulp.task('copy-js', function () {
+module.exports.copyJS = function () {
 
     var src = config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*',
         dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.js;
@@ -9,9 +8,9 @@ gulp.task('copy-js', function () {
     return gulp.src(src)
         .pipe(gulp.dest(dest));
 
-});
+};
 
-gulp.task('copy-assets', function () {
+module.exports.copyAssets = function () {
 
     var src = config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/**/*',
         dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.assets;
@@ -19,6 +18,4 @@ gulp.task('copy-assets', function () {
     return gulp.src(src)
         .pipe(gulp.dest(dest));
 
-});
-
-module.exports = ['copy-js', 'copy-assets'];
+};

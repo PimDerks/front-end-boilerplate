@@ -1,44 +1,35 @@
 var gulp = require('gulp'),
     watch = require('gulp-watch'),
-    util = require('gulp-util'),
     config = require('./gulp.config');
 
-module.exports = function(browserSync) {
+module.exports.watchContent = function() {
 
-    return function() {
+    // watch content
+    gulp.watch(config.roots.content + '/' + config.content.pages + '/**/*', ['swig']);
 
-        // watch content
-        gulp.watch(config.roots.content + '/' + config.content.pages + '/**/*', ['swig']);
+    // watch data
+    gulp.watch(config.roots.content + '/' + config.content.data + '/**/*', ['swig']);
 
-        // watch data
-        gulp.watch(config.roots.content + '/' + config.content.data + '/**/*', ['swig']);
+};
 
-        // watch swig
-        gulp.watch(config.roots.src + '/' + config.paths.templates + '/**/*', ['swig']);
-        gulp.watch(config.roots.src + '/' + config.paths.includes + '/**/*', ['swig']);
+module.exports.watchJS = function() {
 
-        // watch sass files
-        gulp.watch(config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/**/*', ['sass']);
+    // watch js files
+    gulp.watch(config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*', ['copy-js', 'amd']);
 
-        // watch js files
-        gulp.watch(config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*', ['copy-js']);
+};
 
-        var timer;
+module.exports.watchCSS = function() {
 
-        // watch www
-        gulp.watch(config.roots.www + '/**/*').on('change', function(){
+    // watch sass files
+    gulp.watch(config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/**/*', ['sass']);
 
-            // throttle
-            if(timer){
-                clearTimeout(timer);
-            }
+};
 
-            timer = setTimeout(function(){
-                browserSync.reload
-            }, 100);
+module.exports.watchHTML = function() {
 
-        });
-
-    };
+    // watch swig
+    gulp.watch(config.roots.src + '/' + config.paths.templates + '/**/*', ['swig']);
+    gulp.watch(config.roots.src + '/' + config.paths.includes + '/**/*', ['swig']);
 
 };

@@ -8,7 +8,8 @@ module.exports = function(browserSync){
         browserSync.init({
             server: {
                 baseDir: config.roots.www
-            }
+            },
+            open: true
         });
 
     }

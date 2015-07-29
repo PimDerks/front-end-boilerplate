@@ -3,17 +3,13 @@ var gulp = require('gulp'),
 
 module.exports = function() {
 
-    return gulp.task('clean', function () {
+    // empty and remove www and tmp directories
+    var www = config.roots.www,
+        tmp = config.roots.tmp;
 
-        // empty and remove www and tmp directories
-        var www = config.roots.www,
-            tmp = config.roots.tmp;
-
-        return gulp.src([www, tmp])
-            .pipe(clean({
-                read: false // do not read files, just remove
-            }));
-
-    });
+    return gulp.src([www, tmp])
+        .pipe(clean({
+            read: false // do not read files, just remove
+        }));
 
 };
