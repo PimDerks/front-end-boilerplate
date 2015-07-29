@@ -23,8 +23,21 @@ module.exports = function(browserSync) {
         // watch js files
         gulp.watch(config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*', ['copy-js']);
 
+        var timer;
+
         // watch www
-        gulp.watch(config.roots.www + '/**/*').on('change', browserSync.reload);
+        gulp.watch(config.roots.www + '/**/*').on('change', function(){
+
+            // throttle
+            if(timer){
+                clearTimeout(timer);
+            }
+
+            timer = setTimeout(function(){
+                browserSync.reload
+            }, 100);
+
+        });
 
     };
 

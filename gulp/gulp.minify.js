@@ -70,6 +70,6 @@ gulp.task('base64', function(){
         }))
         .pipe(gulp.dest(dir));
 
-})
+});
 
-module.exports = ['imagemin', 'uglify', 'minify-css', 'amdOptimize', 'base64'];
+module.exports = ['imagemin', 'amdOptimize', 'uglify', 'minify-css', 'base64'];

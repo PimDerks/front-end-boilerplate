@@ -110,11 +110,11 @@ var methods = {
 
             methods.setMasterPagePath(page).then(function(){
                 i++;
-                console.log("Succesfully set master page path in file:" + page);
+                // console.log("Succesfully set master page path in file:" + page);
                 if(i === count) deferred.resolve();
             }).error(function(){
                 i++;
-                console.log("Unable to set master page path in file:" + page);
+                // console.log("Unable to set master page path in file:" + page);
                 if(i === count) deferred.resolve();
             });
 
@@ -187,8 +187,11 @@ var methods = {
 
         var pages = methods.getPages();
 
-        pages.forEach(function(page){
+        pages.forEach(function(page, index){
             methods.renderPage(page);
+            if(index === (pages.length - 1)){
+                console.log('Succesfully rendered ' + pages.length + ' pages.');
+            }
         });
 
     },
@@ -222,11 +225,12 @@ var methods = {
         // write rendered template to file
         utils.writeFile(config.roots.www + '/' + name + '.html', swiggedContent, function(err){
             if(err){
-                console.log("Unable to render page: " + src);
+                // console.log("Unable to render page: " + src);
                 return;
             }
 
-            console.log("Succesfully rendered page: " + src);
+            // console.log("Succesfully rendered page: " + src);
+
         });
 
     }
@@ -241,6 +245,9 @@ module.exports = function() {
     methods.copy(config.roots.content + '/' + config.content.pages, config.roots.tmp).then(function() {
 
         methods.setMasterPagePaths().then(function () {
+
+            // log
+            console.log('Rendering pages...');
 
             // render templates
             methods.renderPages();
