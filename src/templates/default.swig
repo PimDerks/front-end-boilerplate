@@ -70,8 +70,18 @@
                 // cache bust
                 version: (new Date().getTime()),
 
-                // location of conditioner config
-                conditioner: "/static/js/config",
+                // location of conditioner config (when using a separate request)
+                // conditioner: '/static/js/config',
+
+                // config for conditioner, ideally should be inline to avoid extra request
+                conditioner: {
+                    'paths': {
+                        'monitors': './vendor/rikschennink/monitors/'
+                    },
+                    'modules': {
+                        'ui/Test': {}
+                    }
+                },
 
                 // location of asynchronously loaded fonts
                 fonts: {
@@ -94,11 +104,11 @@
                 "baseUrl": config.scripts.dir,
                 "urlArgs": "bust=" +  config.version,
                 "paths":{
-                    "config": config.conditioner
+                    // "config": config.conditioner
                 },
                 "shim": {
                     "conditioner": {
-                        "deps": ["config"]
+                        // "deps": ["config"]
                     }
                 }
             };
