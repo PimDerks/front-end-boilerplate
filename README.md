@@ -16,7 +16,9 @@ Lorem ipsum
 * AutoPrefixer
 * Node.JS
 
-## Gulp tasks
+## Gulp
+
+We use Gulp as a taskrunner to automate stuff. The following tasks can be used:
 
 ### gulp dev
 
@@ -24,7 +26,7 @@ Default task which you would normally use.
 
 ### gulp lint
 
-Lint the code-base (SCSS, JavaScript, HTML).
+Lint the code-base (SCSS, JavaScript, HTML). Runs on the /www/ directory for the HTML-linting. SCSS and JS linting is done on the /src/ directory.
 
 ### gulp build
 
@@ -36,4 +38,4 @@ Uploads the /build/ directory to the configured FTP-server.
 
 ## Icons
 
-Favicons can be generated at http://realfavicongenerator.net/. They are put in the /src/icons/-directory.
+Favicons can be generated at http://realfavicongenerator.net/. They are put in the /src/static/assets/icons/-directory.
