@@ -15,7 +15,7 @@ module.exports = function(browserSync) {
         }
 
         timer = setTimeout(function(){
-            browserSync.reload
+            browserSync.reload()
         }, 100);
 
     });

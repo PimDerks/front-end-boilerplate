@@ -40,7 +40,7 @@ gulp.task('watch-js', watch.watchJS)
 gulp.task('watch', ['watch-html', 'watch-content', 'watch-css', 'watch-js', 'watch-www']);
 
 // Inline assets
-gulp.task('base64', require);
+gulp.task('base64', base64);
 
 // Minify CSS, JS and images
 gulp.task('minifyCSS', minify.minifyCSS);
@@ -63,5 +63,11 @@ gulp.task('copy', ['copyJS', 'copyAssets']);
 
 // dev
 gulp.task('dev', function() {
-    seq('clean', 'copy', 'sass', 'swig', 'watch', 'browser-sync');
+    // seq('clean', 'copy', 'amd', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
+    seq('clean', 'copy', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
+});
+
+// build
+gulp.task('build', function() {
+    // seq('dev', 'copyDev', 'minify);
 });

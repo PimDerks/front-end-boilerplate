@@ -32,6 +32,7 @@
         <meta property="og:image" content="" />
         <!-- /Open Graph Data -->
 
+        <link rel="stylesheet" href="/static/css/screen.css" />
         <style>
             * {
                 font-family: Roboto, "Comic Sans MS", serif;
