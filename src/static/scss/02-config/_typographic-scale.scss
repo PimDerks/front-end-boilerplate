@@ -1,0 +1,112 @@
+/* Breakpoints
+----------------------------------------*/
+
+// Typographic scales which can be used.
+//
+// When the value is an integer the base-font-size gets multiplied by the power of the value.
+// 16 * 1.067, 16 * 1.067 * 1.067 etc.
+//
+// When the value is a list there is no ratio, it is simply multiplication:
+// 16 * 1, 16 * 2, 16 * 3 etc.
+
+$typographic-scales:(
+    'minor-second':     1.067,
+    'major-second':     1.125,
+    'minor-third':      1.2,
+    'major-third':      1.25,
+    'perfect-fourth':   1.33,
+    'augmented-fourth': 1.414,
+    'perfect-fifth':    1.5,
+    'golden-ratio':     1.618,
+    'custom':           (1, 2, 3, 4, 5) // this should be the same length as the sizes defined in $typographic-scale-sizes
+);
+
+// Breakpoints
+$typographic-breakpoints:(
+    'xs':   (
+        'font-size': 12,
+        'line-height': 1.5,
+        'scale': map-get($typographic-scales, 'major-third')
+    ),
+    's':    (
+        'font-size': 13,
+        'line-height': 1.5,
+        'scale': map-get($typographic-scales, 'major-third')
+    ),
+    'm':    (
+        'font-size': 14,
+        'line-height': 1.5,
+        'scale': map-get($typographic-scales, 'major-third')
+    ),
+    'l':    (
+        'font-size': 15,
+        'line-height': 1.5,
+        'scale': map-get($typographic-scales, 'major-third')
+    ),
+    'xl':    (
+        'font-size': 16,
+        'line-height': 1.5,
+        'scale': map-get($typographic-scales, 'major-third')
+    )
+);
+
+// Base font-size and line-height
+
+$typographic-baseline:(
+    'font-size': 16,
+    'line-height': 1.5
+);
+
+// These should be ordered smallest to largest
+
+$typographic-scale-sizes:(
+    'epsilon',
+    'delta',
+    'gamma',
+    'beta',
+    'alpha'
+);
+
+// Configure the scale to use
+
+$typographic-scale: map-get($typographic-scales, 'custom');
+
+// Get the base-font-size and line-height to use
+
+$font-size: map-get($typographic-baseline, 'font-size');
+$line-height: map-get($typographic-baseline, 'line-height');
+$line-height-px: $font-size * $line-height;
+
+// Loop through breakpoints
+@each $bp-name, $bp-size in $breakpoints {
+    $bp-config: map-get($typographic-breakpoints, $bp-name);
+    @debug $bp-name, $bp-size, $bp-config;
+}
+
+// Calculate font-size and line-height
+
+@for $i from 1 through length($typographic-scale-sizes) {
+    $size: nth($typographic-scale-sizes, $i);
+    $scale: $typographic-scale;
+    $new-font-size: $font-size;
+
+    // calculate font-size
+
+    @if type-of($scale) == list {
+        $new-font-size: $new-font-size * nth($scale, $i);
+    } @else {
+        @for $j from 1 through $i {
+            $new-font-size: $new-font-size * $typographic-scale;
+        }
+    }
+
+    // calculate line-height
+    $new-line-height: 0;
+    $half: $line-height-px/2;
+    @while $new-line-height <= $new-font-size {
+        $new-line-height: $new-line-height + $half;
+    }
+
+    @debug $size, $new-font-size, $new-line-height;
+
+}
