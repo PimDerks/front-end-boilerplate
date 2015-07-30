@@ -63,10 +63,63 @@
         <p>Template</p>
 
         <div data-module="ui/Test"></div>
-        <script src="/static/js/vendor/filamentgroup/loadcss.js"></script>
         <!--[if IE 9]>
             <script src="/static/js/shim.js"></script>
         <![endif]-->
+        <script>
+            var config = {
+
+                // cache bust
+                version: (new Date().getTime()),
+
+                // location of conditioner config (when using a separate request)
+                // conditioner: '/static/js/config',
+
+                // config for conditioner, ideally should be inline to avoid extra request
+                conditioner: {
+                    'paths': {
+                        'monitors': './vendor/rikschennink/monitors/'
+                    },
+                    'modules': {
+                        'ui/Test': {}
+                    }
+                },
+
+                // location of asynchronously loaded fonts
+                fonts: {
+                    ttf: "/static/css/ttf.css",
+                    woff: "/static/css/woff.css",
+                    woff2: "/static/css/woff2.css"
+                },
+
+                // location of asynchronously loaded scripts
+                scripts: {
+                    requirejs: "/static/js/vendor/jrburke/require.js", // src of requirejs lib
+                    dir: "/static/js/", // root of all scripts loaded via requirejs
+                    main: "main" // gets prefixed with scripts.dir
+                }
+
+            },
+
+            // global var 'require' is automatically used for requireJS initialisation
+            require = {
+                "baseUrl": config.scripts.dir,
+                "urlArgs": "bust=" +  config.version,
+                "paths":{
+                    // "config": config.conditioner
+                },
+                map:{
+                    '*':{
+                        conditioner:'vendor/rikschennink/conditioner'
+                    }
+                },
+                "shim": {
+                    "conditioner": {
+                        // "deps": ["config"]
+                    }
+                }
+            };
+        </script>
         <script>
             (function(window, undefined){
 
@@ -76,59 +129,6 @@
                 if (!('querySelector' in d && 'addEventListener' in window)) {
                     return;
                 }
-
-                var config = {
-
-                    // cache bust
-                    version: (new Date().getTime()),
-
-                    // location of conditioner config (when using a separate request)
-                    // conditioner: '/static/js/config',
-
-                    // config for conditioner, ideally should be inline to avoid extra request
-                    conditioner: {
-                        'paths': {
-                            'monitors': './vendor/rikschennink/monitors/'
-                        },
-                        'modules': {
-                            'ui/Test': {}
-                        }
-                    },
-
-                    // location of asynchronously loaded fonts
-                    fonts: {
-                        ttf: "/static/css/ttf.css",
-                        woff: "/static/css/woff.css",
-                        woff2: "/static/css/woff2.css"
-                    },
-
-                    // location of asynchronously loaded scripts
-                    scripts: {
-                        requirejs: "/static/js/vendor/jrburke/require.js", // src of requirejs lib
-                        dir: "/static/js/", // root of all scripts loaded via requirejs
-                        main: "main" // gets prefixed with scripts.dir
-                    }
-
-                },
-
-                // global var 'require' is automatically used for requireJS initialisation
-                require = {
-                    "baseUrl": config.scripts.dir,
-                    "urlArgs": "bust=" +  config.version,
-                    "paths":{
-                        // "config": config.conditioner
-                    },
-                    map:{
-                        '*':{
-                            conditioner:'vendor/rikschennink/conditioner'
-                        }
-                    },
-                    "shim": {
-                        "conditioner": {
-                            // "deps": ["config"]
-                        }
-                    }
-                };
 
                 /*!
                  loadCSS: load a CSS file asynchronously.
