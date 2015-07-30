@@ -5,6 +5,7 @@ var gulp = require('gulp'),
 
 // require
 var clean = require('./gulp/gulp.clean'),
+    concat = require('./gulp/gulp.concat'),
     watch = require('./gulp/gulp.watch'),
     watchWWW = require('./gulp/gulp.watchWWW')(bs),
     sass = require('./gulp/gulp.sass'),
@@ -18,6 +19,9 @@ var clean = require('./gulp/gulp.clean'),
 
 // Remove temp/www dir
 gulp.task('clean', clean);
+
+// Concat tasks
+gulp.task('concat-shim', concat.shim);
 
 // Automatically update files in browser
 gulp.task('browser-sync', browserSync);
@@ -63,7 +67,7 @@ gulp.task('copy', ['copyJS', 'copyAssets']);
 
 // dev
 gulp.task('dev', function() {
-    seq('clean', 'copy', 'amd', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
+    seq('clean', 'copy', 'concat-shim', 'amd', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
 });
 
 // build

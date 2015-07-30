@@ -28,7 +28,8 @@ module.exports = (function(){
             includes: '_includes',
             img: 'assets/img',
             fonts: 'assets/fonts',
-            templates: 'templates'
+            templates: 'templates',
+            shim: 'shim'
         },
 
         // server
