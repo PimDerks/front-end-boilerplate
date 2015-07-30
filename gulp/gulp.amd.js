@@ -15,7 +15,7 @@ module.exports = function(){
                 "modernizr": 'vendor/paulirish/modernizr'
             }
         }))
-        .pipe(concat("main2.js"))
+        .pipe(concat("main-build.js"))
         .pipe(gulp.dest(dest));
 
 };

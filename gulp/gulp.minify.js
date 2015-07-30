@@ -7,8 +7,8 @@ var gulp = require('gulp'),
 
 module.exports.minifyCSS = function() {
 
-    var src = config.roots.www + '/' + config.paths.static + '/' + config.paths.css + '/*',
-        dest = config.roots.www + '/' + config.paths.staticMin + '/' + config.paths.css;
+    var src = config.roots.www + '/' + config.paths.static + '/' + config.paths.css + '/**/*.css',
+        dest = config.roots.dest + '/' + config.paths.staticMin + '/' + config.paths.css;
 
     return gulp.src(src)
         .pipe(minifyCss({compatibility: 'ie8'}))
@@ -18,8 +18,8 @@ module.exports.minifyCSS = function() {
 
 module.exports.minifyJS = function() {
 
-    var src = config.roots.www + '/' + config.paths.static + '/' + config.paths.js + '/*',
-        dest = config.roots.www + '/' + config.paths.staticMin + '/' + config.paths.js;
+    var src = config.roots.www + '/' + config.paths.static + '/' + config.paths.js + '/**/*.js',
+        dest = config.roots.dest + '/' + config.paths.staticMin + '/' + config.paths.js;
 
     return gulp.src(src)
         .pipe(uglify())
@@ -29,12 +29,15 @@ module.exports.minifyJS = function() {
 
 module.exports.minifyImg = function () {
 
-    return gulp.src(config.roots.www + '/' + config.paths.static + '/' + config.paths.img + '/*')
+    var src = config.roots.www + '/' + config.paths.static + '/' + config.paths.img + '/*',
+        dest = config.roots.dest + '/' + config.paths.staticMin + '/' + config.paths.img;
+
+    return gulp.src(src)
         .pipe(imagemin({
             progressive: true,
             svgoPlugins: [{removeViewBox: false}],
             use: [pngquant()]
         }))
-        .pipe(gulp.dest(config.paths.assets));
+        .pipe(gulp.dest(dest));
 
 };

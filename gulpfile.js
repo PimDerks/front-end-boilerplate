@@ -6,6 +6,7 @@ var gulp = require('gulp'),
 // require
 var clean = require('./gulp/gulp.clean'),
     concat = require('./gulp/gulp.concat'),
+    inline = require('./gulp/gulp.inline'),
     watch = require('./gulp/gulp.watch'),
     watchWWW = require('./gulp/gulp.watchWWW')(bs),
     sass = require('./gulp/gulp.sass'),
@@ -22,6 +23,9 @@ gulp.task('clean', clean);
 
 // Concat tasks
 gulp.task('concat-shim', concat.shim);
+
+// Inline
+gulp.task('inline', inline);
 
 // Automatically update files in browser
 gulp.task('browser-sync', browserSync);
@@ -64,6 +68,8 @@ gulp.task('lint', ['lint-scss', 'lint-jscs', 'lint-jshint', 'lint-w3c', 'lint-ht
 gulp.task('copyJS', copy.copyJS);
 gulp.task('copyAssets', copy.copyAssets);
 gulp.task('copy', ['copyJS', 'copyAssets']);
+gulp.task('copyBuildStatic', copy.copyBuildStatic);
+gulp.task('copyBuildHTML', inline);
 
 // dev
 gulp.task('dev', function() {
@@ -72,5 +78,7 @@ gulp.task('dev', function() {
 
 // build
 gulp.task('build', function() {
-    // seq('dev', 'copyDev', 'minify);
+
+    seq('copyBuildStatic', 'minify', 'copyBuildHTML');
+
 });

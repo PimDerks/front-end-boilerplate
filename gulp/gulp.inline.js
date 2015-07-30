@@ -1,0 +1,18 @@
+var gulp = require('gulp'),
+    config = require('./gulp.config'),
+    inlinesource = require('gulp-inline-source');
+
+module.exports = function(){
+
+    var src = config.roots.www + '/**/*.html',
+        dest = config.roots.dest + '/' + config.paths.templates;
+
+    var options = {
+        compress: false
+    };
+
+    return gulp.src(src)
+        .pipe(inlinesource(options))
+        .pipe(gulp.dest(dest));
+
+};

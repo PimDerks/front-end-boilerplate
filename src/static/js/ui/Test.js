@@ -21,7 +21,7 @@ define([], function () {
          */
 
         _initialize: function () {
-            console.log('init module');
+            console.log('init module with options', this._options);
         },
 
         /**
