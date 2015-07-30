@@ -4,7 +4,7 @@ define([], function() {
 
     /**
      * Initialize module.
-     * @param {element} element - The node.
+     * @param {element} element - The node (element) to load this module on.
      * @param {object} options - Options for this module.
      */
     var exports = function(element, options) {
@@ -25,7 +25,7 @@ define([], function() {
          * @private
          */
         _initialize: function() {
-            console.log('init module with options', this._options);
+            console.log('init module with options', this._options, 'on', new Date());
         },
 
         /**

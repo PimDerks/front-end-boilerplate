@@ -1,10 +1,35 @@
-body {
-  color: #0000FF;
-  background:yellow;
-  font-size: 1em;
-}
+/* 01 Mixins and helpers
+--------------------------------------*/
+@import '01-mixins/map-has-nested-keys';
+@import '01-mixins/map-deep-get';
+@import '01-mixins/z-index';
 
-.blaat {
-  color: #FF0000;
-  font-size: 3px;
-}
+/* 02 Settings
+--------------------------------------*/
+@import '02-config/z-index';
+
+/* 03 Reset
+--------------------------------------*/
+@import '03-base/normalize';
+
+/* 04 Generic
+--------------------------------------*/
+@import '04-generic/images';
+@import '04-generic/forms';
+@import '04-generic/typography';
+@import '04-generic/links';
+@import '04-generic/quotes';
+@import '04-generic/table';
+@import '04-generic/lists';
+@import '04-generic/generic';
+@import '04-generic/layout';
+
+/* 05 Objects
+--------------------------------------*/
+
+
+/* 06 Components
+--------------------------------------*/
+
+/* 07 Trumps
+--------------------------------------*/

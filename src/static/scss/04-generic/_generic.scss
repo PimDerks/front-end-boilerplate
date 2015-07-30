@@ -1,0 +1,72 @@
+/* Body
+----------------------------------------------- */
+
+// 1. Box-sizing best practice, as per https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+
+body {
+  box-sizing: border-box; /* 1 */
+  overflow-x: hidden;
+  overflow-y: scroll;
+  z-index: z("alpha", "alpha-1");
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Generic elements
+----------------------------------------------- */
+
+object {
+  outline: none;
+}
+
+hr {
+  display: none;
+}
+
+br {
+  height: 0;
+  line-height: 0;
+  clear: both;
+}
+
+sub,
+sup {
+  font-size: .675em;
+}
+
+sub {
+  vertical-align: bottom;
+}
+
+sup {
+  vertical-align: top;
+}
+
+i {
+  font-style: normal;
+}
+
+/* Selected text
+----------------------------------------------- */
+
+::selection {
+  background: red;
+  color: pink;
+  text-shadow: none;
+}
+
+/* Remove the gap between audio, canvas, iframes images, videos and the bottom of their containers.
+----------------------------------------------- */
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
