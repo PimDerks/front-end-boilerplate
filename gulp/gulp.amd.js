@@ -1,16 +1,14 @@
 var gulp = require('gulp'),
-    imagemin = require('gulp-imagemin'),
-    uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
-    amdOptimize = require('gulp-amd-optimize'),
-    base64 = require('gulp-base64');
+    amdOptimize = require('gulp-amd-optimize');
 
 module.exports = function(){
 
-    var src = config.roots.www + '/' + config.paths.static + '/' + config.paths.js + '/**/*',
+    var src = config.roots.www + '/' + config.paths.static + '/' + config.paths.js,
+        files = src + '/**/*',
         dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.js;
 
-    return gulp.src(src)
+    return gulp.src(files)
         .pipe(amdOptimize("main", {
             "paths": {
                 "conditioner": 'vendor/rikschennink/conditioner',

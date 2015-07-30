@@ -15,7 +15,7 @@ module.exports.watchContent = function() {
 module.exports.watchJS = function() {
 
     // watch js files
-    gulp.watch(config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*', ['copyJS']);
+    gulp.watch(config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*', ['copyJS', 'amd']);
 
 };
 

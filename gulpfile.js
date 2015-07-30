@@ -63,8 +63,7 @@ gulp.task('copy', ['copyJS', 'copyAssets']);
 
 // dev
 gulp.task('dev', function() {
-    // seq('clean', 'copy', 'amd', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
-    seq('clean', 'copy', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
+    seq('clean', 'copy', 'amd', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
 });
 
 // build

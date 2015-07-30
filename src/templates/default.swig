@@ -107,6 +107,11 @@
                 "paths":{
                     // "config": config.conditioner
                 },
+                map:{
+                    '*':{
+                        conditioner:'vendor/rikschennink/conditioner'
+                    }
+                },
                 "shim": {
                     "conditioner": {
                         // "deps": ["config"]
