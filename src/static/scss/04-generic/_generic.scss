@@ -7,7 +7,7 @@ body {
   box-sizing: border-box; /* 1 */
   overflow-x: hidden;
   overflow-y: scroll;
-  z-index: z("alpha", "alpha-1");
+  z-index: z('alpha', 'alpha-1');
 }
 
 *,
@@ -54,8 +54,8 @@ i {
 ----------------------------------------------- */
 
 ::selection {
-  background: red;
-  color: pink;
+  background: #FF0000;
+  color: #00FF00;
   text-shadow: none;
 }
 

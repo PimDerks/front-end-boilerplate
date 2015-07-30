@@ -29,7 +29,10 @@ module.exports.jscs = function () {
 
 module.exports.scsslint = function() {
 
-    return gulp.src(config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/**/*.scss')
+    return gulp.src([
+            config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/**/*.scss',
+            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/03-base/_normalize.scss'
+        ])
         .pipe(scsslint({
             'config': './.scss-lint.yml'
         }));
