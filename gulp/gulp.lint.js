@@ -7,20 +7,30 @@ var gulp = require('gulp'),
     jscs = require('gulp-jscs');
 
 module.exports.jshint = function() {
-    return gulp.src(config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*.js')
+    return gulp.src([
+            config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*.js',
+            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/vendor/**/*.js',
+            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/shim/**/*.js',
+            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/initial.js'
+        ])
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'))
         .pipe(jshint.reporter('fail'));
 };
 
 module.exports.jscs = function () {
-    return gulp.src(config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*.js')
+    return gulp.src([
+            config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*.js',
+            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/vendor/**/*.js',
+            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/shim/**/*.js',
+            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/initial.js'
+        ])
         .pipe(jscs());
 };
 
 module.exports.scsslint = function() {
 
-    return gulp.src(config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/**/*.js')
+    return gulp.src(config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/**/*.scss')
         .pipe(scsslint({
             'config': './.scss-lint.yml'
         }));

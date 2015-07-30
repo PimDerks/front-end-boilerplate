@@ -58,7 +58,6 @@ gulp.task('minifyImg', minify.minifyImg);
 gulp.task('minify', ['minifyCSS', 'minifyJS', 'minifyImg']);
 
 // Lint
-gulp.task('lint-w3c', lint.w3c);
 gulp.task('lint-html', lint.htmlhint);
 gulp.task('lint-jscs', lint.jscs);
 gulp.task('lint-jshint', lint.jshint)

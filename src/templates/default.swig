@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns#">
     <head>
+        <meta charset="utf-8" content=""/>
         <title>Blaat.</title>
         <link rel="apple-touch-icon" sizes="57x57" href="/static/assets/icons/apple-touch-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/static/assets/icons/apple-touch-icon-60x60.png">
@@ -60,7 +61,8 @@
             </ul>
         {%  endfor %}
 
-        <p>Template</p>
+        <p>Template.</p>
+        <section>Blaat</section>
 
         <div data-module="ui/Test"></div>
         <!--[if IE 9]>

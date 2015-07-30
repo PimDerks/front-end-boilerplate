@@ -1,14 +1,16 @@
-(function(){
+(function() {
+
+    'use strict';
 
     // fixed paths, these should not differ between FED/DEV/TEST/PROD
 
     requirejs.config({
-        "paths": {
-            "conditioner": 'vendor/rikschennink/conditioner',
-            "modernizr": 'vendor/paulirish/modernizr'
+        'paths': {
+            'conditioner': 'vendor/rikschennink/conditioner',
+            'modernizr': 'vendor/paulirish/modernizr'
         },
-        "shim": {
-            "modernizr": {
+        'shim': {
+            'modernizr': {
                 exports: 'window.Modernizr'
             }
         }
@@ -23,7 +25,7 @@
 
     // Use when loading the conditioner config from a global variable (preferred!)
 
-    require(['modernizr', 'conditioner'], function(Modernizr, Conditioner){
+    require(['modernizr', 'conditioner'], function(Modernizr, Conditioner) {
         Conditioner.init(window.config.conditioner);
     });
 

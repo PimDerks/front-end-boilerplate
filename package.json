@@ -31,6 +31,7 @@
     "gulp-w3cjs": "^1.0.0",
     "gulp-watch": "^4.2.4",
     "imagemin-pngquant": "^4.1.0",
+    "jscs-jsdoc": "^1.1.0",
     "jshint-stylish": "^2.0.1",
     "json-file": "^0.1.0",
     "lodash": "^3.9.3",

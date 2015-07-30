@@ -1,8 +1,16 @@
-define([], function () {
+define([], function() {
 
     'use strict';
 
-    var exports = function (element, options){
+    /**
+     * Initialize module.
+     * @param {element} element - The node.
+     * @param {object} options - Options for this module.
+     */
+    var exports = function(element, options) {
+
+        var blaat = 'blaat';
+        console.log(blaat + '');
 
         this._element = element;
         this._options = options || {};
@@ -19,8 +27,7 @@ define([], function () {
          * @static
          * @private
          */
-
-        _initialize: function () {
+        _initialize: function() {
             console.log('init module with options', this._options);
         },
 
@@ -31,8 +38,7 @@ define([], function () {
          * @static
          * @public
          */
-
-        unload: function () {
+        unload: function() {
 
         }
 

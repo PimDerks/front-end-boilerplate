@@ -1,7 +1,7 @@
 var config = {
 
         // cache bust
-        version: (new Date().getTime()),
+        version: (new Date().getTime()) + '1',
 
         /* location of conditioner config (when using a separate request)
 
@@ -21,8 +21,8 @@ var config = {
             },
             'modules': {
                 'ui/Test': {
-                    "options": {
-                        "key": "value"
+                    'options': {
+                        'key': 'value'
                     }
                 }
             }
@@ -30,37 +30,37 @@ var config = {
 
         // location of asynchronously loaded fonts
         fonts: {
-            ttf: "/static/css/ttf.css",
-            woff: "/static/css/woff.css",
-            woff2: "/static/css/woff2.css"
+            ttf: '/static/css/ttf.css',
+            woff: '/static/css/woff.css',
+            woff2: '/static/css/woff2.css'
         },
 
         // location of asynchronously loaded scripts
         scripts: {
-            requirejs: "/static/js/vendor/jrburke/require.js", // src of requirejs lib
-            dir: "/static/js/", // root of all scripts loaded via requirejs
-            main: "main-build" // gets prefixed with scripts.dir
+            requirejs: '/static/js/vendor/jrburke/require.js', // src of requirejs lib
+            dir: '/static/js/', // root of all scripts loaded via requirejs
+            main: 'main-build' // gets prefixed with scripts.dir
         }
 
     },
 
-// global var 'require' is automatically used for requireJS initialisation
+    // global var 'require' is automatically used for requireJS initialisation
     require = {
-        "baseUrl": config.scripts.dir,
-        "urlArgs": "bust=" +  config.version,
-        "paths":{
+        'baseUrl': config.scripts.dir,
+        'urlArgs': 'bust=' +  config.version,
+        'paths': {
             // when using a separate request for conditioner config
-            // "config": config.conditioner
+            // 'config': config.conditioner
         },
-        map:{
-            '*':{
-                conditioner:'vendor/rikschennink/conditioner'
+        map: {
+            '*': {
+                conditioner: 'vendor/rikschennink/conditioner'
             }
         },
-        "shim": {
-            "conditioner": {
+        'shim': {
+            'conditioner': {
                 // when using a separate request for conditioner config
-                // "deps": ["config"]
+                // 'deps': ['config']
             }
         }
     };

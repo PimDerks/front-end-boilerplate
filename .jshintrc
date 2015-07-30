@@ -58,5 +58,5 @@
   "onevar"        : false,
   "passfail"      : false,
   "white"         : false,
-  "predef"        : ["requirejs","require","define","google","Hammer","Modernizr","alert","module"]
+  "predef"        : ["requirejs","require","define","google","Hammer","Modernizr","alert","module", "console", "config"]
 }
