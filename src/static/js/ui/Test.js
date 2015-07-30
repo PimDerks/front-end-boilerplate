@@ -9,9 +9,6 @@ define([], function() {
      */
     var exports = function(element, options) {
 
-        var blaat = 'blaat';
-        console.log(blaat + '');
-
         this._element = element;
         this._options = options || {};
         this._initialize();

@@ -14,8 +14,7 @@ module.exports.jshint = function() {
             '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/initial.js'
         ])
         .pipe(jshint())
-        .pipe(jshint.reporter('jshint-stylish'))
-        .pipe(jshint.reporter('fail'));
+        .pipe(jshint.reporter('jshint-stylish'));
 };
 
 module.exports.jscs = function () {
