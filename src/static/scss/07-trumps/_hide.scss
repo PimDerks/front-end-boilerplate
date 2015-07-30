@@ -1,0 +1,14 @@
+.hide,
+.screenreader {
+  @include hide();
+
+  &--focusable:active,
+  &--focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}

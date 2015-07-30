@@ -1,0 +1,6 @@
+/* Clear floats using the .group helper.
+----------------------------------------------- */
+
+.group {
+    @include clearfix;
+}

@@ -1,0 +1,15 @@
+/* Breakpoints
+----------------------------------------*/
+
+$breakpoint-xs:20em; /* 320 = iPhone portrait */
+$breakpoint-s:30em; /* 480 = iPhone landscape */
+$breakpoint-m:48em; /* 768 = iPad landscape */
+$breakpoint-l:62.5em; /* 1000 = iPad portrait */
+$breakpoint-xl:80em; /* 1280 = laptop */
+
+$breakpoints:(
+    xs:         $breakpoint-xs,
+    s:          $breakpoint-s,
+    m:          $breakpoint-m,
+    l:          $breakpoint-l,
+    xl:         $breakpoint-xl);

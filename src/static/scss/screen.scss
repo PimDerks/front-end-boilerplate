@@ -3,10 +3,22 @@
 @import '01-mixins/map-has-nested-keys';
 @import '01-mixins/map-deep-get';
 @import '01-mixins/z-index';
+@import '01-mixins/blank-list';
+@import '01-mixins/clearfix';
+@import '01-mixins/font-face';
+@import '01-mixins/hide';
+@import '01-mixins/opposite-direction';
+@import '01-mixins/placeholder';
+@import '01-mixins/position';
+@import '01-mixins/rem';
+@import '01-mixins/respond';
+@import '01-mixins/triangle';
+@import '01-mixins/target';
 
 /* 02 Settings
 --------------------------------------*/
 @import '02-config/z-index';
+@import '02-config/breakpoints';
 
 /* 03 Reset
 --------------------------------------*/
@@ -27,9 +39,10 @@
 /* 05 Objects
 --------------------------------------*/
 
-
 /* 06 Components
 --------------------------------------*/
 
 /* 07 Trumps
 --------------------------------------*/
+@import '07-trumps/group';
+@import '07-trumps/hide';
