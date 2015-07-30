@@ -16,6 +16,7 @@ var clean = require('./gulp/gulp.clean'),
     base64 = require('./gulp/gulp.base64'),
     lint = require('./gulp/gulp.lint'),
     copy = require('./gulp/gulp.copy'),
+    ftp = require('./gulp/gulp.ftp'),
     browserSync = require('./gulp/gulp.browsersync')(bs);
 
 // Remove temp/www dir
@@ -70,6 +71,9 @@ gulp.task('copyAssets', copy.copyAssets);
 gulp.task('copy', ['copyJS', 'copyAssets']);
 gulp.task('copyBuildStatic', copy.copyBuildStatic);
 gulp.task('copyBuildHTML', inline);
+
+// Deploy
+gulp.task('deploy', ftp);
 
 // dev
 gulp.task('dev', function() {
