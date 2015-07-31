@@ -18,7 +18,7 @@ $typographic-scales:(
     'augmented-fourth': 1.414,
     'perfect-fifth':    1.5,
     'golden-ratio':     1.618,
-    'custom':           (1, 2, 3, 4, 5) // this should be the same length as the sizes defined in $typographic-scale-sizes
+    'custom':           (12/16, 14/16, 16/16, 20/16, 22/16, 24/16, 26/16, 28/16) // this should be the same length as the sizes defined in $typographic-scale-sizes
 );
 
 // Breakpoints
@@ -31,22 +31,22 @@ $typographic-breakpoints:(
     's':    (
         'font-size': 13,
         'line-height': 1.5,
-        'scale': map-get($typographic-scales, 'major-third')
+        'scale': map-get($typographic-scales, 'perfect-fourth')
     ),
     'm':    (
         'font-size': 14,
         'line-height': 1.5,
-        'scale': map-get($typographic-scales, 'major-third')
+        'scale': map-get($typographic-scales, 'augmented-fourth')
     ),
     'l':    (
         'font-size': 15,
         'line-height': 1.5,
-        'scale': map-get($typographic-scales, 'major-third')
+        'scale': map-get($typographic-scales, 'perfect-fifth')
     ),
     'xl':    (
         'font-size': 16,
         'line-height': 1.5,
-        'scale': map-get($typographic-scales, 'major-third')
+        'scale': map-get($typographic-scales, 'custom')
     )
 );
 
@@ -60,11 +60,14 @@ $typographic-baseline:(
 // These should be ordered smallest to largest
 
 $typographic-scale-sizes:(
-    'epsilon',
-    'delta',
-    'gamma',
-    'beta',
-    'alpha'
+    'xsmall': -2,
+    'small': -1,
+    'base': 0,
+    'epsilon': 1,
+    'delta': 2,
+    'gamma': 3,
+    'beta': 4,
+    'alpha': 5
 );
 
 // Configure the scale to use
@@ -77,36 +80,58 @@ $font-size: map-get($typographic-baseline, 'font-size');
 $line-height: map-get($typographic-baseline, 'line-height');
 $line-height-px: $font-size * $line-height;
 
+@mixin calculate-font-size($name, $font-size, $line-height, $scale, $ratio){
+    // @debug $name, $font-size, $line-height, $scale, $ratio;
+    @return null;
+}
+
 // Loop through breakpoints
 @each $bp-name, $bp-size in $breakpoints {
     $bp-config: map-get($typographic-breakpoints, $bp-name);
-    @debug $bp-name, $bp-size, $bp-config;
-}
+    $bp: map-get($breakpoints, $bp-name);
+    $scale: map-get($bp-config, 'scale');
 
-// Calculate font-size and line-height
+    @include respond-min($bp) {
 
-@for $i from 1 through length($typographic-scale-sizes) {
-    $size: nth($typographic-scale-sizes, $i);
-    $scale: $typographic-scale;
-    $new-font-size: $font-size;
+        // Calculate font-size and line-height
+        @for $i from 1 to length($typographic-scale-sizes) + 1 {
+            $size: nth($typographic-scale-sizes, $i);
+            $name: nth($size, 1);
+            $ratio: nth($size, 2);
+            $new-font-size: $font-size;
+            $new-line-height: 0;
 
-    // calculate font-size
+            // calculate font-size
 
-    @if type-of($scale) == list {
-        $new-font-size: $new-font-size * nth($scale, $i);
-    } @else {
-        @for $j from 1 through $i {
-            $new-font-size: $new-font-size * $typographic-scale;
+            @if type-of($scale) == list {
+                $scaled: nth($scale, $i);
+                $new-font-size: $new-font-size * $scaled;
+            } @else {
+
+                @if $ratio >= 0 {
+                    @for $j from 0 to $ratio {
+                        $new-font-size: $new-font-size * $scale;
+                    }
+                } @else if $ratio < 0 {
+                    @for $j from $ratio to 0 {
+                        $new-font-size: $new-font-size / $scale;
+                    }
+                }
+
+            }
+
+            // calculate line-height
+            $half: $line-height-px/2;
+            @while $new-line-height <= $new-font-size {
+                $new-line-height: $new-line-height + $half;
+            }
+
+            @debug $bp-name, $name, $font-size, $ratio, $new-font-size;
+
         }
+
     }
 
-    // calculate line-height
-    $new-line-height: 0;
-    $half: $line-height-px/2;
-    @while $new-line-height <= $new-font-size {
-        $new-line-height: $new-line-height + $half;
-    }
-
-    @debug $size, $new-font-size, $new-line-height;
+    @debug '------------';
 
 }
