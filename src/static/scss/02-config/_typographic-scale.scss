@@ -80,9 +80,38 @@ $font-size: map-get($typographic-baseline, 'font-size');
 $line-height: map-get($typographic-baseline, 'line-height');
 $line-height-px: $font-size * $line-height;
 
-@mixin calculate-font-size($name, $font-size, $line-height, $scale, $ratio){
-    // @debug $name, $font-size, $line-height, $scale, $ratio;
-    @return null;
+@mixin generate-font-properties($bp, $size, $fs, $index){
+    $name: nth($size, 1);
+    $ratio: nth($size, 2);
+    $new-font-size: $fs;
+    $new-line-height: 0;
+
+    // calculate font-size
+
+    @if type-of($scale) == list {
+        $scaled: nth($scale, $index);
+        $new-font-size: $new-font-size * $scaled;
+    } @else {
+
+        @if $ratio >= 0 {
+            @for $j from 0 to $ratio {
+                $new-font-size: $new-font-size * $scale;
+            }
+        } @else if $ratio < 0 {
+            @for $j from $ratio to 0 {
+                $new-font-size: $new-font-size / $scale;
+            }
+        }
+
+    }
+
+    // calculate line-height
+    $half: $line-height-px/2;
+    @while $new-line-height <= $new-font-size {
+        $new-line-height: $new-line-height + $half;
+    }
+
+    @debug $bp-name, $name, $font-size, '==>', $new-font-size, $new-line-height;
 }
 
 // Loop through breakpoints
@@ -96,38 +125,7 @@ $line-height-px: $font-size * $line-height;
         // Calculate font-size and line-height
         @for $i from 1 to length($typographic-scale-sizes) + 1 {
             $size: nth($typographic-scale-sizes, $i);
-            $name: nth($size, 1);
-            $ratio: nth($size, 2);
-            $new-font-size: $font-size;
-            $new-line-height: 0;
-
-            // calculate font-size
-
-            @if type-of($scale) == list {
-                $scaled: nth($scale, $i);
-                $new-font-size: $new-font-size * $scaled;
-            } @else {
-
-                @if $ratio >= 0 {
-                    @for $j from 0 to $ratio {
-                        $new-font-size: $new-font-size * $scale;
-                    }
-                } @else if $ratio < 0 {
-                    @for $j from $ratio to 0 {
-                        $new-font-size: $new-font-size / $scale;
-                    }
-                }
-
-            }
-
-            // calculate line-height
-            $half: $line-height-px/2;
-            @while $new-line-height <= $new-font-size {
-                $new-line-height: $new-line-height + $half;
-            }
-
-            @debug $bp-name, $name, $font-size, $ratio, $new-font-size;
-
+            @include generate-font-properties($bp, $size, $font-size, $i);
         }
 
     }
