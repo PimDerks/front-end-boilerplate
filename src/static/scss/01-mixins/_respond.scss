@@ -21,15 +21,19 @@ $fix-mqs: false !default;
 }
 
 @mixin respond-min-max($min,$max) {
+
+  $max: $max * .999; // to avoid overlapping with $max itself
+
   @if $fix-mqs {
     @if $fix-mqs >= $min and $fix-mqs <= $max {
       @content;
     }
   } @else {
-    @media screen and (min-width:$min) and (max-width: $max) {
+    @media screen and (min-width: $min) and (max-width: $max) {
       @content;
     }
   }
+
 }
 
 @mixin respond-max($width) {

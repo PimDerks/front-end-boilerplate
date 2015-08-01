@@ -40,12 +40,30 @@
             }
         </style>
     </head>
-    <body>
+    <body class="baseline">
         <p>Template</p>
 
-        {% block content %}
+        <p>{% block content %}
             Placeholder for content.
-        {% endblock %}
+        {% endblock %}</p>
+
+        <p>Blaat.</p>
+
+
+        <h1>Heading 1</h1>
+        <p>Lorem ipsum.</p>
+
+        <h2>Heading 2</h2>
+        <p>Lorem ipsum.</p>
+
+        <h3>Heading 3</h3>
+        <p>Lorem ipsum.</p>
+
+        <h4>Heading 4</h4>
+        <p>Lorem ipsum.</p>
+
+        <h5>Heading 5</h5>
+        <p>Lorem ipsum.</p>
 
         <h1>Data</h1>
 

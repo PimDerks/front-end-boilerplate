@@ -25,7 +25,7 @@ $typographic-scales:(
 $typographic-breakpoints:(
     'xs':   (
         'font-size': 12,
-        'line-height': 1.5,
+        'line-height': 1.4,
         'scale': map-get($typographic-scales, 'major-third')
     ),
     's':    (
@@ -35,17 +35,17 @@ $typographic-breakpoints:(
     ),
     'm':    (
         'font-size': 14,
-        'line-height': 1.5,
+        'line-height': 1.6,
         'scale': map-get($typographic-scales, 'augmented-fourth')
     ),
     'l':    (
         'font-size': 15,
-        'line-height': 1.5,
+        'line-height': 1.7,
         'scale': map-get($typographic-scales, 'perfect-fifth')
     ),
     'xl':    (
         'font-size': 16,
-        'line-height': 1.5,
+        'line-height': 1.8,
         'scale': map-get($typographic-scales, 'custom')
     )
 );
@@ -80,7 +80,7 @@ $font-size: map-get($typographic-baseline, 'font-size');
 $line-height: map-get($typographic-baseline, 'line-height');
 $line-height-px: $font-size * $line-height;
 
-@mixin generate-font-properties($bp, $size, $fs, $index){
+@mixin generate-font-properties($bp, $size, $fs, $index) {
     $name: nth($size, 1);
     $ratio: nth($size, 2);
     $new-font-size: $fs;
@@ -111,7 +111,12 @@ $line-height-px: $font-size * $line-height;
         $new-line-height: $new-line-height + $half;
     }
 
-    @debug $bp-name, $name, $font-size, '==>', $new-font-size, $new-line-height;
+    font-size: $new-font-size + px;
+    line-height: $new-line-height + px;
+    margin-bottom: $line-height-px + px;
+
+    // @debug $bp-name, $name, $font-size, '==>', $new-font-size, $new-line-height;
+
 }
 
 // Loop through breakpoints
@@ -120,16 +125,80 @@ $line-height-px: $font-size * $line-height;
     $bp: map-get($breakpoints, $bp-name);
     $scale: map-get($bp-config, 'scale');
 
+    // maybe use respond-min-max here?
     @include respond-min($bp) {
-
         // Calculate font-size and line-height
         @for $i from 1 to length($typographic-scale-sizes) + 1 {
             $size: nth($typographic-scale-sizes, $i);
-            @include generate-font-properties($bp, $size, $font-size, $i);
+            $name: nth($size, 1);
+
+            .#{$name} {
+                @include generate-font-properties($bp, $size, $font-size, $i);
+            }
+
+        }
+    }
+
+    // @debug '------------';
+
+}
+
+@function get-baseline-height($amount:1, $breakpoint:'xs') {
+    $bp: map-get($breakpoints, $breakpoint);
+    $bp-config: map-get($typographic-breakpoints, $breakpoint);
+    $line-height: map-get($bp-config, 'line-height');
+    @return $line-height + em;
+}
+
+/* Set base font-size
+----------------------------------------------- */
+
+$base: 16; // browser default
+
+@each $bp-name, $bp-size in $breakpoints {
+    $bp-config: map-get($typographic-breakpoints, $bp-name);
+    $bp: map-get($breakpoints, $bp-name);
+    $font-size: map-get($bp-config, 'font-size');
+    $line-height: map-get($bp-config, 'line-height');
+
+    @include respond-min($bp) {
+
+        body {
+            font-size: ($font-size/$base) * 100%;
+            line-height: $line-height;
+        }
+
+        .baseline {
+            background-size: 100% $line-height + em;
         }
 
     }
 
-    @debug '------------';
+}
+
+/* Baseline background
+----------------------------------------------- */
+
+.baseline {
+    background-image: linear-gradient(#EEEEEE 1px, #EEEEEE 50%, transparent 51%, transparent 100%);
+    background-position: left top;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    label,
+    ol,
+    ul,
+    dl,
+    p,
+    .alpha,
+    .beta,
+    .gamma,
+    .delta,
+    .epsilon {
+        background: rgba(255,0,0,.25) !important;
+    }
 
 }
