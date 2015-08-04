@@ -29,21 +29,21 @@ module.exports.copyAssets = function () {
 
 module.exports.copyBuildStatic = function () {
 
-    //var src = config.roots.www + '/' + config.paths.static + '/**/*',
-    //    dest = config.roots.dest + '/' + config.paths.static;
-    //
-    //return gulp.src(src)
-    //    .pipe(gulp.dest(dest));
+    var src = config.roots.www + '/' + config.paths.static + '/**/*',
+        dest = config.roots.dest + '/' + config.paths.static;
+
+    return gulp.src(src)
+        .pipe(gulp.dest(dest));
 
 };
 
 
 module.exports.copyBuildHTML = function () {
 
-    //var src = config.roots.www + '/**/*.html',
-    //    dest = config.roots.dest;
-    //
-    //return gulp.src(src)
-    //    .pipe(gulp.dest(dest));
+    var src = config.roots.www + '/**/*.html',
+        dest = config.roots.dest;
+
+    return gulp.src(src)
+        .pipe(gulp.dest(dest));
 
 };

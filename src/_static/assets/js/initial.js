@@ -51,7 +51,7 @@ require = {
     'paths': {
         // when using a separate request for conditioner config
         // 'config': config.conditioner
-        'modules': 'ui/07-modules'
+        'modules': 'ui/07-modules' // so we can use 'modules/X' instead of 'ui/07-modules/X'
     },
     map: {
         '*': {
