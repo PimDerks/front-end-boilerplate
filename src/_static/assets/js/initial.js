@@ -17,7 +17,7 @@ var config = {
     // config for conditioner, ideally should be inline to avoid extra request
     conditioner: {
         'paths': {
-            'monitors': './vendor/rikschennink/monitors/'
+            'monitors': './vendor/conditioner/monitors/'
         },
         'modules': {
             'ui/Test': {
@@ -37,7 +37,7 @@ var config = {
 
     // location of asynchronously loaded scripts
     scripts: {
-        requirejs: '/_static/vendor/jrburke/require.js', // src of requirejs lib
+        requirejs: '/_static/vendor/requirejs/require.js', // src of requirejs lib
         dir: '/_static/', // root of all scripts loaded via requirejs
         main: 'assets/js/main' // gets prefixed with scripts.dir
     }
@@ -55,7 +55,7 @@ require = {
     },
     map: {
         '*': {
-            conditioner: 'vendor/rikschennink/conditioner',
+            conditioner: 'vendor/conditioner/conditioner',
         }
     },
     'shim': {
