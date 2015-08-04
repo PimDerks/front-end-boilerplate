@@ -8,12 +8,15 @@ var gulp = require('gulp'),
 
 module.exports = function() {
 
+    var src = config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.sass + '/**.scss',
+        dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.css;
+
     // all files in root of /scss/
-    return gulp.src([config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/**.scss'])
+    return gulp.src(src)
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(autoprefixer('last 1 version', '> 5%', 'ie 9'))
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(config.roots.www + '/' + config.paths.static + '/' + config.paths.css));
+        .pipe(gulp.dest(dest));
 
 };

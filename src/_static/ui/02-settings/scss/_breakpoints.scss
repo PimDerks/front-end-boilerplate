@@ -17,5 +17,3 @@ $breakpoints:(
 @function get-breakpoint($name){
     @return map-get($breakpoints, $name);
 }
-
-@debug get-breakpoint('xs');

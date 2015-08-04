@@ -19,12 +19,13 @@ module.exports = (function(){
 
         // path
         paths: {
-            static: 'static',
-            staticMin: 'static-min',
+            ui: 'ui',
+            assets: 'assets',
+            static: '_static',
+            staticMin: '_static-min',
             sass: 'scss',
             css: 'css',
             js: 'js',
-            assets: 'assets',
             includes: '_includes',
             img: 'assets/img',
             fonts: 'assets/fonts',

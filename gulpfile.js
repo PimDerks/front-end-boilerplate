@@ -76,7 +76,8 @@ gulp.task('deploy', ftp);
 
 // dev
 gulp.task('dev', function() {
-    seq('clean', 'copy', 'concat-shim', 'amd', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
+    // seq('clean', 'copy', 'concat-shim', 'amd', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
+    seq('clean', 'copy', 'concat-shim', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
 });
 
 // build

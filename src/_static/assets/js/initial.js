@@ -30,16 +30,16 @@ var config = {
 
     // location of asynchronously loaded fonts
     fonts: {
-        ttf: '/static/css/ttf.css',
-        woff: '/static/css/woff.css',
-        woff2: '/static/css/woff2.css'
+        ttf: '/_static/assets/css/ttf.css',
+        woff: '/_static/assets/css/woff.css',
+        woff2: '/_static/assets/css/woff2.css'
     },
 
     // location of asynchronously loaded scripts
     scripts: {
-        requirejs: '/static/js/vendor/jrburke/require.js', // src of requirejs lib
-        dir: '/static/js/', // root of all scripts loaded via requirejs
-        main: 'main-build' // gets prefixed with scripts.dir
+        requirejs: '/_static/vendor/jrburke/require.js', // src of requirejs lib
+        dir: '/_static/', // root of all scripts loaded via requirejs
+        main: 'assets/js/main' // gets prefixed with scripts.dir
     }
 
 },
@@ -51,10 +51,11 @@ require = {
     'paths': {
         // when using a separate request for conditioner config
         // 'config': config.conditioner
+        'modules': 'ui/07-modules'
     },
     map: {
         '*': {
-            conditioner: 'vendor/rikschennink/conditioner'
+            conditioner: 'vendor/rikschennink/conditioner',
         }
     },
     'shim': {
