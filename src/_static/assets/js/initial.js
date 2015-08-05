@@ -1,7 +1,7 @@
 var config = {
 
     // cache bust
-    version: (new Date().getTime()) + '1',
+    version: (new Date().getTime()),
 
     /* location of conditioner config (when using a separate request)
 
@@ -51,11 +51,16 @@ require = {
     'paths': {
         // when using a separate request for conditioner config
         // 'config': config.conditioner
-        'modules': 'ui/07-modules' // so we can use 'modules/X' instead of 'ui/07-modules/X'
+        'utils': 'ui/01-utils',
+        'base': 'ui/03-base',
+        'generic': 'ui/04-generic',
+        'objects': 'ui/05-objects',
+        'components': 'ui/06-components',
+        'modules': 'ui/07-modules'
     },
     map: {
         '*': {
-            conditioner: 'vendor/conditioner/conditioner',
+            'conditioner': 'vendor/conditioner/conditioner'
         }
     },
     'shim': {

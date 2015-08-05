@@ -82,7 +82,7 @@
         <p>Template.</p>
         <section>Blaat</section>
 
-        <div data-module="modules/Test"></div>
+        <div data-module="modules/Module/js/Module"></div>
         <!--[if IE 9]>
             <script src="/_static/assets/js/shim.js"></script>
         <![endif]-->
