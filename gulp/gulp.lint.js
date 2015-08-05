@@ -8,10 +8,10 @@ var gulp = require('gulp'),
 
 module.exports.jshint = function() {
     return gulp.src([
-            config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*.js',
-            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/vendor/**/*.js',
-            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/shim/**/*.js',
-            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/initial.js'
+            config.roots.src + '/' + config.paths.static + '/**/*.js',
+            '!' + config.roots.src + '/' + config.paths.static + '/vendor/**/*.js',
+            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.js + '/shim/**/*.js',
+            '!' + config.roots.src + '/' + config.paths.static + + '/' + config.paths.assets + '/' + config.paths.js + '/initial.js'
         ])
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
@@ -19,10 +19,10 @@ module.exports.jshint = function() {
 
 module.exports.jscs = function () {
     return gulp.src([
-            config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*.js',
-            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/vendor/**/*.js',
-            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/shim/**/*.js',
-            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/initial.js'
+            config.roots.src + '/' + config.paths.static + '/**/*.js',
+            '!' + config.roots.src + '/' + config.paths.static + '/vendor/**/*.js',
+            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.js + '/shim/**/*.js',
+            '!' + config.roots.src + '/' + config.paths.static + + '/' + config.paths.assets + '/' + config.paths.js + '/initial.js'
         ])
         .pipe(jscs());
 };
@@ -30,8 +30,7 @@ module.exports.jscs = function () {
 module.exports.scsslint = function() {
 
     return gulp.src([
-            config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/**/*.scss',
-            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/03-base/_normalize.scss'
+            config.roots.src + '/**/*.scss'
         ])
         .pipe(scsslint({
             'config': './.scss-lint.yml'
