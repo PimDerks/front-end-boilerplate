@@ -6,24 +6,21 @@ var gulp = require('gulp'),
     w3cjs = require('gulp-w3cjs'),
     jscs = require('gulp-jscs');
 
+var jsFiles = [
+    config.roots.src + '/' + config.paths.static + '/**/*.js',
+    '!' + config.roots.src + '/' + config.paths.static + '/vendor/**/*.js',
+    '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.js + '/shim/**/*.js',
+    '!' + config.roots.src + '/' + config.paths.static + + '/' + config.paths.assets + '/' + config.paths.js + '/initial.js'
+];
+
 module.exports.jshint = function() {
-    return gulp.src([
-            config.roots.src + '/' + config.paths.static + '/**/*.js',
-            '!' + config.roots.src + '/' + config.paths.static + '/vendor/**/*.js',
-            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.js + '/shim/**/*.js',
-            '!' + config.roots.src + '/' + config.paths.static + + '/' + config.paths.assets + '/' + config.paths.js + '/initial.js'
-        ])
+    return gulp.src(jsFiles)
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
 };
 
 module.exports.jscs = function () {
-    return gulp.src([
-            config.roots.src + '/' + config.paths.static + '/**/*.js',
-            '!' + config.roots.src + '/' + config.paths.static + '/vendor/**/*.js',
-            '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.js + '/shim/**/*.js',
-            '!' + config.roots.src + '/' + config.paths.static + + '/' + config.paths.assets + '/' + config.paths.js + '/initial.js'
-        ])
+    return gulp.src(jsFiles)
         .pipe(jscs());
 };
 
