@@ -1,5 +1,4 @@
 var gulp = require('gulp'),
-    util = require('gulp-util'),
     watch = require('gulp-watch'),
     sass = require('gulp-sass'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -8,7 +7,7 @@ var gulp = require('gulp'),
 
 module.exports = function() {
 
-    var src = config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.sass + '/**.scss',
+    var src = config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.sass + '/*.scss',
         dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.css;
 
     // all files in root of /scss/

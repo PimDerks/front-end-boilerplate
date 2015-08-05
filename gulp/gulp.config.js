@@ -7,29 +7,25 @@ module.exports = (function(){
             src: './src',
             www: './www',
             tmp: './tmp',
-            dest: './dest',
-            content: './content'
-        },
-
-        // data
-        content: {
-            pages: 'pages', // becomes roots.content + this
-            data: 'data' // becomes roots.content + this
+            dest: './dest'
         },
 
         // path
         paths: {
+            prototype: 'prototype',
+            data: 'data',
+            modules: 'modules',
             ui: 'ui',
             assets: 'assets',
-            static: '_static',
-            staticMin: '_static-min',
+            static: 'static',
+            staticMin: 'static-min',
             sass: 'scss',
             css: 'css',
             js: 'js',
-            includes: '_includes',
+            includes: 'includes',
             img: 'assets/img',
             fonts: 'assets/fonts',
-            templates: 'templates',
+            layouts: 'layouts',
             shim: 'shim'
         },
 

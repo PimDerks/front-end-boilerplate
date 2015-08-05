@@ -5,10 +5,10 @@ var gulp = require('gulp'),
 module.exports.watchContent = function() {
 
     // watch content
-    gulp.watch(config.roots.content + '/' + config.content.pages + '/**/*', ['swig']);
+    gulp.watch(config.roots.src + '/' + config.roots.prototype + '/**/*', ['html']);
 
     // watch data
-    gulp.watch(config.roots.content + '/' + config.content.data + '/**/*', ['swig']);
+    gulp.watch(config.roots.src + '/' + config.roots.data + '/**/*', ['html']);
 
 };
 
@@ -29,7 +29,9 @@ module.exports.watchCSS = function() {
 module.exports.watchHTML = function() {
 
     // watch swig
-    gulp.watch(config.roots.src + '/' + config.paths.templates + '/**/*', ['swig']);
-    gulp.watch(config.roots.src + '/' + config.paths.includes + '/**/*', ['swig']);
+    gulp.watch(config.roots.src + '/' + config.paths.layouts + '/**/*', ['html']);
+    gulp.watch(config.roots.src + '/' + config.paths.includes + '/**/*', ['html']);
+    gulp.watch(config.roots.src + '/' + config.paths.modules + '/**/*', ['html']);
+
 
 };

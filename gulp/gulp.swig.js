@@ -29,7 +29,26 @@ var methods = {
 
         var result = [];
 
-        utils.walk(config.roots.tmp, function(path){
+        utils.walk(config.roots.tmp + '/' + config.paths.prototype, function(path){
+
+            var ext = utils.getExtension(path);
+
+            switch(ext) {
+                case 'swig':
+                    result.push(path);
+            }
+
+        });
+
+        return result;
+
+    },
+
+    getComponents: function(){
+
+        var result = [];
+
+        utils.walk(config.roots.src + '/' + config.paths.modules, function(path){
 
             var ext = utils.getExtension(path);
 
@@ -51,7 +70,7 @@ var methods = {
         };
 
         // get data files
-        utils.walk(config.roots.content + '/' + config.content.data, function(path){
+        utils.walk(config.roots.src + '/' + config.paths.data, function(path){
 
             var name = utils.stripExtension(utils.getFileName(path)),
                 ext = utils.getExtension(path);
@@ -89,7 +108,7 @@ var methods = {
     getRelativeTemplatePath: function(file, template){
 
         // get relative template path
-        var pathToTemplate = config.roots.src + '/' + config.paths.templates + '/' + template;
+        var pathToTemplate = config.roots.tmp + '/' + config.paths.layouts + '/' + template;
 
         // return relative path
         return path.relative(file.substr(0, file.lastIndexOf('/')), pathToTemplate)
@@ -183,12 +202,25 @@ var methods = {
 
     },
 
-    renderPages: function(){
+    renderComponents: function(){
+
+        var components = methods.getComponents();
+
+        components.forEach(function(component, index){
+            methods.renderSwigFile(component, config.roots.tmp);
+            if(index === (components.length - 1)){
+                console.log('Succesfully rendered ' + components.length + ' components.');
+            }
+        });
+
+    },
+
+    renderPrototype: function(){
 
         var pages = methods.getPages();
 
         pages.forEach(function(page, index){
-            methods.renderPage(page);
+            methods.renderSwigFile(page, config.roots.www);
             if(index === (pages.length - 1)){
                 console.log('Succesfully rendered ' + pages.length + ' pages.');
             }
@@ -196,20 +228,20 @@ var methods = {
 
     },
 
-    renderPage: function(src){
+    renderSwigFile: function(src, targetDir){
 
         // strip extension from file
         var name = src.substr(0, src.indexOf('.swig')),
             json = name + '.json';
 
         // get site-wide data
-        var data = methods.getData();
+        var data = methods.getData() || {};
 
         // check is a JSON file exists with the same file
-        var page = fse.readJsonSync(json, { throws: false });
+        var local = fse.readJsonSync(json, { throws: false });
 
-        if(page){
-            data.data[page] = page;
+        if(local){
+            data.data['local'] = local;
         }
 
         // invalidate the swig cache
@@ -222,14 +254,21 @@ var methods = {
         var removeDir = config.roots.tmp.replace('./','');
         name = name.replace(removeDir + '/', '');
 
+        // strip /src/ dir from filename
+        var removeDir2 = config.roots.src.replace('./','');
+        name = name.replace(removeDir2 + '/', '');
+
         // write rendered template to file
-        utils.writeFile(config.roots.www + '/' + name + '.html', swiggedContent, function(err){
+
+        var dest = targetDir ? targetDir : config.roots.www;
+
+        utils.writeFile(dest + '/' + name + '.html', swiggedContent, function(err){
             if(err){
-                // console.log("Unable to render page: " + src);
+                // console.log("Unable to render component: " + src);
                 return;
             }
 
-            // console.log("Succesfully rendered page: " + src);
+            // console.log("Succesfully rendered component: " + src);
 
         });
 
@@ -239,23 +278,20 @@ var methods = {
 
 module.exports = function() {
 
-    var swigFiles = [];
+    methods.renderComponents();
 
     // copy all files to temp
-    methods.copy(config.roots.content + '/' + config.content.pages, config.roots.tmp).then(function() {
 
-        methods.setMasterPagePaths().then(function () {
+    methods.setMasterPagePaths().then(function () {
 
-            // log
-            console.log('Rendering pages...');
+        // log
+        console.log('Rendering pages...');
 
-            // render templates
-            methods.renderPages();
+        // render templates
+        methods.renderPrototype();
 
-        }).error(function(){
-
-        });
-
+    }).error(function () {
+        //
     });
 
 };

@@ -1,5 +1,19 @@
 var gulp = require('gulp');
 
+module.exports.copySrc = function () {
+
+    return gulp.src(config.roots.src + '/**/*')
+        .pipe(gulp.dest(config.roots.tmp));
+
+};
+
+module.exports.copySwig = function () {
+
+    return gulp.src(config.roots.src + '/**/*.swig')
+        .pipe(gulp.dest(config.roots.tmp));
+
+};
+
 module.exports.copyJS = function () {
 
     var src = config.roots.src + '/**/*.js',

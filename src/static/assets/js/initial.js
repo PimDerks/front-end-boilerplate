@@ -30,15 +30,15 @@ var config = {
 
     // location of asynchronously loaded fonts
     fonts: {
-        ttf: '/_static/assets/css/ttf.css',
-        woff: '/_static/assets/css/woff.css',
-        woff2: '/_static/assets/css/woff2.css'
+        ttf: '/static/assets/css/ttf.css',
+        woff: '/static/assets/css/woff.css',
+        woff2: '/static/assets/css/woff2.css'
     },
 
     // location of asynchronously loaded scripts
     scripts: {
-        requirejs: '/_static/ui/vendor/requirejs/require.js', // src of requirejs lib
-        dir: '/_static/ui', // root of all scripts loaded via requirejs
+        requirejs: '/static/ui/vendor/requirejs/require.js', // src of requirejs lib
+        dir: '/static/ui', // root of all scripts loaded via requirejs
         main: 'main' // gets prefixed with scripts.dir
     }
 

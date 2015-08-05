@@ -68,16 +68,22 @@ gulp.task('lint', ['lint-scss', 'lint-jscs', 'lint-jshint', 'lint-w3c', 'lint-ht
 // Copy
 gulp.task('copyJS', copy.copyJS);
 gulp.task('copyAssets', copy.copyAssets);
-gulp.task('copy', ['copyJS', 'copyAssets']);
 gulp.task('copyBuildStatic', copy.copyBuildStatic);
+gulp.task('copySwig', copy.copySwig);
 gulp.task('copyBuildHTML', inline);
+gulp.task('copy', copy.copySrc);
 
 // Deploy
 gulp.task('deploy', ftp);
 
 // dev
 gulp.task('dev', function() {
-    seq('clean', 'copy', 'concat-shim', 'amd', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
+    seq('clean', 'copy', 'copyJS', 'copyAssets', 'concat-shim', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
+});
+
+// build html
+gulp.task('html', function() {
+    seq('copySwig', 'swig');
 });
 
 // build

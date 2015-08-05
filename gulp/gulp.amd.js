@@ -20,11 +20,12 @@ module.exports = function(){
                     'utils': '01-utils',
                     'base': '03-base',
                     'generic': '04-generic',
-                    'objects': '05-objects',
+                    'objects': 'empty:', // ignore entire folder
                     'components': '06-components',
                     'modules': '07-modules'
                 },
-                "baseUrl": dir
+                "baseUrl": dir,
+                "exclude": ['05-objects/js/Object'] // again, we need to use the original path structure here
             }))
             .pipe(concat(module + '.js'))
             .pipe(gulp.dest(dest));
