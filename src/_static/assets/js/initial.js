@@ -37,9 +37,9 @@ var config = {
 
     // location of asynchronously loaded scripts
     scripts: {
-        requirejs: '/_static/vendor/requirejs/require.js', // src of requirejs lib
-        dir: '/_static/', // root of all scripts loaded via requirejs
-        main: 'assets/js/main' // gets prefixed with scripts.dir
+        requirejs: '/_static/ui/vendor/requirejs/require.js', // src of requirejs lib
+        dir: '/_static/ui', // root of all scripts loaded via requirejs
+        main: 'main' // gets prefixed with scripts.dir
     }
 
 },
@@ -51,12 +51,12 @@ require = {
     'paths': {
         // when using a separate request for conditioner config
         // 'config': config.conditioner
-        'utils': 'ui/01-utils',
-        'base': 'ui/03-base',
-        'generic': 'ui/04-generic',
-        'objects': 'ui/05-objects',
-        'components': 'ui/06-components',
-        'modules': 'ui/07-modules'
+        'utils': '01-utils',
+        'base': '03-base',
+        'generic': '04-generic',
+        'objects': '05-objects',
+        'components': '06-components',
+        'modules': '07-modules'
     },
     map: {
         '*': {

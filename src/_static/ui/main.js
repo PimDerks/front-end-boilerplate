@@ -6,7 +6,7 @@
 
     requirejs.config({
         'paths': {
-            'conditioner': 'vendor/conditionerjs/conditioner',
+            'conditioner': 'vendor/conditioner/conditioner',
             'modernizr': 'vendor/modernizr/modernizr'
         },
         'shim': {

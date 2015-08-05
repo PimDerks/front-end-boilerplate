@@ -15,7 +15,7 @@ module.exports.watchContent = function() {
 module.exports.watchJS = function() {
 
     // watch js files
-    gulp.watch(config.roots.src + '/**/*.js', ['lint-jshint', 'lint-jscs', 'copyJS']);
+    gulp.watch(config.roots.src + '/**/*.js', ['lint-jshint', 'lint-jscs', 'copyJS', 'amd']);
 
 };
 
