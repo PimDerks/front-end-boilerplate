@@ -18,8 +18,8 @@ module.exports.copyAssets = function () {
         dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.assets;
 
     src.push(config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/**/*'); // all assets
+    src.push('!' + config.roots.src + '/**/*.scss'); // ignore scss files
     src.push('!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.sass); // ignore sass dir
-    src.push('!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.sass + '/**/*'); // ignore sass file
     src.push('!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.js + '/**/*'); // ignore js files (copyJS task)
 
     return gulp.src(src)
