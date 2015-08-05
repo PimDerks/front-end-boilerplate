@@ -15,14 +15,14 @@ module.exports.watchContent = function() {
 module.exports.watchJS = function() {
 
     // watch js files
-    gulp.watch(config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*', ['lint-jshint', 'lint-jscs', 'copyJS', 'amd']);
+    gulp.watch(config.roots.src + '/**/*.js', ['lint-jshint', 'lint-jscs', 'copyJS', 'amd']);
 
 };
 
 module.exports.watchCSS = function() {
 
     // watch sass files
-    gulp.watch(config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/**/*', ['lint-scss', 'sass']);
+    gulp.watch(config.roots.src + '/**/*.scss', ['lint-scss', 'sass']);
 
 };
 
