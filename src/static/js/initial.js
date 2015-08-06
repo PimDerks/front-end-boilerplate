@@ -17,7 +17,7 @@ var config = {
     // config for conditioner, ideally should be inline to avoid extra request
     conditioner: {
         'paths': {
-            'monitors': './vendor/conditioner/monitors/'
+            'monitors': './base/vendor/conditioner/monitors/'
         },
         'modules': {
             'ui/Test': {
@@ -30,15 +30,15 @@ var config = {
 
     // location of asynchronously loaded fonts
     fonts: {
-        ttf: '/static/assets/css/ttf.css',
-        woff: '/static/assets/css/woff.css',
-        woff2: '/static/assets/css/woff2.css'
+        ttf: '/static/css/ttf.css',
+        woff: '/static/css/woff.css',
+        woff2: '/static/css/woff2.css'
     },
 
     // location of asynchronously loaded scripts
     scripts: {
-        requirejs: '/static/ui/vendor/requirejs/require.js', // src of requirejs lib
-        dir: '/static/ui', // root of all scripts loaded via requirejs
+        requirejs: '/static/js/base/vendor/requirejs/require.js', // src of requirejs lib
+        dir: '/static/js', // root of all scripts loaded via requirejs
         main: 'main' // gets prefixed with scripts.dir
     }
 
@@ -51,16 +51,10 @@ require = {
     'paths': {
         // when using a separate request for conditioner config
         // 'config': config.conditioner
-        'utils': '01-utils',
-        'base': '03-base',
-        'generic': '04-generic',
-        'objects': '05-objects',
-        'components': '06-components',
-        'modules': '07-modules'
     },
     map: {
         '*': {
-            'conditioner': 'vendor/conditioner/conditioner'
+            'conditioner': 'base/vendor/conditioner/conditioner'
         }
     },
     'shim': {

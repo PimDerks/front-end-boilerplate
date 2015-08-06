@@ -8,9 +8,11 @@ var gulp = require('gulp'),
 
 var jsFiles = [
     config.roots.src + '/' + config.paths.static + '/**/*.js',
+    config.roots.src + '/' + config.paths.modules + '/**/*.js',
+    '!' + config.roots.src + '/' + config.paths.modules + '/base/js/00-vendor/**/*.js',
     '!' + config.roots.src + '/' + config.paths.static + '/vendor/**/*.js',
-    '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.js + '/shim/**/*.js',
-    '!' + config.roots.src + '/' + config.paths.static + + '/' + config.paths.assets + '/' + config.paths.js + '/initial.js'
+    '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/shim/**/*.js',
+    '!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/initial.js'
 ];
 
 module.exports.jshint = function() {

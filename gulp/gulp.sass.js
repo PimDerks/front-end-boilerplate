@@ -7,8 +7,8 @@ var gulp = require('gulp'),
 
 module.exports = function() {
 
-    var src = config.roots.src + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.sass + '/*.scss',
-        dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.assets + '/' + config.paths.css;
+    var src = config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/*.scss',
+        dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.css;
 
     // all files in root of /scss/
     return gulp.src(src)

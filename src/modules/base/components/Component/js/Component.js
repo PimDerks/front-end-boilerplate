@@ -1,4 +1,4 @@
-define(['objects/js/Object'], function(Object) {
+define(['base/objects/Object'], function(Object) {
 
     'use strict';
 

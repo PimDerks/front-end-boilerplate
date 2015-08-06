@@ -86,7 +86,14 @@ gulp.task('html', function() {
     seq('copySwig', 'swig');
 });
 
+// build js
+gulp.task('js', function() {
+    seq('copyJS');
+});
+
 // build
 gulp.task('build', function() {
     seq('copyBuildStatic', 'minify', 'copyBuildHTML');
 });
+
+

@@ -1,4 +1,4 @@
-define(['components/Component/js/Component'], function(Component) {
+define(['base/components/Component/Component'], function(Component) {
 
     'use strict';
 
@@ -25,7 +25,7 @@ define(['components/Component/js/Component'], function(Component) {
          * @private
          */
         _initialize: function() {
-            console.log('init module with options', this._options, 'on', new Date(), Component);
+            console.log('Initialized modules/Module with options', this._options, 'on', new Date(), Component);
         },
 
         /**

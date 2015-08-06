@@ -6,8 +6,8 @@
 
     requirejs.config({
         'paths': {
-            'conditioner': 'vendor/conditioner/conditioner',
-            'modernizr': 'vendor/modernizr/modernizr'
+            'conditioner': 'base/vendor/conditioner/conditioner',
+            'modernizr': 'base/vendor/modernizr/modernizr'
         },
         'shim': {
             'modernizr': {
