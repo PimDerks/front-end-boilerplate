@@ -145,9 +145,13 @@ We use Swig as our templating engine, for both pages and components.
 - Before compiling the pages in the `prototype`-folder, all `.swig`-files in the `modules` folder are compiled. This allows us to use separate data-files for each component.
 - Swig requires relative `extends` paths. To enable us to use nesting in the `prototype`-folder, these files are dynamically added when compiling the templates. You only need to include the layout-name you want to use from the `layouts`-folder.
 
+### Data
+- Site-wide data (e.g. dictionary items etc) can be configured in the `data` folder. Its contents will be available in your `.swig`-files via `data.filename`, so `dictionary.json` becomes `data.dictionary`.
+- For each `.swig` file you can include a `.json` file with the same name. Its contents will be added to the site-wide data described above on the local-property of the JSON object (`data.local`).
+
 ## Gulp
 
-We use Gulp as a taskrunner to automate stuff. The following tasks can be used:
+We use Gulp as a task-runner to automate tasks. The following tasks can be used:
 
 ### gulp initial
 
