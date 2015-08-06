@@ -58,7 +58,7 @@ gulp.task('copy-unminified', copy.copyUnminifiedAssets);
 gulp.task('browser-sync', browserSync);
 
 // Compile AMD modules
-// gulp.task('amd', amd);
+gulp.task('amd', amd);
 
 // Inline assets
 gulp.task('base64', base64);
@@ -99,7 +99,7 @@ gulp.task('html', function(){
 
 // build
 gulp.task('build', function() {
-    seq('copy-www-static', 'minify', 'inline');
+    seq('copy-www-static', 'minify', 'inline', 'amd');
 });
 
 
