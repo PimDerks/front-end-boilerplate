@@ -31,12 +31,36 @@ Lorem ipsum
 
 ## Directories
 
+### Roots
+
 Paths can be configured in `gulp.config.js`.
 
 * `roots.src` is the source directory you are working in.
 * `roots.www` is the output of the `gulp initial`-task your project which will be running in a webserver
 * `roots.tmp` is used for writing temporary files (right now only used for Swig)
 * `roots.dest` is the output of the `gulp build`-task.
+
+### Modules
+
+We bundle files (SCSS, JavaScript, Swig, ...) together based on components/modules.
+
+#### JavaScript
+
+In the `roots.src`-folder, all JavaScript should be in the `modules`-folder. Site-wide, generic modules should be in `modules/base`.
+
+The subfolders in the `modules/base/js`-folder are prefixed with numbers to make clear how everything should be structured. These numbers are stripped from the directory-names when compiling. The `/js/`-subfolder for each module is also stripped:
+
+- `src/modules/base/js/00-vendor` becomes `www/static/js/base/vendor`
+- `src/modules/moduleX/js/moduleX` becomes `www/static/js/module/moduleX`
+
+etc. 
+
+#### SCSS
+
+For now, all the SCSS is merged into one single file. In the future it might be necessary to output separate files for modules.
+This would however only be necessary when modules become (too) big.
+
+The subfolders in the `modules/base/scss`-folder are prefixed with numbers to make clear how everything should be structured.
 
 ## Gulp
 
