@@ -5,7 +5,7 @@ var gulp = require('gulp'),
 module.exports = function(){
 
     var src = config.roots.www + '/**/*.html',
-        dest = config.roots.dest + '/' + config.paths.templates;
+        dest = config.roots.dest;
 
     var options = {
         compress: false

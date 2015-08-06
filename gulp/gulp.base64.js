@@ -7,13 +7,14 @@ var gulp = require('gulp'),
 
 module.exports = function(){
 
-    var dir = config.roots.www + '/' + config.paths.static + '/' + config.paths.css;
+    var src = config.roots.dest + '/' + config.paths.static + '/**/*.css',
+        dest = config.roots.dest + '/' + config.paths.staticMin;
 
-    return gulp.src(dir + '/*.css')
+    return gulp.src(src)
         .pipe(base64({
             extensions: ['ttf', 'woff', 'woff2'],
             maxImageSize: 1024*1024 // max size in bytes
         }))
-        .pipe(gulp.dest(dir));
+        .pipe(gulp.dest(dest));
 
 };

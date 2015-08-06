@@ -7,6 +7,7 @@ module.exports = function(browserSync) {
     var timer;
 
     // watch www
+
     gulp.watch(config.roots.www + '/**/*').on('change', function(){
 
         // throttle

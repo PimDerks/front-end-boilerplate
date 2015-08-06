@@ -1,12 +1,13 @@
 var gulp = require('gulp'),
-    cache = require('gulp-cached');
     swig = require('swig'),
     path = require('path'),
     config = require('./gulp.config'),
     utils = require('./gulp.utils'),
     fs = require('fs'),
     fse = require('fs-extra'),
-    Promise = require('./gulp.promise');
+    Promise = require('./gulp.promise'),
+    htmlhint = require("gulp-htmlhint"),
+    w3cjs = require('gulp-w3cjs');
 
 var methods = {
 
@@ -237,9 +238,8 @@ var methods = {
         // get site-wide data
         var data = methods.getData() || {};
 
-        // check is a JSON file exists with the same file
+        // check is a JSON file exists with the same file in the same directory
         var local = fse.readJsonSync(json, { throws: false });
-
         if(local){
             data.data['local'] = local;
         }
@@ -276,22 +276,49 @@ var methods = {
 
 };
 
-module.exports = function() {
+module.exports.copy = function() {
 
-    methods.renderComponents();
+    methods.copy(config.roots.src, config.roots.tmp).then(function(){
 
-    // copy all files to temp
+        methods.renderComponents();
 
-    methods.setMasterPagePaths().then(function () {
+        methods.setMasterPagePaths().then(function () {
 
-        // log
-        console.log('Rendering pages...');
+            // log
+            console.log('Rendering pages...');
 
-        // render templates
-        methods.renderPrototype();
+            // render templates
+            methods.renderPrototype();
 
-    }).error(function () {
-        //
+        }).error(function () {
+        });
+
     });
+
+};
+
+module.exports.lint = function(){
+    return gulp.src(config.roots.www + '/**/*.html')
+        .pipe(w3cjs())
+        .pipe(htmlhint())
+        .pipe(htmlhint.failReporter());
+
+};
+
+module.exports.watch = function(){
+
+    var src = [];
+
+    // swig
+    src.push(config.roots.src + '/' + config.paths.layouts + '/**/*');
+    src.push(config.roots.src + '/' + config.paths.includes + '/**/*');
+    src.push(config.roots.src + '/' + config.paths.modules + '/**/*.swig');
+
+    // content + data
+    src.push(config.roots.src + '/' + config.roots.prototype + '/**/*');
+    src.push(config.roots.src + '/' + config.roots.data + '/**/*');
+
+    // watch data
+    gulp.watch(src, ['html']);
 
 };

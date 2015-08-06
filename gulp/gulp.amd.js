@@ -4,9 +4,9 @@ var gulp = require('gulp'),
 
 module.exports = function(){
 
-    var dir = config.roots.src + '/' + config.paths.static + '/' + config.paths.ui,
-        files = dir + '/**/*',
-        dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.ui;
+    var dir = config.roots.src
+        files = dir + '/**/*.js',
+        dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.js;
 
     // Modules to compile. We must use the actual file path here.
     var modules = ["main", "07-modules/Module/js/Module"];

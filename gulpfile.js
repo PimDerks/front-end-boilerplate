@@ -7,46 +7,58 @@ var gulp = require('gulp'),
 var clean = require('./gulp/gulp.clean'),
     concat = require('./gulp/gulp.concat'),
     inline = require('./gulp/gulp.inline'),
-    watch = require('./gulp/gulp.watch'),
     watchWWW = require('./gulp/gulp.watchWWW')(bs),
     sass = require('./gulp/gulp.sass'),
     swig = require('./gulp/gulp.swig'),
     minify = require('./gulp/gulp.minify'),
     amd = require('./gulp/gulp.amd'),
     base64 = require('./gulp/gulp.base64'),
-    lint = require('./gulp/gulp.lint'),
     copy = require('./gulp/gulp.copy'),
     ftp = require('./gulp/gulp.ftp'),
-    browserSync = require('./gulp/gulp.browsersync')(bs);
+    browserSync = require('./gulp/gulp.browsersync')(bs),
+    js = require('./gulp/gulp.javascript');
+    swig = require('./gulp/gulp.swig');
 
 // Remove temp/www dir
 gulp.task('clean', clean);
 
-// Concat tasks
-gulp.task('concat-shim', concat.shim);
+// Javascript tasks
+gulp.task('js-copy', js.copy);
+gulp.task('js-copy-modules', js.copyModules);
+gulp.task('js-lint', js.lint);
+gulp.task('js-watch', js.watch);
 
-// Inline
+// SASS tasks
+gulp.task('sass-copy', sass.copy);
+gulp.task('sass-lint', sass.lint);
+gulp.task('sass-watch', sass.watch);
+
+// HTML/Swig tasks
+gulp.task('html-copy', swig.copy);
+gulp.task('html-lint', swig.lint);
+gulp.task('html-watch', swig.watch);
+
+// Overall watch
+gulp.task('www-watch', watchWWW);
+gulp.task('watch', ['js-watch', 'sass-watch', 'html-watch', 'www-watch']);
+
+// Concat shims
+gulp.task('shim', concat.shim);
+
+// Inline assets
 gulp.task('inline', inline);
+
+// Copy task
+gulp.task('copy-assets', copy.copyAssets);
+gulp.task('copy-www-html', copy.copyBuildHTML);
+gulp.task('copy-www-static', copy.copyBuildStatic);
+gulp.task('copy-unminified', copy.copyUnminifiedAssets);
 
 // Automatically update files in browser
 gulp.task('browser-sync', browserSync);
 
-// Compile Swig to HTML
-gulp.task('swig', swig);
-
-// Compile SASS to CSS
-gulp.task('sass', sass);
-
 // Compile AMD modules
-gulp.task('amd', amd);
-
-// Watch files
-gulp.task('watch-www', watchWWW);
-gulp.task('watch-html', ['swig'], watch.watchHTML);
-gulp.task('watch-content', ['swig'], watch.watchContent);
-gulp.task('watch-css', ['sass'], watch.watchCSS);
-gulp.task('watch-js', watch.watchJS)
-gulp.task('watch', ['watch-html', 'watch-content', 'watch-css', 'watch-js', 'watch-www']);
+// gulp.task('amd', amd);
 
 // Inline assets
 gulp.task('base64', base64);
@@ -55,45 +67,34 @@ gulp.task('base64', base64);
 gulp.task('minifyCSS', minify.minifyCSS);
 gulp.task('minifyJS', minify.minifyJS);
 gulp.task('minifyImg', minify.minifyImg);
-gulp.task('minify', ['minifyCSS', 'minifyJS', 'minifyImg']);
-
-// Lint
-gulp.task('lint-html', lint.htmlhint);
-gulp.task('lint-w3c', lint.w3c);
-gulp.task('lint-jscs', lint.jscs);
-gulp.task('lint-jshint', lint.jshint)
-gulp.task('lint-scss', lint.scsslint);
-gulp.task('lint', ['lint-scss', 'lint-jscs', 'lint-jshint', 'lint-w3c', 'lint-html']);
-
-// Copy
-gulp.task('copyJS', copy.copyJS);
-gulp.task('copyAssets', copy.copyAssets);
-gulp.task('copyBuildStatic', copy.copyBuildStatic);
-gulp.task('copySwig', copy.copySwig);
-gulp.task('copyBuildHTML', inline);
-gulp.task('copy', copy.copySrc);
+gulp.task('minify', ['minifyCSS', 'minifyJS', 'minifyImg', 'copy-unminified']);
 
 // Deploy
 gulp.task('deploy', ftp);
 
 // dev
 gulp.task('dev', function() {
-    seq('clean', 'copy', 'copyJS', 'copyAssets', 'concat-shim', 'sass', 'base64', 'swig', 'watch', 'browser-sync');
-});
-
-// build html
-gulp.task('html', function() {
-    seq('copySwig', 'swig');
+    seq('clean', 'js', 'sass', 'html', 'shim', 'copy-assets', 'watch', 'browser-sync');
 });
 
 // build js
 gulp.task('js', function() {
-    seq('copyJS');
+    seq('js-copy', 'js-copy-modules', 'js-lint');
+});
+
+// build sass
+gulp.task('sass', function() {
+    seq('sass-copy', 'sass-lint')
+});
+
+// build html
+gulp.task('html', function(){
+    seq('html-copy', 'html-lint');
 });
 
 // build
 gulp.task('build', function() {
-    seq('copyBuildStatic', 'minify', 'copyBuildHTML');
+    seq('copy-www-static', 'minify', 'inline');
 });
 
 

@@ -23,8 +23,9 @@ module.exports = (function(){
             css: 'css',
             js: 'js',
             includes: 'includes',
-            img: 'assets/img',
-            fonts: 'assets/fonts',
+            img: 'img',
+            fonts: 'fonts',
+            icons: 'icons',
             layouts: 'layouts',
             shim: 'shim'
         },
