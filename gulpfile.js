@@ -72,9 +72,14 @@ gulp.task('minify', ['minifyCSS', 'minifyJS', 'minifyImg', 'copy-unminified']);
 // Deploy
 gulp.task('deploy', ftp);
 
+// Initial
+gulp.task('initial', function() {
+    seq('clean', 'js', 'sass', 'html', 'shim', 'copy-assets');
+});
+
 // dev
 gulp.task('dev', function() {
-    seq('clean', 'js', 'sass', 'html', 'shim', 'copy-assets', 'watch', 'browser-sync');
+    seq('watch', 'browser-sync');
 });
 
 // build js
