@@ -50,7 +50,7 @@ module.exports.copyModules = function() {
 module.exports.watch = function() {
 
     // Watch js files. Tasks are defined in the main gruntfile.
-    gulp.watch(config.roots.src + '/**/*.js', ['js-copy', 'js-lint']);
+    gulp.watch(config.roots.src + '/**/*.js', ['js-copy', 'js-copy-modules', 'js-lint']);
 
 };
 
