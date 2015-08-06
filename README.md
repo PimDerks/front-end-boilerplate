@@ -130,6 +130,12 @@ The subfolders in the `modules/base/js`-folder are prefixed with numbers to make
 
 etc.
 
+##### RequireJS
+
+RequireJS loads everything from the `/static/js`-folder, meaning that dependencies should be loaded as follows:
+
+- `src/modules/base/js/00-vendor` becomes `base/vendor`
+- `src/modules/moduleX/js/moduleX` becomes `module/moduleX`
 
 #### SCSS
 
@@ -174,3 +180,7 @@ Uploads the /build/ directory to the configured FTP-server.
 ### Favicons
 
 Favicons can be generated at http://realfavicongenerator.net/. They should be put in /src/static/img/.
+
+### Troubleshooting
+
+You might run into certificate problems on Windows. Try the information [this url](https://gist.github.com/luislavena/f064211759ee0f806c88), that should take care of it :)
