@@ -29,6 +29,80 @@ Lorem ipsum
 * [BEM](https://css-tricks.com/bem-101/)
 * [Content First]
 
+## Terms
+
+### Utils
+
+Put your generic utilities here. An utility should most of the time do something with the data it receives as input
+
+- SASS mixins
+- SASS functions
+- JavaScript utilities like Observer, Mediator, ...
+- ...
+
+### Settings
+
+Put your configuration for your module/components here.
+
+- Configuration for Conditioner
+- Configuration for Require
+- Configuration for breakpoints in SASS
+- Configuration for colors in SASS
+- ...
+
+### Base
+
+The starting point of your module. Most of the time this will probably be empty, except for the `base`-module.
+
+- Normalize.css
+- Global `box-sizing` declarations
+- `::selection`
+- Site-wide behaviour, e.g. adding `target=_blank` to all external links.
+
+### Generic
+
+The initial layer of setting up your module. Most of the time this will probably be empty, except for the `base`-module.
+For SASS, there should be no classes here, only element (`h1 {}`, attribute (`[title] {}`) and/or pseudo-selectors (`:hover {}`).
+
+- Default styling for all elements (`h1`, `p`, `ul` etc.).
+
+### Objects
+
+Objects are the lowest level building blocks for your components.
+
+An object should only do 1 thing. Therefore an object should only exist in 1 language.
+
+- SASS: A class or mixin for removing the default styling (bullets etc.) from a list
+- SASS: A class or mixin for displaying list-items inline
+- SASS: A class or mixin for boxes
+- JavaScript: Interface-like objects
+- JavaScript: Models (?)
+- ...
+
+### Components
+
+Component are building blocks for modules. A component can have its own CSS, JavaScript, HTML etc.
+
+- Buttons
+- Form-element
+- Share-component
+- Link-list
+- ...
+
+### Modules
+
+A module is usually a bigger part of your application and will contain multiple components. Only module specific code should be here.
+
+- Header
+- Footer
+- Filter
+- Search
+- ...
+
+### Trumps
+
+A trump is a playing card which is elevated above its normal rank in trick-taking games ([Wikipedia](https://en.wikipedia.org/wiki/Trump)). Use trumps to make sure classes like `.hide`, `.screenreader` etc are at the bottom of your CSS output so that they are not overwritten by other code!
+
 ## Directories
 
 ### Roots
@@ -42,7 +116,7 @@ Paths can be configured in `gulp.config.js`.
 
 ### Modules
 
-We bundle files (SCSS, JavaScript, Swig, ...) together based on components/modules.
+We bundle files (SCSS, JavaScript, Swig, ...) together based on components/modules in the `src`-folder. The output will look more familiar, with pretty much everything output to a `static`-folder.
 
 #### JavaScript
 
@@ -53,7 +127,7 @@ The subfolders in the `modules/base/js`-folder are prefixed with numbers to make
 - `src/modules/base/js/00-vendor` becomes `www/static/js/base/vendor`
 - `src/modules/moduleX/js/moduleX` becomes `www/static/js/module/moduleX`
 
-etc. 
+etc.
 
 #### SCSS
 
