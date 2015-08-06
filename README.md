@@ -18,6 +18,7 @@ Lorem ipsum
 ### Languages
 * HTML
 * Javascript
+* [SWIG](http://paularmstrong.github.io/swig/)
 * [SASS](http://sass-lang.com/)
 
 ### Libraries
@@ -129,12 +130,20 @@ The subfolders in the `modules/base/js`-folder are prefixed with numbers to make
 
 etc.
 
+
 #### SCSS
 
 For now, all the SCSS is merged into one single file. In the future it might be necessary to output separate files for modules.
 This would however only be necessary when modules become (too) big.
 
 The subfolders in the `modules/base/scss`-folder are prefixed with numbers to make clear how everything should be structured.
+
+## Swig
+
+We use Swig as our templating engine, for both pages and components.
+
+- Before compiling the pages in the `prototype`-folder, all `.swig`-files in the `modules` folder are compiled. This allows us to use separate data-files for each component.
+- Swig requires relative `extends` paths. To enable us to use nesting in the `prototype`-folder, these files are dynamically added when compiling the templates. You only need to include the layout-name you want to use from the `layouts`-folder.
 
 ## Gulp
 
