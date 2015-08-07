@@ -9,7 +9,7 @@ module.exports = function() {
     src.push(config.roots.tmp);
     src.push(config.roots.dest);
 
-    return gulp.src([www, tmp, dest])
+    return gulp.src(src)
         .pipe(clean({
             read: false, // do not read files, just remove
             force: true // force files for Windows
