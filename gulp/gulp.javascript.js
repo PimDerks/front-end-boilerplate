@@ -35,8 +35,9 @@ module.exports.copyModules = function() {
         // remove 00- from dir-name
         path.dirname = path.dirname.replace(/[0-9]{2}-+/ig,'');
 
-        // remove /js/'s from dir-name
+        // remove /js/'s from dir-name (ugly work-around for windows for now)
         path.dirname = path.dirname.replace(/\/js/ig, '');
+        path.dirname = path.dirname.replace(/\\js/ig, '');
 
     });
 
