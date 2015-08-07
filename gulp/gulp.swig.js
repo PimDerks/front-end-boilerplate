@@ -30,7 +30,7 @@ var methods = {
 
         var result = [];
 
-        utils.walk(config.roots.tmp + '/' + config.paths.prototype, function(path){
+        utils.walk(path.join(config.roots.tmp, config.paths.prototype), function(path){
 
             var ext = utils.getExtension(path);
 
@@ -49,7 +49,7 @@ var methods = {
 
         var result = [];
 
-        utils.walk(config.roots.src + '/' + config.paths.modules, function(path){
+        utils.walk(path.join(config.roots.src, config.paths.modules), function(path){
 
             var ext = utils.getExtension(path);
 
@@ -71,7 +71,7 @@ var methods = {
         };
 
         // get data files
-        utils.walk(config.roots.src + '/' + config.paths.data, function(path){
+        utils.walk(path.join(config.roots.src, config.paths.data), function(path){
 
             var name = utils.stripExtension(utils.getFileName(path)),
                 ext = utils.getExtension(path);
@@ -109,10 +109,17 @@ var methods = {
     getRelativeTemplatePath: function(file, template){
 
         // get relative template path
-        var pathToTemplate = config.roots.tmp + '/' + config.paths.layouts + '/' + template;
+        var pathToTemplate = path.join(config.roots.tmp, config.paths.layouts, template);
+
+        // current path
+        var curr = file.substr(0, file.lastIndexOf('/'));
+        curr = file.substr(0, file.lastIndexOf('\\'));
+
+        // relative path
+        var rel = path.relative(curr, pathToTemplate);
 
         // return relative path
-        return path.relative(file.substr(0, file.lastIndexOf('/')), pathToTemplate)
+        return rel;
 
     },
 
@@ -250,19 +257,22 @@ var methods = {
         // render template using swig
         var swiggedContent = swig.renderFile(src, data);
 
-        // strip /tmp/ dir from filename
+        // strip /tmp/ dir from filename (ugly work around)
         var removeDir = config.roots.tmp.replace('./','');
         name = name.replace(removeDir + '/', '');
+        name = name.replace(removeDir + '\\', '');
 
-        // strip /src/ dir from filename
+
+        // strip /src/ dir from filename (ugly work around)
         var removeDir2 = config.roots.src.replace('./','');
         name = name.replace(removeDir2 + '/', '');
+        name = name.replace(removeDir2 + '\\', '');
 
         // write rendered template to file
 
         var dest = targetDir ? targetDir : config.roots.www;
 
-        utils.writeFile(dest + '/' + name + '.html', swiggedContent, function(err){
+        utils.writeFile(path.join(dest, name + '.html'), swiggedContent, function(err){
             if(err){
                 // console.log("Unable to render component: " + src);
                 return;
