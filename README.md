@@ -30,6 +30,17 @@ Lorem ipsum
 * [BEM](https://css-tricks.com/bem-101/)
 * [Content First]
 
+## Installation
+
+First make sure you've got Ruby and NodeJS installed. Then proceed as follows:
+
+* Install Gulp (`npm install gulp`)
+* Install all packages defined in package.json (`npm install`)
+
+### Troubleshooting
+
+You might run into certificate problems on Windows. Try the information [this url](https://gist.github.com/luislavena/f064211759ee0f806c88), that should take care of it :)
+
 ## Terms
 
 ### Utils
@@ -180,7 +191,3 @@ Uploads the /build/ directory to the configured FTP-server.
 ### Favicons
 
 Favicons can be generated at http://realfavicongenerator.net/. They should be put in /src/static/img/.
-
-### Troubleshooting
-
-You might run into certificate problems on Windows. Try the information [this url](https://gist.github.com/luislavena/f064211759ee0f806c88), that should take care of it :)
