@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    uglify = require('gulp-uglify'),
     concat = require('gulp-concat'),
     amdOptimize = require('gulp-amd-optimize');
 
@@ -22,6 +23,7 @@ module.exports = function(){
                 "exclude": [] // again, we need to use the original path structure here
             }))
             .pipe(concat(module + '.js'))
+            .pipe(uglify())
             .pipe(gulp.dest(dest));
     });
 
