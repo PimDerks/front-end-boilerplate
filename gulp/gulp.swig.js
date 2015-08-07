@@ -112,11 +112,14 @@ var methods = {
         var pathToTemplate = path.join(config.roots.tmp, config.paths.layouts, template);
 
         // current path
-        var curr = file.substr(0, file.lastIndexOf('/'));
-        curr = file.substr(0, file.lastIndexOf('\\'));
+        var index = file.lastIndexOf('/') || file.lastIndexOf('\\');
+
+        var curr = file.substr(0, index);
 
         // relative path
         var rel = path.relative(curr, pathToTemplate);
+
+        console.log(rel);
 
         // return relative path
         return rel;
