@@ -17,7 +17,7 @@ var config = {
     // config for conditioner, ideally should be inline to avoid extra request
     conditioner: {
         'paths': {
-            'monitors': './base/vendor/conditioner/monitors/'
+            'monitors': './monitors/'
         },
         'modules': {
             'ui/Test': {
