@@ -76,7 +76,7 @@ gulp.task('deploy', ftp);
 
 // Initial
 gulp.task('initial', function() {
-    seq('clean', 'js', 'sass', 'html', 'shim', 'copy-assets');
+    seq('clean', 'js', 'sass', 'html', 'shim', 'copy-assets', 'copy-media');
 });
 
 // dev
