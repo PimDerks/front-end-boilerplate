@@ -112,7 +112,13 @@ var methods = {
         var pathToTemplate = path.join(config.roots.tmp, config.paths.layouts, template);
 
         // current path
-        var index = file.lastIndexOf('/') || file.lastIndexOf('\\');
+        var index;
+
+        if(file.lastIndexOf('/') >= 0){
+            index = file.lastIndexOf('/')
+        } else {
+            index = file.lastIndexOf('\\');
+        }
 
         var curr = file.substr(0, index);
 
