@@ -35,11 +35,12 @@ Lorem ipsum
 First make sure you've got Ruby and NodeJS installed. Then proceed as follows:
 
 * Install Gulp (`npm install gulp`)
+* Install SCSS_Lint (`gem install scss_lint`)
 * Install all packages defined in package.json (`npm install`)
 
 ### Troubleshooting
 
-You might run into certificate problems on Windows. Try the information [this url](https://gist.github.com/luislavena/f064211759ee0f806c88), that should take care of it :)
+You might run into certificate problems on Windows. Try the information [this url](https://gist.github.com/luislavena/f064211759ee0f806c88#step-1-obtain-the-new-trust-certificate), that should take care of it :)
 
 ## Terms
 
