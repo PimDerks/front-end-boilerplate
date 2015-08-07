@@ -8,7 +8,8 @@ module.exports = function(){
         dest = config.roots.dest;
 
     var options = {
-        compress: false
+        compress: false,
+        attribute: 'data-inline'
     };
 
     return gulp.src(src)
