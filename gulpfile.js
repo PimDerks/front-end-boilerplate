@@ -50,8 +50,10 @@ gulp.task('inline', inline);
 
 // Copy task
 gulp.task('copy-assets', copy.copyAssets);
+gulp.task('copy-media', copy.copyMedia);
 gulp.task('copy-www-html', copy.copyBuildHTML);
 gulp.task('copy-www-static', copy.copyBuildStatic);
+gulp.task('copy-www-media', copy.copyBuildMedia);
 gulp.task('copy-unminified', copy.copyUnminifiedAssets);
 
 // Automatically update files in browser
@@ -99,7 +101,7 @@ gulp.task('html', function(){
 
 // build
 gulp.task('build', function() {
-    seq('copy-www-static', 'minify', 'inline', 'amd');
+    seq('copy-www-static', 'copy-www-media', 'minify', 'inline', 'amd');
 });
 
 

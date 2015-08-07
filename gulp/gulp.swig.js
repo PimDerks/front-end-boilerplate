@@ -125,8 +125,6 @@ var methods = {
         // relative path
         var rel = path.relative(curr, pathToTemplate);
 
-        console.log(rel);
-
         // return relative path
         return rel;
 

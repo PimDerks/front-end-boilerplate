@@ -30,14 +30,33 @@ module.exports.copyBuildStatic = function () {
 
 };
 
+module.exports.copyMedia = function () {
 
-module.exports.copyBuildHTML = function () {
-
-    var src = config.roots.www + '/**/*.html',
-        dest = config.roots.dest;
+    var src = config.roots.src + '/' + config.paths.prototype + '/' + config.paths.media + '/**/*',
+        dest = config.roots.www + '/' + config.paths.prototype + '/' + config.paths.media;
 
     return gulp.src(src)
         .pipe(gulp.dest(dest));
+
+};
+
+module.exports.copyBuildMedia = function () {
+
+    var src = config.roots.www + '/' + config.paths.prototype + '/' + config.paths.media + '/**/*',
+        dest = config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.media;
+
+    return gulp.src(src)
+        .pipe(gulp.dest(dest));
+
+};
+
+module.exports.copyBuildHTML = function () {
+
+var src = config.roots.www + '/**/*.html',
+    dest = config.roots.dest;
+
+return gulp.src(src)
+    .pipe(gulp.dest(dest));
 
 };
 

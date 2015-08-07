@@ -27,7 +27,8 @@ module.exports = (function(){
             fonts: 'fonts',
             icons: 'icons',
             layouts: 'layouts',
-            shim: 'shim'
+            shim: 'shim',
+            media: '_media'
         },
 
         // server
