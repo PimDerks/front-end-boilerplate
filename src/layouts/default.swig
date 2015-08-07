@@ -16,9 +16,9 @@
     </head>
     <body class="baseline">
 
-        <p>{% block content %}
-            Placeholder for content.
-        {% endblock %}</p>
+        {% block content %}
+            <p>This comes from the default layout.</p>
+        {% endblock %}
 
         <h1>Data</h1>
 

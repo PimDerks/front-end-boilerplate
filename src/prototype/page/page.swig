@@ -1,5 +1,6 @@
-﻿﻿{% extends 'default.swig' %}
+﻿﻿{% extends 'inherited.swig' %}
 
 {% block content %}
-    News.
+    {% parent %}
+    <p>This comes from the page.</p>
 {% endblock %}

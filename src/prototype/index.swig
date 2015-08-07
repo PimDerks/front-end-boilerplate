@@ -1,5 +1,6 @@
 ﻿﻿{% extends 'default.swig' %}
 
 {% block content %}
-        Index. Blaat.
+        {% parent %}
+        <p>This comes from the page.</p>
 {% endblock %}

@@ -1,43 +1,6 @@
-{% include "sublayouts/document-open.swig" %}
+{% extends 'default.swig' %}
 
-    <head>
-
-        {% include "sublayouts/document-head.swig" %}
-
-        <title>
-            {% block title %}
-                Default title
-            {% endblock %} - {{ data.project }}
-        </title>
-
-        {% include "sublayouts/document-head-includes.swig" %}
-        {% include "sublayouts/document-head-og-data.swig" %}
-
-    </head>
-    <body class="baseline">
-
-        <p>{% block content %}
-            Placeholder for content.
-        {% endblock %}</p>
-
-        <h1>Data</h1>
-
-        {% include "../modules/base/components/Component/Component.html" %}
-
-        {% for x in data %}
-            <ul>
-                <li>{{ loop.key }}
-                    <ul>
-                    {% for y in x %}
-                        <li>{{ y }}</li>
-                    {% endfor %}
-                    </ul>
-                </li>
-            </ul>
-        {%  endfor %}
-
-        <div data-module="module/Module"></div>
-
-        {% include "sublayouts/document-scripts.swig" %}
-
-{% include "sublayouts/document-foot.swig" %}
+{% block content %}
+    {% parent %}
+    <p>This comes from the inherited layout.</p>
+{% endblock %}
