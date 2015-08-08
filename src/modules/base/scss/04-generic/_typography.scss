@@ -1,11 +1,13 @@
 @mixin get-baseline-properties($props) {
   @each $bp in $breakpoints {
     $bp-size: nth($bp, 2);
+
     @include respond-min($bp-size) {
       @each $prop, $amount in $props {
         @include get-baseline-property($prop, $amount, $bp);
       }
     }
+
   }
 }
 
@@ -17,9 +19,11 @@
   @if $breakpoint {
     #{$prop}: $height;
   } @else {
-    @include respond-min($breakpoint){
+
+    @include respond-min($breakpoint) {
       #{$prop}: $height;
     }
+
   }
 }
 

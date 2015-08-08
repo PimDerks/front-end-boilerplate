@@ -27,6 +27,7 @@ module.exports.lint = function(){
 
     var src = [];
     src.push(config.roots.src + '/**/*.scss');
+    src.push('!' + config.roots.src + '/' + config.paths.modules + '/base/scss/03-base/_normalize.scss');
 
     return gulp.src(src)
         .pipe(scsslint({
