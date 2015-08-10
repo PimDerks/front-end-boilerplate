@@ -1,4 +1,4 @@
-define([], function() {
+define(['Observer'], function(Observer) {
 
     'use strict';
 
