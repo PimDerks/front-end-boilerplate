@@ -76,7 +76,9 @@ gulp.task('deploy', ftp);
 
 // Initial
 gulp.task('initial', function() {
-    seq('clean', 'js', 'sass', 'html', 'shim', 'copy-assets', 'copy-media');
+    seq('clean', 'js', 'sass', 'html', 'shim', 'copy-assets', 'copy-media', function(){
+        process.exit(0);
+    });
 });
 
 // dev
@@ -101,7 +103,7 @@ gulp.task('html', function(){
 
 // build
 gulp.task('build', function() {
-    seq('copy-www-static', 'copy-www-media', 'minify', 'inline', 'amd');
+    seq('copy-www-static', 'copy-www-media', 'minify', 'inline', 'amd', function(){
+        process.exit(0);
+    });
 });
-
-
