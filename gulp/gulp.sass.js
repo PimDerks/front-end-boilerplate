@@ -4,7 +4,8 @@ var gulp = require('gulp'),
     scsslint = require('gulp-scss-lint'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
-    config = require('./gulp.config')
+    config = require('./gulp.config'),
+    plumber = require('gulp-plumber');
 
 module.exports.copy = function() {
 
@@ -15,6 +16,7 @@ module.exports.copy = function() {
 
     // all files in root of /scss/
     return gulp.src(src)
+        .pipe(plumber())
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(autoprefixer('last 1 version', '> 5%', 'ie 9'))
