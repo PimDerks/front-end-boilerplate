@@ -2,5 +2,5 @@
 
 {% block content %}
         {% parent %}
-        <p>This comes from the page.</p>
+        <p>This comes from the page!</p>
 {% endblock %}
