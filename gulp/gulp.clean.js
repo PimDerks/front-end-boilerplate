@@ -1,7 +1,8 @@
 var gulp = require('gulp'),
-    clean = require('gulp-clean');
+    clean = require('gulp-clean'),
+    config = require('./gulp.config');
 
-module.exports = function() {
+module.exports = function(){
 
     // empty and remove www and tmp directories
     var src = [];
@@ -14,5 +15,4 @@ module.exports = function() {
             read: false, // do not read files, just remove
             force: true // force files for Windows
         }));
-
 };
