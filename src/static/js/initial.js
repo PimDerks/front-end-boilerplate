@@ -51,11 +51,12 @@ require = {
     'paths': {
         // when using a separate request for conditioner config
         // 'config': config.conditioner
-        'Observer': 'base/vendor/conditioner/utils/Observer'
+
     },
     map: {
         '*': {
-            'conditioner': 'base/vendor/conditioner/conditioner'
+            'conditioner': 'base/vendor/conditioner/conditioner',
+            'Observer': 'base/vendor/conditioner/utils/Observer'
         }
     },
     'shim': {
