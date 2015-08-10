@@ -327,12 +327,9 @@ module.exports.watch = function(){
     var src = [];
 
     // swig
-    src.push(config.roots.src + '/' + config.paths.layouts + '/**/*');
-    src.push(config.roots.src + '/' + config.paths.includes + '/**/*');
-    src.push(config.roots.src + '/' + config.paths.modules + '/**/*.swig');
+    src.push(config.roots.src + '/**/*.swig');
 
-    // content + data
-    src.push(config.roots.src + '/' + config.roots.prototype + '/**/*');
+    // data
     src.push(config.roots.src + '/' + config.roots.data + '/**/*');
 
     // watch data
