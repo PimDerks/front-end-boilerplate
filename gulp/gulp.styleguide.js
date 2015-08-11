@@ -9,6 +9,8 @@ var gulp = require('gulp'),
     htmlhint = require("gulp-htmlhint"),
     w3cjs = require('gulp-w3cjs');
 
+    require('swig-highlight').apply(swig);
+
 var methods = {
 
     getComponentName: function(file){
@@ -76,6 +78,14 @@ var methods = {
 
     },
 
+    getFile: function(file){
+        var obj = {
+          name: file,
+          contents: fs.readFileSync(file, 'utf8')
+        };
+        return obj;
+    },
+
     getDependencies: function(file, dir){
 
         var result = [];
@@ -105,7 +115,8 @@ var methods = {
                 // base module gets all dependencies
                 // submodules only get dependencies which match filename
                 if(filename === component || temp === filename) {
-                    result.push(f);
+                    var r = methods.getFile(f);
+                    result.push(r);
                 //
                 }
 
@@ -137,13 +148,13 @@ var methods = {
         temp['code']['css'] = methods.getDependencies(c, config.paths.sass);
 
         // get related SCSS
-        temp['code']['html'] = [c];
+        temp['code']['html'] = [methods.getFile(c)];
 
         // get expected data-format
-        temp['data'] = methods.getData(c);
+        temp['data'] = methods.getData(c)? methods.getFile(methods.getData(c)) : null;
 
         // get documentation
-        temp['doc'] = methods.getDocumentation(c);
+        temp['doc'] = methods.getDocumentation(c) ? methods.getFile(methods.getDocumentation(c)) : null;
 
         return temp;
 

@@ -2,7 +2,17 @@
 <html>
         <head>
                 <title>Styleguide</title>
+                <link rel="stylesheet" href="//highlightjs.org/static/demo/styles/darkula.css">
+                <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+                <script>hljs.initHighlightingOnLoad();</script>
                 <style>
+                        pre,
+                        code {
+                                display: block;
+                                margin: 0;
+                                padding: 0;
+                        }
+
                         h1,
                         h2,
                         h3,

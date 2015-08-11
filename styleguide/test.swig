@@ -22,7 +22,8 @@
 
 {% if config.data.doc %}
     <{{ heading }}>Documentation</{{ heading }}>
-    {{ config.data.doc }}
+    {{ config.data.doc.name }}
+    <pre><code>{{ config.data.doc.contents }}</code></pre>
 {% endif %}
 
 {# Code for this component #}
@@ -34,7 +35,10 @@
         <p>Hier komen de contents van de HTML dependencies:</p>
          <ul>
             {% for dep in config.data.code.html %}
-                <li>{{ dep }}</li>
+                <li>
+                    {{ dep.name }}
+                    <pre><code>{{ dep.contents }}</code></pre>
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -44,7 +48,10 @@
         <p>Hier komen de contents van de CSS dependencies.</p>
         <ul>
             {% for dep in config.data.code.css %}
-                <li>{{ dep }}</li>
+                <li>
+                    {{ dep.name }}
+                    <pre><code>{{ dep.contents }}</code></pre>
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -54,7 +61,10 @@
         <p>Hier komen de contents van de JavaScript dependencies.</p>
         <ul>
             {% for dep in config.data.code.js %}
-                <li>{{ dep }}</li>
+                <li>
+                    {{ dep.name }}
+                    <pre><code>{{ dep.contents }}</code></pre>
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -65,5 +75,6 @@
 
 {% if config.data.data %}
     <{{ heading }}>Data</{{ heading }}>
-    <p>{{ config.data.data }}</p>
+    <p>{{ config.data.data.name }}</p>
+<pre><code>{{ config.data.data.contents }}</code></pre>
 {% endif %}
