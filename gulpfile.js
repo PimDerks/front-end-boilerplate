@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     seq = require('run-sequence');
 
 // require
-var clean = require('./gulp/gulp.clean'),
+var api = require('./gulp/gulp.rest'),
+    clean = require('./gulp/gulp.clean'),
     concat = require('./gulp/gulp.concat'),
     inline = require('./gulp/gulp.inline'),
     watchWWW = require('./gulp/gulp.watchWWW')(bs),
@@ -19,6 +20,10 @@ var clean = require('./gulp/gulp.clean'),
     browserSync = require('./gulp/gulp.browsersync')(bs),
     js = require('./gulp/gulp.javascript');
     swig = require('./gulp/gulp.swig');
+
+// API
+gulp.task('api-start', api.run);
+gulp.task('api-watch', api.watch);
 
 // Remove temp/www dir
 gulp.task('clean', clean);
@@ -41,7 +46,7 @@ gulp.task('html-watch', swig.watch);
 
 // Overall watch
 gulp.task('www-watch', watchWWW);
-gulp.task('watch', ['js-watch', 'sass-watch', 'html-watch', 'www-watch']);
+gulp.task('watch', ['api-watch', 'js-watch', 'sass-watch', 'html-watch', 'www-watch']);
 
 // Concat shims
 gulp.task('shim', concat.shim);
@@ -82,9 +87,9 @@ gulp.task('initial', function() {
     });
 });
 
-// dev
+// devg
 gulp.task('dev', function() {
-    seq('watch', 'browser-sync');
+    seq('api-start', 'watch', 'browser-sync');
 });
 
 // build js
