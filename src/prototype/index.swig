@@ -1,4 +1,4 @@
-﻿﻿{% extends 'default.swig' %}
+﻿﻿{% extends '../layouts/default.swig' %}
 
 {% block content %}
         {% parent %}

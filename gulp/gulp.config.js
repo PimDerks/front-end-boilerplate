@@ -38,7 +38,7 @@ module.exports = (function(){
 
         // regex
         regex: {
-            template: "{\\% extends '[a-z]+\\.swig' \\%}"
+            template: "{\\% extends '[a-z/]+\\.swig' \\%}"
         },
 
         // strings to replace

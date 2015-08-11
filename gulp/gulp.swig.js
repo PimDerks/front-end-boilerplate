@@ -299,7 +299,9 @@ module.exports.copy = function() {
 
         methods.renderComponents();
 
-        methods.setMasterPagePaths().then(function () {
+        // methods.setMasterPagePaths().then(function () {
+
+        setTimeout(function(){
 
             // log
             console.log('Rendering pages...');
@@ -307,8 +309,10 @@ module.exports.copy = function() {
             // render templates
             methods.renderPrototype();
 
-        }).error(function () {
         });
+
+        // }).error(function () {
+        // });
 
     });
 

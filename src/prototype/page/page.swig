@@ -1,4 +1,4 @@
-﻿﻿{% extends 'inherited.swig' %}
+﻿﻿{% extends '../../layouts/inherited.swig' %}
 
 {% block content %}
     {% parent %}
