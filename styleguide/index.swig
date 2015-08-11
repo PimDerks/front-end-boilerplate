@@ -48,10 +48,10 @@
                                                         {% endif %}
                                                 </dl>
 
-                                                {% if sub.deps.css || sub.deps.js %}
+                                                {% if sub.deps.css.length > 0 || sub.deps.js.length > 0 %}
                                                         <h5>Dependencies</h5>
                                                         <dl>
-                                                                {% if sub.deps.css %}
+                                                                {% if sub.deps.css.length > 0 %}
                                                                         <dt>CSS</dt>
                                                                         <dd>
                                                                                 <ul>
@@ -62,11 +62,11 @@
                                                                         </dd>
                                                                 {%  endif %}
 
-                                                                {% if sub.deps.css %}
+                                                                {% if sub.deps.js.length > 0 %}
                                                                         <dt>JavaScript</dt>
                                                                         <dd>
                                                                                 <ul>
-                                                                                        {% for dep in sub.deps.css %}
+                                                                                        {% for dep in sub.deps.js %}
                                                                                                 <li>{{ dep }}</li>
                                                                                         {% endfor %}
                                                                                 </ul>

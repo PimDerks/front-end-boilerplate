@@ -62,8 +62,16 @@ var methods = {
 
         var result = [];
 
+        // get filename
+        var filename = path.basename(file);
+        filename = filename.replace(path.extname(filename), '');
+
         // get directory
         var base = path.dirname(file);
+
+        // get component baseName
+        var component = base.split(path.sep);
+        component = component[component.length-1];
 
         // get subdirectory
         var subdir = path.join(base, dir);
@@ -72,7 +80,17 @@ var methods = {
 
             // read files from subdirectory
             utils.walk(subdir, function(f){
-                result.push(f);
+
+                var temp = path.basename(f);
+                temp = temp.replace(path.extname(temp), '');
+
+                // base module gets all dependencies
+                // submodules only get dependencies which match filename
+                if(filename === component || temp === filename) {
+                    result.push(f);
+                //
+                }
+
             });
 
         }
