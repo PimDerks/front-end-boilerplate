@@ -1,8 +1,5 @@
 var gulp = require('gulp'),
-    imagemin = require('gulp-imagemin'),
-    uglify = require('gulp-uglify'),
-    concat = require('gulp-concat'),
-    amdOptimize = require('gulp-amd-optimize'),
+    util = require('gulp-util'),
     base64 = require('gulp-base64');
 
 module.exports = function(){

@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     config = require('./gulp/gulp.config'),
     bs = require('browser-sync').create(),
+    util = require('gulp-util'),
     seq = require('run-sequence');
 
 // require
@@ -88,17 +89,37 @@ gulp.task('dev', function() {
 
 // build js
 gulp.task('js', function() {
-    seq('js-copy', 'js-copy-modules', 'js-lint');
+
+    if(util.env.killlint) {
+        seq('js-copy', 'js-copy-modules');
+    } else {
+        seq('js-copy', 'js-copy-modules', 'js-lint');
+    }
+
 });
 
 // build sass
 gulp.task('sass', function() {
-    seq('sass-copy', 'sass-lint')
+
+    if(util.env.killlint) {
+        seq('sass-copy');
+    } else {
+        seq('sass-copy', 'sass-lint');
+    }
+
+
 });
 
 // build html
 gulp.task('html', function(){
-    seq('html-copy', 'html-lint');
+
+    if(util.env.killlint) {
+        seq('html-copy');
+    } else {
+        seq('html-copy', 'html-lint');
+    }
+
+
 });
 
 // build

@@ -1,5 +1,6 @@
 var path = require('path'),
     _ = require('lodash'),
+    util = require('gulp-util'),
     fs = require('fs'),
     fse = require('fs-extra'),
     jsonfile = require('json-file'),
