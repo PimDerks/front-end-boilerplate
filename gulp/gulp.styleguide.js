@@ -15,6 +15,24 @@ var methods = {
         return path.basename(file).replace(path.extname(file), '');
     },
 
+    getDocumentation: function(file){
+
+        var result;
+
+        // get directory
+        var base = path.dirname(file);
+
+        // get filename
+        var name = methods.getComponentName(file);
+
+        // expected .json file
+        var json = path.join(base, name + '.md');
+
+        // check if path exists
+        return fs.existsSync(json) ? json : null;
+
+    },
+
     getComponentHierarchy: function(file){
 
         // replace 'src/modules'
@@ -118,8 +136,14 @@ var methods = {
         // get related SCSS
         temp['deps']['css'] = methods.getDependencies(c, config.paths.sass);
 
+        // get related SCSS
+        temp['deps']['html'] = [c];
+
         // get expected data-format
         temp['data'] = methods.getData(c);
+
+        // get documentation
+        temp['doc'] = methods.getDocumentation(c);
 
         return temp;
 
@@ -161,7 +185,6 @@ var methods = {
 
         }
 
-        console.log(result);
         return result;
 
     },
@@ -176,8 +199,6 @@ var methods = {
 
         // render template using swig
         var swiggedContent = swig.renderFile(template, data);
-
-        // console.log(data);
 
         // write file
         utils.writeFile(path.join(config.roots.www, config.paths.styleguide, 'index.html'), swiggedContent, function(err){

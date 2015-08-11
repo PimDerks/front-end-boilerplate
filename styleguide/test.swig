@@ -1,0 +1,116 @@
+{% set heading = 'h' + config.heading %}
+{% set subheadingLevel = config.heading + 1 %}
+{% set subheading = 'h' + subheadingLevel %}
+
+{{ blaat }}
+
+{# Location of this component in the project. #}
+<{{ heading }}>Location</{{ heading }}>
+<dl class="hierarchy">
+
+    <dt>Module</dt>
+    <dd>{{ config.data.hierarchy.module }}</dd>
+    <dt>Component</dt>
+    <dd>{{ config.data.hierarchy.component }}</dd>
+    {% if config.data.hierarchy.config.datamodule %}
+        <dt>config.datamodule</dt>
+        <dd>{{ config.data.hierarchy.config.datamodule }}</dd>
+    {% endif %}
+</dl>
+
+{# Documentation of this component. #}
+
+{% if config.data.doc %}
+    <{{ heading }}>Documentation</{{ heading }}>
+    {{ config.data.doc }}
+{% endif %}
+
+{# Code for this component #}
+{% if config.data.deps.css.length > 0 || config.data.deps.js.length > 0 || config.data.deps.html.length > 0 %}
+    <{{ heading }}>Code</{{ heading }}>
+
+    {% if config.data.deps.html.length > 0 %}
+        <{{ subheading }}>HTML</{{ subheading }}>
+        <p>Hier komen de contents van de HTML dependencies:</p>
+         <ul>
+            {% for dep in config.data.deps.html %}
+                <li>{{ dep }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if config.data.deps.css.length > 0 %}
+        <{{ subheading }}>SASS</{{ subheading }}>
+        <p>Hier komen de contents van de CSS dependencies.</p>
+        <ul>
+            {% for dep in config.data.deps.css %}
+                <li>{{ dep }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if config.data.deps.js.length > 0 %}
+        <{{ subheading }}>JavaScript</{{ subheading }}>
+        <p>Hier komen de contents van de JavaScript dependencies.</p>
+        <ul>
+            {% for dep in config.data.deps.js %}
+                <li>{{ dep }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+{% endif %}
+
+{# HTML, JavaScript and CSS dependencies for this component. #}
+
+{% if config.data.deps.css.length > 0 || config.data.deps.js.length > 0 || config.data.deps.html.length > 0 %}
+    <{{ heading }}>Dependencies</{{ heading }}>
+    <dl>
+
+        {# HTML dependencies for this component. #}
+
+        {% if config.data.deps.html.length > 0 %}
+            <dt>HTML</dt>
+            <dd>
+                <ul>
+                    {% for dep in config.data.deps.html %}
+                        <li>{{ dep }}</li>
+                    {% endfor %}
+                </ul>
+            </dd>
+        {%  endif %}
+
+        {# CSS dependencies for this component. #}
+
+        {% if config.data.deps.css.length > 0 %}
+            <dt>SASS</dt>
+            <dd>
+                <ul>
+                    {% for dep in config.data.deps.css %}
+                        <li>{{ dep }}</li>
+                    {% endfor %}
+                </ul>
+            </dd>
+        {%  endif %}
+
+        {# JavaScript dependencies for this component. #}
+
+        {% if config.data.deps.js.length > 0 %}
+            <dt>JavaScript</dt>
+            <dd>
+                <ul>
+                    {% for dep in config.data.deps.js %}
+                        <li>{{ dep }}</li>
+                    {% endfor %}
+                </ul>
+            </dd>
+        {% endif %}
+    </dl>
+{% endif %}
+
+{# Expected data for rendering this component. #}
+
+{% if config.data.data %}
+    <{{ heading }}>Data</{{ heading }}>
+    <p>{{ config.data.data }}</p>
+{% endif %}
