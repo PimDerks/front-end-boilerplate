@@ -1,2 +1,15 @@
+/* 01 Base
+--------------------------------------*/
+
 @import '../../modules/base/scss/base';
+
+/* 02 Modules
+--------------------------------------*/
+
 @import '../../modules/Module/scss/Module';
+
+/* 03 Trumps
+--------------------------------------*/
+
+@import '../../modules/base/scss/07-trumps/group';
+@import '../../modules/base/scss/07-trumps/hide';
