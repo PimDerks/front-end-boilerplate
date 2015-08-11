@@ -128,16 +128,16 @@ var methods = {
         temp['hierarchy'] = methods.getComponentHierarchy(c);
 
         // dependencies
-        temp['deps'] = {};
+        temp['code'] = {};
 
         // get related JavaScript
-        temp['deps']['js'] = methods.getDependencies(c, config.paths.js);
+        temp['code']['js'] = methods.getDependencies(c, config.paths.js);
 
         // get related SCSS
-        temp['deps']['css'] = methods.getDependencies(c, config.paths.sass);
+        temp['code']['css'] = methods.getDependencies(c, config.paths.sass);
 
         // get related SCSS
-        temp['deps']['html'] = [c];
+        temp['code']['html'] = [c];
 
         // get expected data-format
         temp['data'] = methods.getData(c);

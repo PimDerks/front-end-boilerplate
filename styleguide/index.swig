@@ -36,8 +36,6 @@
                         .hierarchy dt {
                                 display: none;
                         }
-
-
                 </style>
         </head>
         <body>
@@ -45,42 +43,28 @@
 
                 <nav>
                         <h2>Index</h2>
+
                         <ul>
-                                <li>
-                                        <a href="#objects">Objects</a>
-                                </li>
-                                <li>
-                                        <a href="#components">Components</a>
-                                        <ul>
-                                                {% for component in components %}
-                                                        <li>
-                                                                <a href="#component-{{ loop.index }}">{{ component.name }}</a>
-                                                                {% set index = loop.index %}
-                                                                {% if component.sub.length > 1 %}
-                                                                        <ul>
-                                                                        {% for sub in component.sub %}
-                                                                                {% if sub.name !== component.name %}
-                                                                                <li>
-                                                                                        <a href="#component-{{ index }}-{{ loop.index }}">{{ sub.name }}</a>
-                                                                                </li>
-                                                                                {% endif %}
-                                                                        {% endfor %}
-                                                                        </ul>
+                                {% for component in components %}
+                                        <li>
+                                                <a href="#component-{{ loop.index }}">{{ component.name }}</a>
+                                                {% set index = loop.index %}
+                                                {% if component.sub.length > 1 %}
+                                                        <ul>
+                                                        {% for sub in component.sub %}
+                                                                {% if sub.name !== component.name %}
+                                                                <li>
+                                                                        <a href="#component-{{ index }}-{{ loop.index }}">{{ sub.name }}</a>
+                                                                </li>
                                                                 {% endif %}
-                                                        </li>
-                                                {% endfor %}
-                                        </ul>
-                                </li>
-                                <li>
-                                        <a href="#modules">Modules</a>
-                                </li>
+                                                        {% endfor %}
+                                                        </ul>
+                                                {% endif %}
+                                        </li>
+                                {% endfor %}
                         </ul>
+    
                 </nav>
-
-
-                <section id="objects">
-                        <h2>Objects</h2>
-                </section>
 
                 <section id="components">
                 <h2>Components</h2>
@@ -120,10 +104,6 @@
                         </section>
 
                 {% endfor %}
-                </section>
-
-                <section id="modules">
-                        <h2>Modules</h2>
                 </section>
 
         </body>
