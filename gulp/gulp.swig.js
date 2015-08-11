@@ -87,136 +87,6 @@ var methods = {
 
     },
 
-    getMasterPageName: function(src){
-
-        // read file
-        var data = fs.readFileSync(src, { encoding: 'utf-8' });
-
-        // check for template string
-        var reg = new RegExp(config.regex.template),
-            string = reg.exec(data);
-
-        if(string){
-            return string[0].replace(config.strings.templateStart, '').replace(config.strings.templateEnd, '');
-        }
-
-        console.log("No template defined in file: ."  + src);
-
-        return false;
-
-    },
-
-    getRelativeTemplatePath: function(file, template){
-
-        // get relative template path
-        var pathToTemplate = path.join(config.roots.tmp, config.paths.layouts, template);
-
-        // current path
-        var index;
-
-        if(file.lastIndexOf('/') >= 0){
-            index = file.lastIndexOf('/')
-        } else {
-            index = file.lastIndexOf('\\');
-        }
-
-        var curr = file.substr(0, index);
-
-        // relative path
-        var rel = path.relative(curr, pathToTemplate);
-
-        // return relative path
-        return rel;
-
-    },
-
-    setMasterPagePaths: function(){
-
-        var deferred = Promise.defer();
-
-        // get all .swig files
-        var pages = methods.getPages(),
-            count = pages.length,
-            i = 0;
-
-        // update extends-statement
-        pages.forEach(function(page, index){
-
-            methods.setMasterPagePath(page).then(function(){
-                i++;
-                // console.log("Succesfully set master page path in file:" + page);
-                if(i === count) deferred.resolve();
-            }).error(function(){
-                i++;
-                // console.log("Unable to set master page path in file:" + page);
-                if(i === count) deferred.resolve();
-            });
-
-        });
-
-        return deferred.promise();
-
-    },
-
-    readPageContent: function(file){
-
-        var deferred = Promise.defer();
-
-        fs.readFile(file, 'utf8', function(err, content) {
-
-            if (err) {
-                console.log('Cannot read file: ' + file);
-                deferred.reject();
-            }
-
-            // replace
-            deferred.resolve(content);
-
-        });
-
-        return deferred.promise();
-
-    },
-
-    setMasterPagePath: function(file){
-
-        var deferred = Promise.defer();
-
-        // get template file name
-        var template = methods.getMasterPageName(file);
-
-        // get relative path
-        var relative = methods.getRelativeTemplatePath(file, template);
-
-        // update file contents
-        methods.readPageContent(file).then(function(content){
-
-            // replace
-            content = content.replace(template, relative);
-
-            if(!template){
-                deferred.reject();
-                return;
-            }
-
-            // write relative template path to temp file
-            utils.writeFile(file, content, function(err){
-
-                if(err){
-                    deferred.reject();
-                }
-
-                deferred.resolve();
-
-            });
-
-        });
-
-        // write file
-        return deferred.promise();
-
-    },
-
     renderComponents: function(){
 
         var components = methods.getComponents();
@@ -299,8 +169,6 @@ module.exports.copy = function() {
 
         methods.renderComponents();
 
-        // methods.setMasterPagePaths().then(function () {
-
         setTimeout(function(){
 
             // log
@@ -310,9 +178,6 @@ module.exports.copy = function() {
             methods.renderPrototype();
 
         });
-
-        // }).error(function () {
-        // });
 
     });
 
