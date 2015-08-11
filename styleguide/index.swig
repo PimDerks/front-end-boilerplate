@@ -48,22 +48,10 @@
                                 {% for component in components %}
                                         <li>
                                                 <a href="#component-{{ loop.index }}">{{ component.name }}</a>
-                                                {% set index = loop.index %}
-                                                {% if component.sub.length > 1 %}
-                                                        <ul>
-                                                        {% for sub in component.sub %}
-                                                                {% if sub.name !== component.name %}
-                                                                <li>
-                                                                        <a href="#component-{{ index }}-{{ loop.index }}">{{ sub.name }}</a>
-                                                                </li>
-                                                                {% endif %}
-                                                        {% endfor %}
-                                                        </ul>
-                                                {% endif %}
                                         </li>
                                 {% endfor %}
                         </ul>
-    
+
                 </nav>
 
                 <section id="components">
