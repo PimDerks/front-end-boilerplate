@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
     swig = require('swig'),
+    markedSwig = require('swig-marked'),
     path = require('path'),
     config = require('./gulp.config'),
     utils = require('./gulp.utils'),
@@ -10,6 +11,9 @@ var gulp = require('gulp'),
     w3cjs = require('gulp-w3cjs');
 
     require('swig-highlight').apply(swig);
+
+    markedSwig.useFilter(swig);
+    markedSwig.useTag(swig);
 
 var methods = {
 

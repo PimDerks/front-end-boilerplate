@@ -23,7 +23,7 @@
 {% if config.data.doc %}
     <{{ heading }}>Documentation</{{ heading }}>
     {{ config.data.doc.name }}
-    <pre><code>{{ config.data.doc.contents }}</code></pre>
+    {% marked %}{{ config.data.doc.contents }}{% endmarked %}
 {% endif %}
 
 {# Code for this component #}

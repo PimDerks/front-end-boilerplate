@@ -60,6 +60,7 @@
                                                 <a href="#component-{{ loop.index }}">{{ component.name }}</a>
                                         </li>
                                 {% endfor %}
+
                         </ul>
 
                 </nav>
