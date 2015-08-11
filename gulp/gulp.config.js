@@ -8,7 +8,8 @@ module.exports = (function(){
             www: './www',
             tmp: './tmp',
             dest: './dest',
-            api: './api'
+            api: './api',
+            styleguide: './styleguide'
         },
 
         // path
@@ -29,7 +30,8 @@ module.exports = (function(){
             icons: 'icons',
             layouts: 'layouts',
             shim: 'shim',
-            media: '_media'
+            media: '_media',
+            styleguide: 'styleguide'
         },
 
         // server

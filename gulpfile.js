@@ -27,7 +27,8 @@ gulp.task('api-start', api.run);
 gulp.task('api-watch', api.watch);
 
 // Styleguide
-gulp.task('styleguide', styleguide);
+gulp.task('styleguide-render', styleguide.render);
+gulp.task('styleguide-watch', styleguide.watch);
 
 // Remove temp/www dir
 gulp.task('clean', clean);
@@ -50,7 +51,7 @@ gulp.task('html-watch', swig.watch);
 
 // Overall watch
 gulp.task('www-watch', watchWWW);
-gulp.task('watch', ['api-watch', 'js-watch', 'sass-watch', 'html-watch', 'www-watch']);
+gulp.task('watch', ['api-watch', 'js-watch', 'sass-watch', 'html-watch', 'styleguide-watch', 'www-watch']);
 
 // Concat shims
 gulp.task('shim', concat.shim);

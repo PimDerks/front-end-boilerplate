@@ -81,9 +81,36 @@ var methods = {
 
     },
 
+    getComponent: function(c){
+
+        var temp = {};
+
+        // get component name
+        temp['name'] = methods.getComponentName(c);
+
+        // remove directories from path
+        temp['hierarchy'] = methods.getComponentHierarchy(c);
+
+        // dependencies
+        temp['deps'] = {};
+
+        // get related JavaScript
+        temp['deps']['js'] = methods.getDependencies(c, config.paths.js);
+
+        // get related SCSS
+        temp['deps']['css'] = methods.getDependencies(c, config.paths.sass);
+
+        // get expected data-format
+        temp['data'] = methods.getData(c);
+
+        return temp;
+
+    },
+
     getComponents: function(){
 
-        var result = [];
+        var result = {},
+            temp = {};
 
         utils.walk(path.join(config.roots.src, config.paths.modules), function(file){
 
@@ -91,38 +118,73 @@ var methods = {
 
                 var obj = {};
 
-                // get component name
-                obj['name'] = methods.getComponentName(file);
+                // get component baseName
+                var base = path.dirname(file).split(path.sep);
+                base = base[base.length-1];
 
-                // remove directories from path
-                obj['hierarchy'] = methods.getComponentHierarchy(file);
+                if(!temp[base]){
+                    temp[base] = [];
+                }
 
-                // dependencies
-                obj['deps'] = {};
-
-                // get related JavaScript
-                obj['deps']['js'] = methods.getDependencies(file, config.paths.js);
-
-                // get related SCSS
-                obj['deps']['css'] = methods.getDependencies(file, config.paths.sass);
-
-                // get expected data-format
-                obj['data'] = methods.getData(file);
-
-                console.log(obj);
+                temp[base].push(methods.getComponent(file));
 
             }
 
         });
 
+        // loop through result
+        result['components'] = [];
+        for(var c in temp){
+
+            var obj = {};
+            obj['name'] = c;
+            obj['sub'] = temp[c];
+            result['components'].push(obj);
+
+        }
+
+        console.log(result);
         return result;
+
+    },
+
+    renderStyleguide: function(data){
+
+        // template of styleguide
+        var template = config.roots.styleguide + path.sep + 'index.swig';
+
+        // invalidate the swig cache
+        swig.invalidateCache();
+
+        // render template using swig
+        var swiggedContent = swig.renderFile(template, data);
+
+        // console.log(data);
+
+        // write file
+        utils.writeFile(path.join(config.roots.www, config.paths.styleguide, 'index.html'), swiggedContent, function(err){
+            if(err){
+                // console.log("Unable to render component: " + src);
+                return;
+            }
+
+            // console.log("Succesfully rendered component: " + src);
+
+        });
 
     }
 
 };
 
-module.exports = function() {
+module.exports.render = function() {
 
-    methods.getComponents();
+    var data = methods.getComponents();
+    methods.renderStyleguide(data);
+
+};
+
+module.exports.watch = function() {
+
+    gulp.watch(config.roots.styleguide + '/**/*', ['styleguide-render']);
 
 };
