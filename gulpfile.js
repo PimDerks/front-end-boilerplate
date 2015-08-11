@@ -6,6 +6,7 @@ var gulp = require('gulp'),
 
 // require
 var api = require('./gulp/gulp.rest'),
+    styleguide = require('./gulp/gulp.styleguide'),
     clean = require('./gulp/gulp.clean'),
     concat = require('./gulp/gulp.concat'),
     inline = require('./gulp/gulp.inline'),
@@ -24,6 +25,9 @@ var api = require('./gulp/gulp.rest'),
 // API
 gulp.task('api-start', api.run);
 gulp.task('api-watch', api.watch);
+
+// Styleguide
+gulp.task('styleguide', styleguide);
 
 // Remove temp/www dir
 gulp.task('clean', clean);
