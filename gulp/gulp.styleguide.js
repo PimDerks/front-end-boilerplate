@@ -141,6 +141,9 @@ var methods = {
 
         var name = methods.getComponentName(c);
 
+        // save url
+        temp['url'] = c;
+
         // get component name
         temp['name'] = name;
 
@@ -209,6 +212,79 @@ var methods = {
 
     },
 
+    getPreviewData: function(){
+
+        var data = {
+            data: {}
+        };
+
+        // get data files
+        utils.walk(path.join(config.roots.src, config.paths.data), function(f){
+
+            var name = utils.stripExtension(utils.getFileName(f)),
+                ext = utils.getExtension(f);
+
+            if(ext === 'json'){
+                // read file
+                data.data[name] = JSON.parse(fs.readFileSync(f, 'utf8'));
+            }
+
+        });
+
+        return data;
+
+    },
+
+    renderPreviews: function(data){
+
+        // template of styleguide
+        var template = config.roots.styleguide + path.sep + 'preview.swig';
+
+        // loop through components
+        data.components.forEach(function(c){
+
+            c.sub.forEach(function(s) {
+
+                // invalidate the swig cache
+                swig.invalidateCache();
+
+                // destination
+                var dest = path.join(config.roots.www, config.paths.styleguide, 'preview', c.name, s.name + '.html');
+
+                // data
+                var compiledData = methods.getPreviewData(); // site wide data
+                compiledData['url'] = s.url; // path for the include
+
+                // strip extension from file
+                var name = s.url.substr(0, s.url.indexOf('.swig')),
+                    json = name + '.json';
+
+                // check is a JSON file exists with the same file in the same directory
+                var local = fse.readJsonSync(json, { throws: false });
+                if(local){
+                    compiledData.data['local'] = local;
+                }
+
+                // render template using swig
+                var swiggedContent = swig.renderFile(template, compiledData);
+
+                // write file
+                utils.writeFile(dest, swiggedContent, function (err) {
+                    if (err) {
+                        // console.log("Unable to render component: " + src);
+                        return;
+                    }
+
+                    // console.log("Succesfully rendered component: " + src);
+
+                });
+
+            });
+
+        });
+
+    },
+
     renderComponents: function(data){
 
         // template of styleguide
@@ -274,6 +350,9 @@ var methods = {
     },
 
     renderStyleguide: function(data){
+
+        // render preview for each component
+        methods.renderPreviews(data);
 
         // render documentation for each component
         methods.renderComponents(data);

@@ -150,6 +150,10 @@ require = {
         fontFileUrl = config.fonts.ttf;
     }
 
+    // force ttf for now
+    fontFileUrl = config.fonts.ttf;
+    console.log(fontFileUrl);
+
     loadCSS(fontFileUrl);
 
     // insert requireJS
