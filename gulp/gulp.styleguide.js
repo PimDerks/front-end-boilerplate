@@ -238,7 +238,7 @@ var methods = {
     renderPreviews: function(data){
 
         // template of styleguide
-        var template = config.roots.styleguide + path.sep + 'preview.swig';
+        var template = config.roots.src + path.sep + config.paths.styleguide + path.sep + 'preview.swig';
 
         // loop through components
         data.components.forEach(function(c){
@@ -289,7 +289,7 @@ var methods = {
     renderComponents: function(data){
 
         // template of styleguide
-        var template = config.roots.styleguide + path.sep + 'component.swig';
+        var template = config.roots.src + path.sep + config.paths.styleguide + path.sep + 'component.swig';
 
         // loop through components
         data.components.forEach(function(c){
@@ -326,7 +326,7 @@ var methods = {
     renderIndex: function(data){
 
         // template of styleguide
-        var template = config.roots.styleguide + path.sep + 'index.swig';
+        var template = config.roots.src + path.sep + config.paths.styleguide + path.sep + 'index.swig';
 
         // destination
         var dest = path.join(config.roots.www, config.paths.styleguide, 'index.html');

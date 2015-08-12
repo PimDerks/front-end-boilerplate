@@ -8,8 +8,7 @@ module.exports = (function(){
             www: './www',
             tmp: './tmp',
             dest: './dest',
-            api: './api',
-            styleguide: './styleguide'
+            api: './api'
         },
 
         // path
