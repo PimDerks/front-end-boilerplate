@@ -7,14 +7,13 @@
 {# Location of this component in the project. #}
 <{{ heading }}>Location</{{ heading }}>
 <dl class="hierarchy">
-
     <dt>Module</dt>
     <dd>{{ config.data.hierarchy.module }}</dd>
     <dt>Component</dt>
     <dd>{{ config.data.hierarchy.component }}</dd>
-    {% if config.data.hierarchy.config.datamodule %}
-        <dt>config.datamodule</dt>
-        <dd>{{ config.data.hierarchy.config.datamodule }}</dd>
+    {% if config.data.hierarchy.subcomponent !== config.data.hierarchy.component && config.data.hierarchy.subcomponent %}
+        <dt>Submodule</dt>
+        <dd>{{ config.data.hierarchy.subcomponent }}</dd>
     {% endif %}
 </dl>
 
@@ -22,7 +21,6 @@
 
 {% if config.data.doc %}
     <{{ heading }}>Documentation</{{ heading }}>
-    {{ config.data.doc.name }}
     {% marked %}{{ config.data.doc.contents }}{% endmarked %}
 {% endif %}
 
@@ -31,7 +29,7 @@
     <{{ heading }}>Code</{{ heading }}>
 
     {% if config.data.code.html.length > 0 %}
-        <{{ subheading }}>HTML</{{ subheading }}>
+        <{{ subheading }}><abbr title="HyperText Markup Language">HTML</abbr></{{ subheading }}>
         <p>Hier komen de contents van de HTML dependencies:</p>
          <ul>
             {% for dep in config.data.code.html %}
@@ -44,7 +42,7 @@
     {% endif %}
 
     {% if config.data.code.css.length > 0 %}
-        <{{ subheading }}>SASS</{{ subheading }}>
+        <{{ subheading }}><abbr title="Cascading StyleSheets">CSS</abbr>/<abbr title="Syntactically Awesome Stylesheets">SASS</abbr></{{ subheading }}>
         <p>Hier komen de contents van de CSS dependencies.</p>
         <ul>
             {% for dep in config.data.code.css %}
@@ -57,7 +55,7 @@
     {% endif %}
 
     {% if config.data.code.js.length > 0 %}
-        <{{ subheading }}>JavaScript</{{ subheading }}>
+        <{{ subheading }}><abbr title="JavaScript">JS</abbr></{{ subheading }}>
         <p>Hier komen de contents van de JavaScript dependencies.</p>
         <ul>
             {% for dep in config.data.code.js %}

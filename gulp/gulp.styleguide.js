@@ -31,11 +31,11 @@ var methods = {
         // get filename
         var name = methods.getComponentName(file);
 
-        // expected .json file
-        var json = path.join(base, name + '.md');
+        // expected .md file
+        var md = path.join(base, name + '.md');
 
         // check if path exists
-        return fs.existsSync(json) ? json : null;
+        return fs.existsSync(md) ? md : null;
 
     },
 
@@ -82,11 +82,14 @@ var methods = {
 
     },
 
-    getFile: function(file){
+    getFile: function(file, componentName){
+
         var obj = {
-          name: file,
-          contents: fs.readFileSync(file, 'utf8')
+            url: file,
+            name: file.slice(file.indexOf(componentName)),
+            contents: fs.readFileSync(file, 'utf8')
         };
+
         return obj;
     },
 
@@ -119,7 +122,7 @@ var methods = {
                 // base module gets all dependencies
                 // submodules only get dependencies which match filename
                 if(filename === component || temp === filename) {
-                    var r = methods.getFile(f);
+                    var r = methods.getFile(f, component);
                     result.push(r);
                 //
                 }
@@ -136,8 +139,10 @@ var methods = {
 
         var temp = {};
 
+        var name = methods.getComponentName(c);
+
         // get component name
-        temp['name'] = methods.getComponentName(c);
+        temp['name'] = name;
 
         // remove directories from path
         temp['hierarchy'] = methods.getComponentHierarchy(c);
@@ -152,13 +157,13 @@ var methods = {
         temp['code']['css'] = methods.getDependencies(c, config.paths.sass);
 
         // get related SCSS
-        temp['code']['html'] = [methods.getFile(c)];
+        temp['code']['html'] = [methods.getFile(c, name)];
 
         // get expected data-format
-        temp['data'] = methods.getData(c)? methods.getFile(methods.getData(c)) : null;
+        temp['data'] = methods.getData(c, name) ? methods.getFile(methods.getData(c), name) : null;
 
         // get documentation
-        temp['doc'] = methods.getDocumentation(c) ? methods.getFile(methods.getDocumentation(c)) : null;
+        temp['doc'] = methods.getDocumentation(c) ? methods.getFile(methods.getDocumentation(c), name) : null;
 
         return temp;
 
