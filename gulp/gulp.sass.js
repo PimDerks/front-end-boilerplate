@@ -34,7 +34,8 @@ module.exports.lint = function(){
 
     return gulp.src(src)
         .pipe(scsslint({
-            'config': './.scss-lint.yml'
+            'config': './.scss-lint.yml',
+            'maxBuffer': 1024*1024
         }));
 
 };
