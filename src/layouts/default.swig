@@ -20,24 +20,6 @@
             <p>This comes from the default layout.</p>
         {% endblock %}
 
-        <h1>Data</h1>
-
-        {% include "../modules/base/components/Component/Component.html" %}
-
-        {% for x in data %}
-            <ul>
-                <li>{{ loop.key }}
-                    <ul>
-                    {% for y in x %}
-                        <li>{{ y }}</li>
-                    {% endfor %}
-                    </ul>
-                </li>
-            </ul>
-        {%  endfor %}
-
-        <div data-module="module/Module"></div>
-
         {% include "sublayouts/document-scripts.swig" %}
 
 {% include "sublayouts/document-foot.swig" %}

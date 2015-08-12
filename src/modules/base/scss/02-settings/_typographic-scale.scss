@@ -180,8 +180,9 @@ $base: 16; // browser default
 ----------------------------------------------- */
 
 .baseline {
-    background-image: linear-gradient(#EEEEEE 1px, #EEEEEE 50%, transparent 51%, transparent 100%);
+    background-image: linear-gradient(rgba(black, .05) 1px, rgba(black, .05) 50%, transparent 51%, transparent 100%);
     background-position: left top;
+
 
     h1,
     h2,
@@ -193,6 +194,7 @@ $base: 16; // browser default
     ul,
     dl,
     p,
+    blockquote,
     .alpha,
     .beta,
     .gamma,

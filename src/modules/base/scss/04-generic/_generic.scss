@@ -16,6 +16,17 @@ body {
   box-sizing: inherit;
 }
 
+body {
+  background-color: #fffff8;
+  color: #111;
+  font-family: ETBembo, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+  margin: 0 auto;
+  max-width: 1400px;
+  padding-left: 12.5%;
+  width: 87.5%;
+  counter-reset: sidenote-counter
+}
+
 /* Generic elements
 ----------------------------------------------- */
 
@@ -54,9 +65,9 @@ i {
 ----------------------------------------------- */
 
 ::selection {
-  background: #FF0000;
-  color: #00FF00;
-  text-shadow: none;
+  // background: #FF0000;
+  // color: #00FF00;
+  // text-shadow: none;
 }
 
 /* Remove the gap between audio, canvas, iframes images, videos and the bottom of their containers.
