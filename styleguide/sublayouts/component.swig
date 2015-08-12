@@ -17,15 +17,13 @@
 
 {# Preview of this component #}
 <{{ heading }}>Preview</{{ heading }}>
-
 {% set breakpoints = [{name:"Mobile Portrait", x:320,y:480}, {name:"Mobile Landscape", x:480,y:320}, {name:"Tablet Portrait", x:768,y:1024}, {name:"Tablet Landscape", x:1024,y:768}, {name:"Widescreen Landscape", x:1280,y:880}] %}
-    <{{ heading }}>Preview </{{ heading }}>
-    <div class="iframe-buttons">
-        {% for breakpoint in breakpoints %}
-            <button class="iframe-button" data-target="iframe-preview-{{ component.name }}" data-x="{{ breakpoint.x }}" data-y="{{ breakpoint.y }}">{{ breakpoint.name }}({{ breakpoint.x }} x {{ breakpoint.y }})</button>
-        {% endfor %}
-    </div><br />
-    <iframe id="iframe-preview-{{ component.name }}" src="/styleguide/preview/{{ component.name }}/{{ data.name }}.html" width="{{ breakpoints[0].x }}" height="{{ breakpoints[0].y }}"></iframe>
+<div class="iframe-buttons">
+    {% for breakpoint in breakpoints %}
+        <button class="iframe-button" data-target="iframe-preview-{{ data.name }}" data-x="{{ breakpoint.x }}" data-y="{{ breakpoint.y }}">{{ breakpoint.name }}({{ breakpoint.x }} x {{ breakpoint.y }})</button>
+    {% endfor %}
+</div><br />
+<iframe id="iframe-preview-{{ data.name }}" src="/styleguide/preview/{{ component.name }}/{{ data.name }}.html" width="{{ breakpoints[0].x }}" height="{{ breakpoints[0].y }}"></iframe>
 
 {# Documentation of this component. #}
 
