@@ -2,4 +2,6 @@ iframe {
   border-style: solid;
   border-width: 1px;
   display: block;
+  resize: both;
+  transition: height 500ms ease-out, width 500ms ease-out;
 }

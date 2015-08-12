@@ -22,6 +22,7 @@
     {% for breakpoint in breakpoints %}
         <button class="iframe-button" data-target="iframe-preview-{{ data.name }}" data-x="{{ breakpoint.x }}" data-y="{{ breakpoint.y }}">{{ breakpoint.name }}({{ breakpoint.x }} x {{ breakpoint.y }})</button>
     {% endfor %}
+    <button class="iframe-button" data-target="iframe-preview-{{ data.name }}" data-min-x="320" data-max-x="1280" data-min-y="320" data-max-y="1024">Random</button>
 </div><br />
 <iframe id="iframe-preview-{{ data.name }}" src="/styleguide/preview/{{ component.name }}/{{ data.name }}.html" width="{{ breakpoints[0].x }}" height="{{ breakpoints[0].y }}"></iframe>
 
