@@ -254,6 +254,7 @@ var methods = {
                 // data
                 var compiledData = methods.getPreviewData(); // site wide data
                 compiledData['url'] = s.url; // path for the include
+                compiledData['src'] = c;
 
                 // strip extension from file
                 var name = s.url.substr(0, s.url.indexOf('.swig')),

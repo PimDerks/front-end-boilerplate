@@ -16,7 +16,7 @@
 </dl>
 
 {# Preview of this component #}
-<iframe src="/styleguide/preview/{{ component.name }}.html"></iframe>
+<iframe src="/styleguide/preview/{{ component.name }}/{{ data.name }}.html"></iframe>
 
 {# Documentation of this component. #}
 

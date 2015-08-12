@@ -94,7 +94,7 @@ gulp.task('initial', function() {
 
 // devg
 gulp.task('dev', function() {
-    seq('api-start', 'watch', 'browser-sync');
+    seq('api-start', 'watch', 'browser-sync', 'styleguide-render');
 });
 
 // build js

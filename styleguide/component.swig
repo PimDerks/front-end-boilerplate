@@ -15,7 +15,7 @@
         {% for sub in component.sub %}
                 {% if sub.name === component.name %}
 
-                        {% set config = { data: sub, heading: 3, postfix: loop.index } %}
+                        {% set config = { data: sub, heading: 3 } %}
                         {% include "sublayouts/component.swig" with config %}
 
                 {% endif %}
@@ -31,7 +31,7 @@
                         {% for sub in component.sub %}
                                 {% if sub.name !== component.name %}
                                         <h3>{{ sub.name }}</h3>
-                                        {% set config = { data: sub, heading: 4, postfix: index + '-' + loop.index } %}
+                                        {% set config = { data: sub, heading: 4 } %}
                                         {% include "sublayouts/component.swig" with config %}
                                 {% endif %}
                         {% endfor %}

@@ -6,19 +6,19 @@
 
         <title>
             {% block title %}
-                Default title
-            {% endblock %} - {{ data.settings.project }}
+                {{ src.name }}
+            {% endblock %} - Preview
         </title>
 
         {% include "../src/layouts/sublayouts/document-head-includes.swig" %}
         {% include "../src/layouts/sublayouts/document-head-og-data.swig" %}
 
     </head>
-    <body
+    <body>
 
         {% block content %}
-            {% set includeURL = '../src' + url %}
-            {{ includeURL }}
+            {% set includeURL = '../' + url %}
+            {% include includeURL %}
         {% endblock %}
 
         {% include "../src/layouts/sublayouts/document-scripts.swig" %}

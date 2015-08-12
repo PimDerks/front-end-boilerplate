@@ -19,8 +19,3 @@
 <meta name="msapplication-config" content="/static/img/icons/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="/static/css/screen.css" />
-<style>
-    * {
-        font-family: Roboto, "Comic Sans MS", serif;
-    }
-</style>
