@@ -21,6 +21,7 @@ module.exports.copy = function() {
         .pipe(sass())
         .pipe(autoprefixer('last 1 version', '> 5%', 'ie 9'))
         .pipe(sourcemaps.write('.'))
+        .pipe(plumber.stop())
         .pipe(gulp.dest(dest));
 
 };
