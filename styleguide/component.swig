@@ -8,14 +8,12 @@
 
         <h1>{{ component.name }}</h1>
 
-        <h2>General information</h2>
-
         {# Render base #}
 
         {% for sub in component.sub %}
                 {% if sub.name === component.name %}
 
-                        {% set config = { data: sub, heading: 3 } %}
+                        {% set config = { data: sub, heading: 2 } %}
                         {% include "sublayouts/component.swig" with config %}
 
                 {% endif %}
