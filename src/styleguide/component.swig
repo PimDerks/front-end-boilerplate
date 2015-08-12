@@ -24,7 +24,7 @@
         {% set index = loop.index %}
 
         {% if component.sub.length > 1 %}
-                <section>
+                <section id="component-{{ component.name }}-variants">
                         <h2>Variants of this component</h2>
                         {% for sub in component.sub %}
                                 {% if sub.name !== component.name %}

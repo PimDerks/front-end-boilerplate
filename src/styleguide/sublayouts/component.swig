@@ -5,7 +5,7 @@
 {% set subsubheading = 'h' + subsubheadingLevel %}
 
 {# Location of this component in the project. #}
-<section id="component-location">
+<section id="component-{{ data.name }}-location">
     <{{ heading }}>Location</{{ heading }}>
     <dl class="hierarchy">
         <dt>Module</dt>
@@ -20,7 +20,7 @@
 </section>
 
 {# Preview of this component #}
-<section id="component-preview">
+<section id="component-{{ data.name }}-preview">
     <{{ heading }}>Preview</{{ heading }}>
     {% set breakpoints = [{name:"Mobile Portrait", x:320,y:480}, {name:"Mobile Landscape", x:480,y:320}, {name:"Tablet Portrait", x:768,y:1024}, {name:"Tablet Landscape", x:1024,y:768}, {name:"Widescreen Landscape", x:1280,y:880}] %}
     <div class="iframe-buttons">
@@ -34,7 +34,7 @@
 
 {# Documentation of this component. #}
 {% if config.data.doc %}
-    <section id="component-documentation">
+    <section id="component-{{ data.name }}-documentation">
         <{{ heading }}>Documentation</{{ heading }}>
         {% marked %}{{ config.data.doc.contents }}{% endmarked %}
     </section>
@@ -43,7 +43,7 @@
 
 {# Code for this component #}
 {% if config.data.code.css.length > 0 || config.data.code.js.length > 0 || config.data.code.html.length > 0 %}
-    <section id="component-code">
+    <section id="component-{{ data.name }}-code">
         <{{ heading }}>Code</{{ heading }}>
 
         {% if config.data.code.html.length > 0 %}
@@ -56,7 +56,7 @@
 
         {% if config.data.code.css.length > 0 %}
             <{{ subheading }}><abbr title="Cascading StyleSheets">CSS</abbr>/<abbr title="Syntactically Awesome Stylesheets">SASS</abbr></{{ subheading }}>
-            {% for dep in config.data.code.html %}
+            {% for dep in config.data.code.css %}
                 <{{ subsubheading }}>{{ dep.name }}</{{ subsubheading }}>
                 <pre><code>{{ dep.contents }}</code></pre>
             {% endfor %}
@@ -64,7 +64,7 @@
 
         {% if config.data.code.js.length > 0 %}
             <{{ subheading }}><abbr title="JavaScript">JS</abbr></{{ subheading }}>
-            {% for dep in config.data.code.html %}
+            {% for dep in config.data.code.js %}
                 <{{ subsubheading }}>{{ dep.name }}</{{ subsubheading }}>
                 <pre><code>{{ dep.contents }}</code></pre>
             {% endfor %}
@@ -76,7 +76,7 @@
 {# Expected data for rendering this component. #}
 
 {% if config.data.data %}
-    <section id="component-data">
+    <section id="component-{{ data.name }}-data">
         <{{ heading }}>Data</{{ heading }}>
         <p>{{ config.data.data.name }}</p>
         <pre><code>{{ config.data.data.contents }}</code></pre>
