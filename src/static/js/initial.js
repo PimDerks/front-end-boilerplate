@@ -152,7 +152,6 @@ require = {
 
     // force ttf for now
     fontFileUrl = config.fonts.ttf;
-    console.log('load url:',  fontFileUrl);
 
     loadCSS(fontFileUrl);
 

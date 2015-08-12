@@ -16,7 +16,13 @@
 </dl>
 
 {# Preview of this component #}
-<iframe src="/styleguide/preview/{{ component.name }}/{{ data.name }}.html"></iframe>
+<{{ heading }}>Preview</{{ heading }}>
+
+{% set breakpoints = [{name:"Mobile Portrait", x:320,y:480}, {name:"Mobile Landscape", x:480,y:320}, {name:"Tablet Portrait", x:768,y:1024}, {name:"Tablet Landscape", x:1024,y:768}, {name:"Widescreen Landscape", x:1280,y:880}] %}
+{% for breakpoint in breakpoints %}
+    <{{ heading }}>Preview {{ breakpoint.name }}({{ breakpoint.x }} x {{ breakpoint.y }})</{{ heading }}>
+    <iframe src="/styleguide/preview/{{ component.name }}/{{ data.name }}.html" width="{{ breakpoint.x }}" height="{{ breakpoint.y }}"></iframe>
+{% endfor %}
 
 {# Documentation of this component. #}
 
