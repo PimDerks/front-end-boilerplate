@@ -1,6 +1,11 @@
 @font-face {
-  font-family: Roboto;
-  src: url('../fonts/roboto.ttf') format('ttf');
-  font-weight: 400;
-  font-style: normal;
+  font-family: ETBembo;
+  src: url("../fonts/ETBembo-RomanLF.ttf");
+}
+
+@font-face {
+  font-family: ETBembo;
+  src: url("../fonts/ETBembo-DisplayItalic.ttf");
+  font-weight: normal;
+  font-style: italic;
 }

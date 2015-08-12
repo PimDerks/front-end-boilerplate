@@ -204,10 +204,50 @@ var methods = {
 
     },
 
-    renderStyleguide: function(data){
+    renderComponents: function(data){
+
+        // template of styleguide
+        var template = config.roots.styleguide + path.sep + 'component.swig';
+
+        // loop through components
+        data.components.forEach(function(c){
+
+            // invalidate the swig cache
+            swig.invalidateCache();
+
+            // destination
+            var dest = path.join(config.roots.www, config.paths.styleguide, 'components', c.name + '.html');
+
+            // data
+            var compiledData = {};
+            compiledData['component'] = c;
+            compiledData['src'] = data;
+
+            // render template using swig
+            var swiggedContent = swig.renderFile(template, compiledData);
+
+            // write file
+            utils.writeFile(dest, swiggedContent, function(err){
+                if(err){
+                    // console.log("Unable to render component: " + src);
+                    return;
+                }
+
+                // console.log("Succesfully rendered component: " + src);
+
+            });
+
+        });
+
+    },
+
+    renderIndex: function(data){
 
         // template of styleguide
         var template = config.roots.styleguide + path.sep + 'index.swig';
+
+        // destination
+        var dest = path.join(config.roots.www, config.paths.styleguide, 'index.html');
 
         // invalidate the swig cache
         swig.invalidateCache();
@@ -216,7 +256,7 @@ var methods = {
         var swiggedContent = swig.renderFile(template, data);
 
         // write file
-        utils.writeFile(path.join(config.roots.www, config.paths.styleguide, 'index.html'), swiggedContent, function(err){
+        utils.writeFile(dest, swiggedContent, function(err){
             if(err){
                 // console.log("Unable to render component: " + src);
                 return;
@@ -225,6 +265,16 @@ var methods = {
             // console.log("Succesfully rendered component: " + src);
 
         });
+
+    },
+
+    renderStyleguide: function(data){
+
+        // render documentation for each component
+        methods.renderComponents(data);
+
+        // render index for styleguide
+        methods.renderIndex(data);
 
     }
 

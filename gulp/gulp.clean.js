@@ -9,6 +9,7 @@ module.exports = function(){
     src.push(config.roots.www);
     src.push(config.roots.tmp);
     src.push(config.roots.dest);
+    src.push(config.roots.styleguide);
 
     return gulp.src(src)
         .pipe(clean({
