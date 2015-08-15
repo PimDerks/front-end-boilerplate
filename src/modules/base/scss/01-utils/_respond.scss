@@ -1,9 +1,16 @@
 $fix-mqs: false !default;
 
-@mixin respond-min($width) {
+@mixin respond-min($bp) {
+
+  @function setScale($bp) {
+    @return map-get($typographic-breakpoints, $bp);
+  }
+
+  // get breakpoint code
+  $width: map-get($breakpoints, $bp);
 
   @if ($width == ''){
-      @content;
+    @content;
   } @else {
 
     @if $fix-mqs {
@@ -16,11 +23,16 @@ $fix-mqs: false !default;
       }
     }
 
+
+
   }
 
 }
 
-@mixin respond-min-max($min,$max) {
+@mixin respond-min-max($bp-min,$bp-max) {
+
+  $min: map-get($breakpoints, $bp-min);
+  $max: map-get($breakpoints, $bp-max);
 
   $max: $max * .999; // to avoid overlapping with $max itself
 
@@ -30,13 +42,16 @@ $fix-mqs: false !default;
     }
   } @else {
     @media screen and (min-width: $min) and (max-width: $max) {
-      @content;
+        @content;
     }
   }
 
 }
 
-@mixin respond-max($width) {
+@mixin respond-max($bp) {
+
+  $width: map-get($breakpoints, $bp);
+
   @if $fix-mqs {
     @if $fix-mqs <= $width {
       @content;
@@ -47,3 +62,4 @@ $fix-mqs: false !default;
     }
   }
 }
+

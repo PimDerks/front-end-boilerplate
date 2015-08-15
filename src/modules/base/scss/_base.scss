@@ -44,3 +44,47 @@
 
 /* 06 Components
 --------------------------------------*/
+
+@function setScale($bp) {
+  @return map-get($typographic-breakpoints, $bp);
+}
+
+.test {
+  font-size: map-get(setScale('xs'), 'font-size');
+}
+
+
+.test {
+  font-size: map-get(setScale('s'), 'font-size');
+}
+
+
+
+$size: 2em;
+
+// Define a mixin with an argument named `$size`
+@mixin whatever($size: .5em) {
+  // Include the `@content` directive in the mixin core
+  @content;
+  margin-bottom: $size * 1.2;
+}
+
+
+
+// Use the mixin
+.blaat {
+  @include whatever {
+    font-size: $size;
+  }
+}
+
+// Use the mixin
+.blaat {
+  @include whatever($size: 10px) {
+    font-size: $size;
+  }
+}
+
+
+
+

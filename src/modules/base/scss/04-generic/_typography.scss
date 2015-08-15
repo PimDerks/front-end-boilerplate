@@ -1,6 +1,6 @@
 @mixin get-baseline-properties($props) {
   @each $bp in $breakpoints {
-    $bp-size: nth($bp, 2);
+    $bp-size: nth($bp, 1);
 
     @include respond-min($bp-size) {
       @each $prop, $amount in $props {
@@ -10,6 +10,7 @@
 
   }
 }
+
 
 @mixin get-baseline-property($prop: 'margin-bottom', $amount: 1, $breakpoint: nth($breakpoints, 1)) {
   $bp-name: nth($breakpoint, 1);
@@ -50,7 +51,7 @@ p {
   margin: 0;
   @include get-baseline-properties(('margin-bottom': 1, 'margin-top': 2));
 
-  @include respond-min($breakpoint-xs) {
+  @include respond-min('xs') {
     @include get-baseline-property('top', 1, nth($breakpoints, 1));
   }
 }

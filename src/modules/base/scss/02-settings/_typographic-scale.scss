@@ -18,6 +18,7 @@ $typographic-scales:(
     'augmented-fourth': 1.414,
     'perfect-fifth':    1.5,
     'golden-ratio':     1.618,
+    'fibonacci':        (1, 1, 2, 3, 5, 8, 13, 21),
     'custom':           (12/16, 14/16, 16/16, 20/16, 22/16, 24/16, 26/16, 28/16) // this should be the same length as the sizes defined in $typographic-scale-sizes
 );
 
@@ -126,7 +127,7 @@ $line-height-px: $font-size * $line-height;
     $scale: map-get($bp-config, 'scale');
 
     // maybe use respond-min-max here?
-    @include respond-min($bp) {
+    @include respond-min($bp-name) {
         // Calculate font-size and line-height
         @for $i from 1 to length($typographic-scale-sizes) + 1 {
             $size: nth($typographic-scale-sizes, $i);
@@ -161,7 +162,7 @@ $base: 16; // browser default
     $font-size: map-get($bp-config, 'font-size');
     $line-height: map-get($bp-config, 'line-height');
 
-    @include respond-min($bp) {
+    @include respond-min($bp-name) {
 
         body {
             font-size: ($font-size/$base) * 100%;
