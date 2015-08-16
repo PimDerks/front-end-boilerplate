@@ -142,6 +142,7 @@
                         &#8220;incidental&#8221;, less relevant links. See the document
                         <cite><a href="links.html">Links Want To Be Links</a></cite>.</p>
 
+                <h2>Forms</h2>
                 <form action=".">
                         <div>
                                 <input type="hidden" name="hidden field" value="42"/>
