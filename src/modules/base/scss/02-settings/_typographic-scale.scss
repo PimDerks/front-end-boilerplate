@@ -22,12 +22,13 @@ $typographic-scales:(
     'custom':           (12/16, 14/16, 16/16, 20/16, 22/16, 24/16, 26/16, 28/16) // this should be the same length as the sizes defined in $typographic-scale-sizes
 );
 
+
 // Breakpoints
 $typographic-breakpoints:(
     'xs':   (
-        'font-size': 12,
-        'line-height': 1.4,
-        'scale': map-get($typographic-scales, 'major-third')
+        'font-size': 10,
+        'line-height': 1.5,
+        'scale': map-get($typographic-scales, 'fibonacci')
     ),
     's':    (
         'font-size': 13,
@@ -60,89 +61,163 @@ $typographic-baseline:(
 
 // These should be ordered smallest to largest
 
-$typographic-scale-sizes:(
-    'xsmall': -2,
-    'small': -1,
-    'base': 0,
-    'epsilon': 1,
-    'delta': 2,
-    'gamma': 3,
-    'beta': 4,
-    'alpha': 5
+$typographic-scale-names:(
+        'xsmall',
+        'small',
+        'base',
+        'epsilon',
+        'delta',
+        'gamma',
+        'beta',
+        'alpha'
 );
 
-// Configure the scale to use
+// These should be ordered smallest to largest
 
-$typographic-scale: map-get($typographic-scales, 'custom');
+$typographic-scale-sizes:(
+        -2,
+        -1,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+);
 
-// Get the base-font-size and line-height to use
+@function calculate-prop-value($prop, $value, $config, $context){
+    $index: map-get-index-of-key($typographic-scale-names, $context); // for a non-fixed typographic scale
+    $factor: nth($typographic-scale-sizes, $index); // for a fixed typographic scale
 
-$font-size: map-get($typographic-baseline, 'font-size');
-$line-height: map-get($typographic-baseline, 'line-height');
-$line-height-px: $font-size * $line-height;
+    // get config values
+    $scale: map-get($config, 'scale');
+    $font-size: map-get($config, 'font-size');
+    $line-height: map-get($config, 'line-height');
+    $line-height-px: $font-size * $line-height;
 
-@mixin generate-font-properties($bp, $size, $fs, $index) {
-    $name: nth($size, 1);
-    $ratio: nth($size, 2);
-    $new-font-size: $fs;
-    $new-line-height: 0;
+    $initial: 0;
 
-    // calculate font-size
+    // initial value
+    @if $prop == 'font-size' {
+        $initial: $font-size;
+    } @else {
+        $initial: $font-size * ($line-height * $value);
+    }
 
     @if type-of($scale) == list {
-        $scaled: nth($scale, $index);
-        $new-font-size: $new-font-size * $scaled;
+        $factor: nth($scale, $index);
+        $initial: $initial * $factor;
     } @else {
-
-        @if $ratio >= 0 {
-            @for $j from 0 to $ratio {
-                $new-font-size: $new-font-size * $scale;
+        @if $factor >= 0 {
+            @for $j from 0 to $factor {
+                $initial: $initial * $scale;
             }
-        } @else if $ratio < 0 {
-            @for $j from $ratio to 0 {
-                $new-font-size: $new-font-size / $scale;
+        } @else if $factor < 0 {
+            @for $j from $factor to 0 {
+                $initial: $initial / $scale;
             }
         }
+    }
+
+    @if $prop == 'line-height' {
+
+        // calculate line-height
+        $initial: 0;
+        $half: $line-height-px/2;
+
+        @while $initial <= $new-font-size {
+            $new-line-height: $new-line-height + $half;
+        }
+    }
+
+    @return $initial;
+}
+
+@mixin write-props ($map) {
+    @each $key, $value in $map {
+        #{$key}:$value + px;
+    }
+}
+
+@mixin scale($props, $bp, $context: 'base'){
+    $map: calculate-scale($props, $bp, $context);
+    @include write-props($map);
+}
+
+@function calculate-line-height($font-size, $config, $context: 'base'){
+    $return: 0;
+    $base-font-size: map-get($config, 'font-size');
+    $line-height: map-get($config, 'line-height');
+    $line-height-pixels: $base-font-size * $line-height;
+    $half: $line-height-pixels/2;
+
+    @while $return < nth($font-size, 2) {
+        $return: $return + $half;
+    }
+
+    @return $return;
+
+
+
+}
+
+@function calculate-prop($prop, $value, $config, $context: 'base'){
+    $return: ();
+
+    $newValue: $value;
+
+    // calculate value
+    $newValue: calculate-prop-value($prop, $value, $config, $context);
+
+    // get start
+    $return: ($prop: $newValue);
+
+    // get index of context
+    @return $return;
+
+}
+
+// Define a mixin with an argument named `$size`
+@function calculate-scale($props: (), $breakpoint: nth($breakpoints, 1), $context: 'base') {
+    $map: ();
+
+    // get config
+    $config: map-get($typographic-breakpoints, $breakpoint);
+
+    // calculate each property
+    @each $prop, $value in $props {
+
+        @if $prop != 'line-height' and $prop != 'font-size' {
+            $new:calculate-prop($prop, $value, $config, $context);
+        }
+
+        @if $prop == 'font-size' {
+            $new:calculate-prop($prop, $value, $config, $context);
+            $font-size: $new;
+        }
+
+        $map: map-merge($map, $new);
 
     }
 
     // calculate line-height
-    $half: $line-height-px/2;
-    @while $new-line-height <= $new-font-size {
-        $new-line-height: $new-line-height + $half;
-    }
+    $res: ('line-height': calculate-line-height(nth($font-size, 1), $config));
+    $map: map-merge($map, $res);
 
-    font-size: $new-font-size + px;
-    line-height: $new-line-height + px;
-    margin-bottom: $line-height-px + px;
 
-    // @debug $bp-name, $name, $font-size, '==>', $new-font-size, $new-line-height;
+
+    @return $map;
 
 }
 
-// Loop through breakpoints
-@each $bp-name, $bp-size in $breakpoints {
-    $bp-config: map-get($typographic-breakpoints, $bp-name);
-    $bp: map-get($breakpoints, $bp-name);
-    $scale: map-get($bp-config, 'scale');
-
-    // maybe use respond-min-max here?
-    @include respond-min($bp-name) {
-        // Calculate font-size and line-height
-        @for $i from 1 to length($typographic-scale-sizes) + 1 {
-            $size: nth($typographic-scale-sizes, $i);
-            $name: nth($size, 1);
-
-            .#{$name} {
-                @include generate-font-properties($bp, $size, $font-size, $i);
-            }
-
-        }
-    }
-
-    // @debug '------------';
-
-}
+.xsmall { $_props: ( 'font-size': 1, 'line-height': 1, 'padding': .5 ); @include scale($_props, 'xs', 'xsmall'); }
+.small { $_props: ( 'font-size': 1, 'line-height': 1, 'padding': .5 ); @include scale($_props, 'xs', 'small'); }
+.base { $_props: ( 'font-size': 1, 'line-height': 1, 'padding': .5 ); @include scale($_props, 'xs', 'base'); }
+.epsilon { $_props: ( 'font-size': 1, 'line-height': 1, 'padding': .5 ); @include scale($_props, 'xs', 'epsilon'); }
+.delta { $_props: ( 'font-size': 1, 'line-height': 1, 'padding': .5 ); @include scale($_props, 'xs', 'delta'); }
+.gamma { $_props: ( 'font-size': 1, 'line-height': 1, 'padding': .5 ); @include scale($_props, 'xs', 'gamma'); }
+.beta { $_props: ( 'font-size': 1, 'line-height': 1, 'padding': .5 ); @include scale($_props, 'xs', 'beta'); }
+.alpha { $_props: ( 'font-size': 1, 'line-height': 1, 'padding': .5 ); @include scale($_props, 'xs', 'alpha'); }
 
 @function get-baseline-height($amount:1, $breakpoint:'xs') {
     $bp: map-get($breakpoints, $breakpoint);
@@ -200,7 +275,10 @@ $base: 16; // browser default
     .beta,
     .gamma,
     .delta,
-    .epsilon {
+    .epsilon,
+    .small,
+    .xsmall,
+    .base {
         background: rgba(#FF0000, .25) !important;
     }
 

@@ -1,0 +1,11 @@
+@function map-get-index-of-key($map: (), $key: ''){
+  $index: length($map);
+  @for $i from 1 through length($map){
+    $set: nth($map, $i);
+    $k: nth($set, 1);
+    @if $k == $key {
+      $index: $i;
+    }
+  }
+  @return $index;
+}

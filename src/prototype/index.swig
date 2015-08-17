@@ -4,6 +4,12 @@
 
         <section>
 
+                {% set classes = ['xsmall', 'small', 'base', 'epsilon', 'delta', 'gamma', 'beta', 'alpha'] %}
+                {% for className in classes %}
+                        <div class="{{ className }}">Consectetur adipiscing elit. Phasellus tincidunt hendrerit arcu, quis laoreet tortor malesuada at.</div>
+                {% endfor %}
+
+
                 <h1>Testing display of HTML elements</h1>
 
                 <h2>Lorem ipsum dolor sit amet</h2>
@@ -152,7 +158,7 @@
                         <ul>
                                 <li><label for="zname">Name</label><input type="text" class="classed" required="" placeholder=" Name" id="zname"></li>
                                 <li><label for="zemail">Email</label><input type="email" class="classed" multiple="" placeholder="email addresses" required="" id="zemail"></li>
-                                <li><label for="zdob">Birthday</label><input type="date" class="classed" required="" placeholder="01/01/84" id="zdob"></li>
+                                <li><label for="zdob">Birthday</label><input type="date" class="classed" required="" id="zdob"></li>
                                 <li><label for="zage">Age</label><input type="number" class="classed" required="" min="21" max="105" id="zage"></li>
                                 <li><label for="zphone">Phone</label><input type="tel" class="classed" pattern="\d{3}-\d{3}-\d{4}" placeholder="XXX-XXX-XXXX" id="zphone"></li>
                                 <li><label for="zrange">Satisfaction</label><input type="range" id="zrange" min="0" max="10" step="1" list="zrangelist">
@@ -221,7 +227,7 @@ Default text.
                                 contain table header cells (<code>th</code> elements) only; other cells
                                 are data cells (<code>td</code> elements):</p>
 
-                        <table summary="Each row names a Nordic country and specifies its total area and land area, in square kilometers">
+                        <table>
                                 <caption>Sample table: Areas of the Nordic countries, in sq km</caption>
                                 <thead><tr><th scope="col">Country</th> <th scope="col">Total area</th> <th scope="col">Land area</th></tr></thead>
                                 <tfoot><tr><th scope="col">Country</th> <th scope="col">Total area</th> <th scope="col">Land area</th></tr></tfoot>
@@ -254,7 +260,7 @@ Default text.
 
                         <h3>Meter</h3>
                         <ul>
-                                <li><meter>Meter</meter></li>
+                                <li><meter value="0">Meter</meter></li>
                                 <li><meter value="1" min="0" max="4" low="2" high="3">1 of 4</meter></li>
                                 <li><meter value="2" min="0" max="4" low="1" high="3">2 of 4</meter></li>
                                 <li><meter value="61" min="0" max="100" low="73" high="87" optimum="100">61</meter></li>
@@ -262,7 +268,7 @@ Default text.
                         <h3>Progress</h3>
                         <ul>
                                 <li><progress>Empty</progress></li>
-                                <li><progress min="0" max="100" value="17">17% complete</progress></li>
+                                <li><progress max="100" value="17">17% complete</progress></li>
                                 <li><progress value="75" max="100">75% complete</progress></li>
                         </ul>
 
