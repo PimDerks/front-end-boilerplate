@@ -65,7 +65,7 @@ module.exports.lint = function(){
     src.push('!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/initial.js');
 
     return gulp.src(src)
-        .pipe(jscs())
+        .pipe(jscs({}))
         .pipe(jshint())
         .pipe(jshint.reporter('jshint-stylish'));
 
