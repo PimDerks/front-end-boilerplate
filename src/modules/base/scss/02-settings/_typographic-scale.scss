@@ -217,6 +217,8 @@ $test: ('xsmall', 'small', 'base', 'epsilon', 'gamma', 'delta');
             .#{$name} { // #{$name}
                 border-top: get-rhythm($scope, 1, $name)+em solid red;
                 border-bottom: get-rhythm($scope, 2, $name)+em solid blue;
+                margin-bottom: get-rhythm($scope, 2, $name)+em;
+                outline: get-rhythm($scope, .5, $name)+em dashed rgba(black, .25);
             }
         }
     }
