@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    gutil = require('gulp-util'),
     watch = require('gulp-watch'),
     sass = require('gulp-sass'),
     scsslint = require('gulp-scss-lint'),
@@ -16,7 +17,10 @@ module.exports.copy = function() {
 
     // all files in root of /scss/
     return gulp.src(src)
-        .pipe(plumber())
+        .pipe(plumber(function(error) {
+            gutil.log(gutil.colors.red(error.message));
+            this.emit('end');
+        }))
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(autoprefixer('last 1 version', '> 5%', 'ie 9'))
