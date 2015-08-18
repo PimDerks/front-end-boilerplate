@@ -45,6 +45,7 @@ $typographic-scale-names:(
         'alpha'
 );
 
+
 // These should be ordered smallest to largest
 
 $typographic-scale-sizes:(
@@ -71,7 +72,6 @@ $typographic-scale-sizes:(
     // fill!
     @each $key, $value in $map {
 
-        @debug $key, $font-size, $value, $context;
         @if $key == 'font-size'{
             $out: $value/$font-size + em;
         } @else {
