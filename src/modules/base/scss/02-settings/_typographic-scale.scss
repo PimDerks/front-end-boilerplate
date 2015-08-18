@@ -26,9 +26,9 @@ $typographic-scales:(
 // Breakpoints
 $typographic-breakpoints:(
     'xs':   (
-        'font-size': 16,
+        'font-size': 10,
         'line-height': 1.5,
-        'scale': map-get($typographic-scales, 'golden-ratio')
+        'scale': map-get($typographic-scales, 'fibonacci')
     )
 );
 
@@ -58,6 +58,46 @@ $typographic-scale-sizes:(
         5
 );
 
+@mixin write-props ($map, $config, $context) {
+
+    // get config values
+    $font-size: map-get($config, 'font-size');
+    $line-height: map-get($config, 'line-height');
+    $scale: map-get($config, 'scale');
+
+    // get calculated font-size in pixels
+    $context: get-font-size($config, $context);
+
+    // fill!
+    @each $key, $value in $map {
+
+        @debug $key, $font-size, $value, $context;
+        @if $key == 'font-size'{
+            $out: $value/$font-size + em;
+        } @else {
+            $out: $value/$context + em;
+        }
+
+        #{$key}: $out;
+
+    }
+}
+
+@mixin scale($props, $bp, $context: 'base'){
+
+    // calculate scale
+    $map: calculate-scale($props, $bp, $context);
+
+    // convert to relative units
+    $config: map-get($typographic-breakpoints, $bp);
+    @include write-props($map, $config, $context);
+
+}
+
+@function get-font-size($config, $context: 'base'){
+    @return calculate-prop-value('font-size', 1, $config, $context);
+}
+
 @function calculate-prop-value($prop, $value, $config, $context){
     $index: map-get-index-of-key($typographic-scale-names, $context); // for a non-fixed typographic scale
     $factor: nth($typographic-scale-sizes, $index); // for a fixed typographic scale
@@ -66,7 +106,6 @@ $typographic-scale-sizes:(
     $scale: map-get($config, 'scale');
     $font-size: map-get($config, 'font-size');
     $line-height: map-get($config, 'line-height');
-    $line-height-px: $font-size * $line-height;
 
     $initial: 0;
 
@@ -93,21 +132,7 @@ $typographic-scale-sizes:(
     }
 
     @return $initial;
-}
 
-@mixin write-props ($map) {
-    @each $key, $value in $map {
-        #{$key}:$value + px;
-    }
-}
-
-@mixin scale($props, $bp, $context: 'base'){
-    $map: calculate-scale($props, $bp, $context);
-    @include write-props($map);
-}
-
-@function get-font-size($config, $context: 'base'){
-    @return calculate-prop-value('font-size', 1, $config, $context);
 }
 
 @function get-rhythm($config, $amount: 1, $context: 'base'){
@@ -173,12 +198,11 @@ $typographic-scale-sizes:(
     // calculate each property
     @each $prop, $value in $props {
 
-        @if $prop != 'line-height' and $prop != 'font-size' {
-            $new:calculate-prop($prop, $value, $config, $context);
+        @if $prop != 'line-height' {
+            $new: calculate-prop($prop, $value, $config, $context);
         }
 
         @if $prop == 'font-size' {
-            $new:calculate-prop($prop, $value, $config, $context);
             $font-size: $new;
         }
 
@@ -209,7 +233,6 @@ $typographic-scale-sizes:(
 
 $sizes: ('xs');
 $test: ('xsmall', 'small', 'base', 'epsilon', 'gamma', 'delta');
-
 
 @each $size in $sizes {
     $scope: map-get($typographic-breakpoints, $size);
