@@ -26,9 +26,9 @@ $typographic-scales:(
 // Breakpoints
 $typographic-breakpoints:(
     'xs':   (
-        'font-size': 10,
+        'font-size': 16,
         'line-height': 1.5,
-        'scale': map-get($typographic-scales, 'fibonacci')
+        'scale': map-get($typographic-scales, 'golden-ratio')
     )
 );
 
@@ -187,8 +187,8 @@ $typographic-scale-sizes:(
     }
 
     // calculate line-height
-    // $res: ('line-height': calculate-line-height(nth($font-size, 1), $config));
-    // $map: map-merge($map, $res);
+    $res: ('line-height': calculate-line-height(nth(nth($font-size, 1), 2), $config));
+    $map: map-merge($map, $res);
 
     @return $map;
 
@@ -210,6 +210,7 @@ $typographic-scale-sizes:(
 $sizes: ('xs');
 $test: ('xsmall', 'small', 'base', 'epsilon', 'gamma', 'delta');
 
+
 @each $size in $sizes {
     $scope: map-get($typographic-breakpoints, $size);
     @if $scope {
@@ -218,7 +219,6 @@ $test: ('xsmall', 'small', 'base', 'epsilon', 'gamma', 'delta');
                 border-top: get-rhythm($scope, 1, $name)+em solid red;
                 border-bottom: get-rhythm($scope, 2, $name)+em solid blue;
                 margin-bottom: get-rhythm($scope, 2, $name)+em;
-                outline: get-rhythm($scope, .5, $name)+em dashed rgba(black, .25);
             }
         }
     }
