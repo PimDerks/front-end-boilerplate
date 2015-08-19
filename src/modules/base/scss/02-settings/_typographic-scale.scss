@@ -26,37 +26,42 @@ $typographic-scales:(
 // Breakpoints
 $typographic-breakpoints:(
     'xs':   (
-        'font-size': 10,
+        'font-size': 16,
         'line-height': 1.5,
-        'scale': map-get($typographic-scales, 'fibonacci')
+        'scale': map-get($typographic-scales, 'perfect-fifth')
+    ),
+    's':   (
+            'font-size': 20,
+            'line-height': 1.6,
+            'scale': map-get($typographic-scales, 'fibonacci')
     )
 );
 
 // These should be ordered smallest to largest
 
 $typographic-scale-names:(
-        'xsmall',
-        'small',
-        'base',
-        'epsilon',
-        'delta',
-        'gamma',
-        'beta',
-        'alpha'
+    'xsmall',
+    'small',
+    'base',
+    'epsilon',
+    'delta',
+    'gamma',
+    'beta',
+    'alpha'
 );
 
 
 // These should be ordered smallest to largest
 
 $typographic-scale-sizes:(
-        -2,
-        -1,
-        0,
-        1,
-        2,
-        3,
-        4,
-        5
+    -1,
+    -1,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
 );
 
 @mixin write-props ($map, $config, $context) {
@@ -116,6 +121,8 @@ $typographic-scale-sizes:(
         $initial: $font-size * ($line-height * $value);
     }
 
+    $start: $initial;
+
     @if type-of($scale) == list {
         $factor: nth($scale, $index);
         $initial: $initial * $factor;
@@ -144,10 +151,12 @@ $typographic-scale-sizes:(
 
     // context
     $font-size-calculated: get-font-size($config, $context);
-    $line-height-calculated: calculate-line-height($font-size-calculated, $config, $context, 1);
+    $line-height-calculated: calculate-line-height($font-size-calculated, $config, $context, 0);
 
     // calculate a single unit of baseline
     $unit: $line-height-pixels/$font-size-calculated;
+
+    @debug $line-height-pixels, $font-size-calculated, $unit;
 
     @return $unit * $amount;
 }
@@ -222,58 +231,60 @@ $typographic-scale-sizes:(
     @return map-get($typographic-breakpoints, $break);
 }
 
-.xsmall { $_props: ( 'font-size': 1, 'line-height': 1, 'margin-bottom': .5 ); @include scale($_props, 'xs', 'xsmall'); }
-.small { $_props: ( 'font-size': 1, 'line-height': 1, 'margin-bottom': .5 ); @include scale($_props, 'xs', 'small'); }
-.base { $_props: ( 'font-size': 1, 'line-height': 1, 'margin-bottom': .5 ); @include scale($_props, 'xs', 'base'); }
-.epsilon { $_props: ( 'font-size': 1, 'line-height': 1, 'margin-bottom': .5 ); @include scale($_props, 'xs', 'epsilon'); }
-.delta { $_props: ( 'font-size': 1, 'line-height': 1, 'margin-bottom': .5 ); @include scale($_props, 'xs', 'delta'); }
-.gamma { $_props: ( 'font-size': 1, 'line-height': 1, 'margin-bottom': .5 ); @include scale($_props, 'xs', 'gamma'); }
-.beta { $_props: ( 'font-size': 1, 'line-height': 1, 'margin-bottom': .5 ); @include scale($_props, 'xs', 'beta'); }
-.alpha { $_props: ( 'font-size': 1, 'line-height': 1, 'margin-bottom': .5 ); @include scale($_props, 'xs', 'alpha'); }
+@each $bp-name, $bp-code in $breakpoints {
+    @if map-has-key($typographic-breakpoints, $bp-name){
+        $scope: map-get($typographic-breakpoints, $bp-name);
+        @include respond-min($bp-name){
+            @each $name in $typographic-scale-names {
+                .#{$name} {
+                    $_props: ('font-size': 1);
+                    @include scale($_props, $bp-name, $name);
 
-$sizes: ('xs');
-$test: ('xsmall', 'small', 'base', 'epsilon', 'gamma', 'delta');
-
-@each $size in $sizes {
-    $scope: map-get($typographic-breakpoints, $size);
-    @if $scope {
-        @each $name in $test {
-            .#{$name} { // #{$name}
-                border-top: get-rhythm($scope, 1, $name)+em solid red;
-                border-bottom: get-rhythm($scope, 2, $name)+em solid blue;
-                margin-bottom: get-rhythm($scope, 2, $name)+em;
+                    border-top: get-rhythm($scope, 1, $name)+em solid red;
+                    border-bottom: get-rhythm($scope, 2, $name)+em solid blue;
+                    margin-bottom: get-rhythm($scope, 2, $name)+em;
+                }
             }
         }
     }
 }
 
+@include respond-min('s'){
+    body {
+        color: green !important;
+    }
+}
 
 /* Set base font-size
 ----------------------------------------------- */
 
 $base: 16; // browser default
 
-//@each $bp-name, $bp-size in $breakpoints {
-    $bp-config: map-get($typographic-breakpoints, 'xs');
-    $bp: map-get($breakpoints, 'xs');
-    $font-size: map-get($bp-config, 'font-size');
-    $line-height: map-get($bp-config, 'line-height');
+@each $bp-name, $bp-size in $breakpoints {
 
-    @include respond-min('xs') {
+    @if map-has-key($typographic-breakpoints, $bp-name) {
+        $bp-config: map-get($typographic-breakpoints, $bp-name);
+        $bp: map-get($breakpoints, $bp-name);
+        $font-size: map-get($bp-config, 'font-size');
+        $line-height: map-get($bp-config, 'line-height');
 
-        body {
-            font-size: ($font-size/$base) * 100%;
-            line-height: $line-height;
+        @include respond-min($bp-name) {
+
+            body {
+                font-size: ($font-size/$base) * 100%;
+                line-height: $line-height;
+            }
+
+            .baseline {
+                background-size: 100% $line-height + em;
+            }
+
         }
-
-        .baseline {
-            background-size: 100% $line-height + em;
-        }
-
+    } @else {
+        // @warn "No typographic scale found for breakpoint `#{$bp-name}` in `$typographic-breakpoints`";
     }
 
-//}
-
+}
 
 
 /* Baseline background
