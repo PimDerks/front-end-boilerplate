@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     utils = require('./gulp.utils'),
     fs = require('fs'),
     fse = require('fs-extra'),
-    Promise = require('./gulp.promise'),
+    // Promise = require('./gulp.promise'),
     htmlhint = require("gulp-htmlhint"),
     w3cjs = require('gulp-w3cjs');
 
@@ -13,16 +13,16 @@ var methods = {
 
     copy: function(src, dest){
 
-        var deferred = Promise.defer();
+        return new Promise(function(resolve, error){
 
-        fse.copy(src, dest, function(err){
-            if(err){
-                deferred.reject(err);
-            }
-            deferred.resolve();
-        })
+            fse.copy(src, dest, function(err){
+                if(err){
+                    error();
+                }
+                resolve();
+            })
 
-        return deferred.promise();
+        });
 
     },
 
@@ -89,26 +89,36 @@ var methods = {
 
     renderComponents: function(){
 
-        var components = methods.getComponents();
+        return new Promise(function(resolve, reject){
 
-        components.forEach(function(component, index){
-            methods.renderSwigFile(component, config.roots.tmp);
-            if(index === (components.length - 1)){
-                console.log('Succesfully rendered ' + components.length + ' components.');
-            }
+            var components = methods.getComponents();
+
+            components.forEach(function(component, index){
+                methods.renderSwigFile(component, config.roots.tmp);
+                if(index === (components.length - 1)){
+                    console.log('Succesfully rendered ' + components.length + ' components.');
+                    resolve();
+                }
+            });
+
         });
 
     },
 
     renderPrototype: function(){
 
-        var pages = methods.getPages();
+        return new Promise(function(resolve, reject){
 
-        pages.forEach(function(page, index){
-            methods.renderSwigFile(page, config.roots.www);
-            if(index === (pages.length - 1)){
-                console.log('Succesfully rendered ' + pages.length + ' pages.');
-            }
+            var pages = methods.getPages();
+
+            pages.forEach(function (page, index) {
+                methods.renderSwigFile(page, config.roots.www);
+                if (index === (pages.length - 1)) {
+                    console.log('Succesfully rendered ' + pages.length + ' pages.');
+                    resolve();
+                }
+            });
+
         });
 
     },
@@ -162,20 +172,24 @@ var methods = {
 
 module.exports.copy = function() {
 
-    methods.copy(config.roots.src, config.roots.tmp).then(function(){
+    methods.copy(config.roots.src, config.roots.tmp).then(function() {
 
-        methods.renderComponents();
+        // log
+        console.log('Rendering components...');
 
-        setTimeout(function(){
+        // return promise
+        return methods.renderComponents();
 
-            // log
-            console.log('Rendering pages...');
+    }).then(function(){
 
-            // render templates
-            methods.renderPrototype();
+        // log
+        console.log('Rendering pages...');
 
-        });
+        // return a promise render templates
+        return methods.renderPrototype();
 
+    }).catch(function(err){
+        console.log("Error:", err);
     });
 
 };
