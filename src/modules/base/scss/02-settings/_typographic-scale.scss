@@ -29,7 +29,7 @@ $typographic-breakpoints:(
     'xs':   (
         'font-size': 20,
         'line-height': 1.5,
-        'scale': map-get($typographic-scales, 'perfect-fifth')
+        'scale': map-get($typographic-scales, 'fibonacci')
     )
 );
 

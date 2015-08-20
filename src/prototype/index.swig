@@ -5,10 +5,13 @@
         <section>
 
                 {% set classes = ['xsmall', 'small', 'base', 'epsilon', 'delta', 'gamma', 'beta', 'alpha'] %}
-                {% set elements = ['p', 'p', 'p', 'h5', 'h4', 'h3', 'h2', 'h1'] %}
+                {% set elements = ['small', 'small', 'p', 'h5', 'h4', 'h3', 'h2', 'h1'] %}
                 {% for className in classes %}
-                        <div class="{{ className }}">Lorem ipsum</div>
-                        <!-- <{{ elements[loop.index] }}>Lorem ipsum</{{ elements[loop.index] }}> -->
+                        {% if loop.index == 1 %}
+                                <{{ elements[loop.index-1] }} class="{{ classes[loop.index-1] }}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</{{ elements[loop.index-1] }}>
+                        {%  else  %}
+                                <{{ elements[loop.index-1] }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</{{ elements[loop.index-1] }}>
+                        {%  endif %}
                 {% endfor %}
 
 

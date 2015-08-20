@@ -13,32 +13,43 @@ body {
 
 h1,
 .alpha {
+  @extend %alpha;
   font-weight: 400;
 }
 
 h2,
 .beta{
+  @extend %beta;
   font-style: italic;
   font-weight: 400;
 }
 
 h3,
 .gamma {
+  @extend %gamma;
   font-style: italic;
+  font-weight: 400;
 }
 
 h4,
 .delta {
-  font-weight: bold;
+  @extend %delta;
+  font-weight: 400;
 }
 
 h5,
 .epsilon {
+  @extend %epsilon;
   font-weight: bold;
 }
 
 p {
+  @extend %base;
   margin: 0;
+}
+
+small {
+  @extend %small;
 }
 
 @each $bp-name, $bp-code in $breakpoints {
@@ -48,11 +59,10 @@ p {
       @each $name in $typographic-scale-names {
         .#{$name},
         %#{$name}{
-          $_props: ('font-size': 1);
-          @include scale($_props, $bp-name, $name);
-          border-bottom: get-rhythm($scope, .5, $name)+em solid #0000FF;
-          margin-bottom: get-rhythm($scope, 1, $name)+em;
-          border-top: get-rhythm($scope, .5, $name)+em solid #FF0000;
+          @include scale($bp-name, $name);
+          margin-bottom: baseline(1, $bp-name, $name);
+          border-bottom: baseline(.5, $bp-name, $name) solid red;
+          border-top: baseline(.5, $bp-name, $name) solid blue;
 
         }
       }
@@ -96,6 +106,10 @@ $base: 16; // browser default
 
 }
 
+small {
+  display: block;
+}
+
 /* Baseline background
 ----------------------------------------------- */
 
@@ -114,6 +128,7 @@ $base: 16; // browser default
   dl,
   p,
   blockquote,
+  small,
   .alpha,
   .beta,
   .gamma,
@@ -127,3 +142,8 @@ $base: 16; // browser default
 
 }
 
+// @debug calc-rel(10);
+// @debug calc-rel(10, 'xs');
+// @debug calc-rel(10, 'xs', 'alpha');
+// @debug baseline(1);
+// @debug baseline(2, 'xs', 'alpha');
