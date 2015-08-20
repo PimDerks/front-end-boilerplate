@@ -76,26 +76,6 @@ $unit: 'em';
     }
 }
 
-@mixin scale($bp, $context: 'base'){
-
-    // calculate scale
-    $map: calculate-scale($bp, $context);
-
-    // convert to relative units
-    $config: map-get($typographic-breakpoints, $bp);
-
-    @if not $config {
-        @error 'No value found for `#{$bp}`. Please make sure it is defined in `$typographic-breakpoints` map.';
-    }
-
-    @include write-props($map, $config, $context);
-
-}
-
-@function get-font-size($config, $context: 'base'){
-    @return calculate-prop-value('font-size', 1, $config, $context);
-}
-
 @function calculate-prop-value($prop, $value, $config, $context){
     $index: map-get-index-of-key($typographic-scale-names, $context); // for a non-fixed typographic scale
     $factor: nth($typographic-scale-sizes, $index); // for a fixed typographic scale
@@ -154,23 +134,10 @@ $unit: 'em';
 
 }
 
-@function calculate-prop($prop, $value, $config, $context: 'base'){
-    $return: ();
-
-    $newValue: $value;
-
-    // calculate value
-    $newValue: calculate-prop-value($prop, $value, $config, $context);
-
-    // get start
-    $return: ($prop: $newValue);
-
-    // get index of context
-    @return $return;
-
+@function get-font-size($config, $context: 'base'){
+    @return calculate-prop-value('font-size', 1, $config, $context);
 }
 
-// Define a mixin with an argument named `$size`
 @function calculate-scale($breakpoint: nth($breakpoints, 1), $context: 'base') {
     $map: ();
 
@@ -187,5 +154,22 @@ $unit: 'em';
     $map: map-merge($map, $line-height);
 
     @return $map;
+
+}
+
+
+@mixin scale($bp, $context: 'base'){
+
+    // calculate scale
+    $map: calculate-scale($bp, $context);
+
+    // convert to relative units
+    $config: map-get($typographic-breakpoints, $bp);
+
+    @if not $config {
+        @error 'No value found for `#{$bp}`. Please make sure it is defined in `$typographic-breakpoints` map.';
+    }
+
+    @include write-props($map, $config, $context);
 
 }
