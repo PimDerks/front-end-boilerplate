@@ -136,14 +136,11 @@ var methods = {
 
         // strip /tmp/ dir from filename (ugly work around)
         var removeDir = config.roots.tmp.replace('./','');
-        name = name.replace(removeDir + '/', '');
-        name = name.replace(removeDir + '\\', '');
-
+        name = name.replace(removeDir + path.sep, '');
 
         // strip /src/ dir from filename (ugly work around)
         var removeDir2 = config.roots.src.replace('./','');
-        name = name.replace(removeDir2 + '/', '');
-        name = name.replace(removeDir2 + '\\', '');
+        name = name.replace(removeDir2 + path.sep, '');
 
         // write rendered template to file
 
