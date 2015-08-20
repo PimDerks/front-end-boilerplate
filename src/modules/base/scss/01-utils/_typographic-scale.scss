@@ -4,6 +4,14 @@
 
 $unit: 'em';
 
+@function rel($pixels, $font-size, $context){
+    @if $unit == 'em' {
+        @return $pixels/$context + em;
+    } @else if $unit == 'rem' {
+        @return $pixels/$font-size + rem;
+    }
+}
+
 @function calc-rel ($pixels, $breakpoint: 'xs', $context: 'base'){
 
     // get config for breakpoint
@@ -16,18 +24,11 @@ $unit: 'em';
     // get config values
     $font-size: map-get($config, 'font-size');
     $line-height: map-get($config, 'line-height');
-    $scale: map-get($config, 'scale');
 
     // get calculated font-size in pixels
     $context: get-font-size($config, $context);
 
-    @if $unit == 'em' {
-        $result: $pixels/$context + em;
-    } @else if $unit == 'rem' {
-        $result: $pixels/$font-size + rem;
-    }
-
-    @return $result;
+    @return rel($pixels, $font-size, $context);
 
 }
 
@@ -37,7 +38,7 @@ $unit: 'em';
     $config: map-get($typographic-breakpoints, $breakpoint);
 
     @if not $config {
-    @error 'No value found for `#{$breakpoint}`. Please make sure it is defined in `$typographic-breakpoints` map.';
+        @error 'No value found for `#{$breakpoint}`. Please make sure it is defined in `$typographic-breakpoints` map.';
     }
 
     // get config values
@@ -82,6 +83,11 @@ $unit: 'em';
 
     // convert to relative units
     $config: map-get($typographic-breakpoints, $bp);
+
+    @if not $config {
+        @error 'No value found for `#{$bp}`. Please make sure it is defined in `$typographic-breakpoints` map.';
+    }
+
     @include write-props($map, $config, $context);
 
 }
@@ -129,7 +135,7 @@ $unit: 'em';
 
 }
 
-@function calculate-line-height($font-size, $config, $context: 'base', $extra: 0){
+@function get-line-height($font-size, $config, $context: 'base', $extra: 0){
     $return: 0;
     $base-font-size: map-get($config, 'font-size');
     $line-height: map-get($config, 'line-height');
@@ -172,11 +178,12 @@ $unit: 'em';
     $config: map-get($typographic-breakpoints, $breakpoint);
 
     // calculate font-size
-    $font-size: calculate-prop('font-size', 1, $config, $context);
+    $font-size-calculated: get-font-size($config, $context);
+    $font-size: ('font-size': $font-size-calculated);
     $map: map-merge($map, $font-size);
 
     // calculate line-height
-    $line-height: ('line-height': calculate-line-height(nth(nth($font-size, 1), 2), $config));
+    $line-height: ('line-height': get-line-height($font-size-calculated, $config));
     $map: map-merge($map, $line-height);
 
     @return $map;

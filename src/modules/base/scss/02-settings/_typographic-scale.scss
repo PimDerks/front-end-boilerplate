@@ -27,9 +27,9 @@ $typographic-scales:(
 // Breakpoints
 $typographic-breakpoints:(
     'xs':   (
-        'font-size': 20,
+        'font-size': 25,
         'line-height': 1.5,
-        'scale': map-get($typographic-scales, 'fibonacci')
+        'scale': map-get($typographic-scales, 'golden-ratio')
     )
 );
 
