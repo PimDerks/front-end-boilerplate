@@ -11,20 +11,119 @@ body {
   max-width: 80%;
 }
 
-h1 {
+h1,
+.alpha {
   font-weight: 400;
 }
 
-h2 {
+h2,
+.beta{
   font-style: italic;
   font-weight: 400;
 }
 
-h3 {
+h3,
+.gamma {
   font-style: italic;
+}
+
+h4,
+.delta {
+  font-weight: bold;
+}
+
+h5,
+.epsilon {
+  font-weight: bold;
 }
 
 p {
   margin: 0;
+}
+
+@each $bp-name, $bp-code in $breakpoints {
+  @if map-has-key($typographic-breakpoints, $bp-name){
+    $scope: map-get($typographic-breakpoints, $bp-name);
+    @include respond-min($bp-name){
+      @each $name in $typographic-scale-names {
+        .#{$name},
+        %#{$name}{
+          $_props: ('font-size': 1);
+          @include scale($_props, $bp-name, $name);
+          border-bottom: get-rhythm($scope, .5, $name)+em solid #0000FF;
+          margin-bottom: get-rhythm($scope, 1, $name)+em;
+          border-top: get-rhythm($scope, .5, $name)+em solid #FF0000;
+
+        }
+      }
+    }
+  }
+}
+
+/* Set base font-size
+----------------------------------------------- */
+
+$base: 16; // browser default
+
+@each $bp-name, $bp-size in $breakpoints {
+
+  $bp-config: map-get($typographic-breakpoints, $bp-name);
+
+  @if not $bp-config {
+    // @warn 'No value found for `#{$bp-name}`. Please make sure it is defined in `$typographic-breakpoints` map.';
+  }
+
+  @if map-has_key($typographic-breakpoints, $bp-name) {
+
+    $bp: map-get($breakpoints, $bp-name);
+    $font-size: map-get($bp-config, 'font-size');
+    $line-height: map-get($bp-config, 'line-height');
+
+    @include respond-min($bp-name) {
+
+      body {
+        font-size: ($font-size/$base) * 100%;
+        line-height: $line-height;
+      }
+
+      .baseline {
+        background-size: 100% $line-height + em;
+      }
+
+    }
+
+  }
+
+}
+
+/* Baseline background
+----------------------------------------------- */
+
+.baseline {
+  background-image: linear-gradient(rgba(black, .05) 1px, rgba(black, .05) 50%, transparent 51%, transparent 100%);
+  background-position: left top;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  label,
+  ol,
+  ul,
+  dl,
+  p,
+  blockquote,
+  .alpha,
+  .beta,
+  .gamma,
+  .delta,
+  .epsilon,
+  .small,
+  .xsmall,
+  .base {
+    background: rgba(#FF0000, .25) !important;
+  }
+
 }
 

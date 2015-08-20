@@ -5,8 +5,10 @@
         <section>
 
                 {% set classes = ['xsmall', 'small', 'base', 'epsilon', 'delta', 'gamma', 'beta', 'alpha'] %}
+                {% set elements = ['p', 'p', 'p', 'h5', 'h4', 'h3', 'h2', 'h1'] %}
                 {% for className in classes %}
-                        <div class="{{ className }}">Consectetur adipiscing elit. Phasellus tincidunt hendrerit arcu, quis laoreet tortor malesuada at.</div>
+                        <div class="{{ className }}">Lorem ipsum</div>
+                        <!-- <{{ elements[loop.index] }}>Lorem ipsum</{{ elements[loop.index] }}> -->
                 {% endfor %}
 
 
