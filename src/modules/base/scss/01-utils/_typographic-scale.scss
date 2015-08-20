@@ -76,9 +76,21 @@ $unit: 'em';
     }
 }
 
+@function value-scale($value, $scale, $index){
+
+    @if type-of($scale) == list {
+        $factor: nth($scale, $index); // for a custom typographic scale
+        $value: $value * $factor;
+    } @else {
+        $factor: nth($typographic-scale-sizes, $index); // for a fixed typographic scale
+        $value: $value * pow($scale, $factor);
+    }
+    @return $value;
+
+}
+
 @function calculate-prop-value($prop, $value, $config, $context){
     $index: map-get-index-of-key($typographic-scale-names, $context); // for a non-fixed typographic scale
-    $factor: nth($typographic-scale-sizes, $index); // for a fixed typographic scale
 
     // get config values
     $scale: map-get($config, 'scale');
@@ -94,24 +106,7 @@ $unit: 'em';
         $initial: $font-size * ($line-height * $value);
     }
 
-    $start: $initial;
-
-    @if type-of($scale) == list {
-        $factor: nth($scale, $index);
-        $initial: $initial * $factor;
-    } @else {
-        @if $factor >= 0 {
-            @for $j from 0 to $factor {
-                $initial: $initial * $scale;
-            }
-        } @else if $factor < 0 {
-            @for $j from $factor to 0 {
-                $initial: $initial / $scale;
-            }
-        }
-    }
-
-    @return $initial;
+    @return value-scale($initial, $scale, $index);
 
 }
 
