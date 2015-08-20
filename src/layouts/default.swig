@@ -16,6 +16,9 @@
     </head>
     <body class="baseline">
 
+        {% include "../modules/base/components/Header/Header.html" %}
+
+
         {% block content %}
             <p>This comes from the default layout.</p>
         {% endblock %}
