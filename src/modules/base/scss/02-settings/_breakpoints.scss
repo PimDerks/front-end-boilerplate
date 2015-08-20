@@ -1,5 +1,6 @@
-/* Breakpoints
-----------------------------------------*/
+/*------------------------------------*\
+    #BREAKPOINTS-SETTINGS
+\*------------------------------------*/
 
 $breakpoints:(
     xs: 20em, /* 320/16 = iPhone portrait */
@@ -8,6 +9,20 @@ $breakpoints:(
     l:  62.5em, /* 1000 = iPad portrait */
     xl: 80em); /* 1280 = laptop */
 
+/**
+ * Z-index management
+ * @author Hugo Giraudel
+ * @link http://www.sitepoint.com/better-solution-managing-z-index-sass/
+*/
+
 @function get-breakpoint($name) {
-    @return map-get($breakpoints, $name);
+
+    $bp: map-get($breakpoints, $name);
+
+    @if not $bp {
+        @error 'No value found for `#{$name}`. Please make sure it is defined in `$breakpoints` map.';
+    }
+
+    @return $bp;
+
 }

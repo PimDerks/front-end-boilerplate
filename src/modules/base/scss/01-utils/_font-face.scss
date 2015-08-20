@@ -1,9 +1,15 @@
-/* Font-face mixin, for use of external fonts. Assumes all different font files are available.
+/*------------------------------------*\
+    #FONT-FACE
+\*------------------------------------*/
+
+/**
+ * Font-face mixin, for use of external fonts. Assumes all different font files are available.
  * @author Lowen
  * @param string use $primary-font global variable
  * @param string path and filename to font
  * @param string defaults to normal
- */
+*/
+
 @mixin font-face($font-family, $path, $weight : normal, $style : normal) {
     @font-face {
         font-family: '#{$font-family}';

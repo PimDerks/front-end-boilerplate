@@ -1,3 +1,13 @@
+/*------------------------------------*\
+    #HIDE
+\*------------------------------------*/
+
+/**
+ * Hide elements for visual users, but still make them available to screenreaders.
+ * Use the --focusable modifier class to show items when focussed via keyboard.
+ */
+
+
 .hide,
 .screenreader {
   @include hide();

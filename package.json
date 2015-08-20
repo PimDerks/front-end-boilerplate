@@ -37,7 +37,7 @@
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.6",
     "gulp-w3cjs": "^1.0.0",
-    "gulp-watch": "^4.2.4",
+    "gulp-watch": "^4.3.5",
     "imagemin-pngquant": "^4.1.0",
     "jscs-jsdoc": "^1.1.0",
     "jshint-stylish": "^2.0.1",

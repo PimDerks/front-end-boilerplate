@@ -1,0 +1,12 @@
+/*------------------------------------*\
+    #LINKS
+\*------------------------------------*/
+
+a {
+  text-decoration: underline;
+
+  @include attention {
+    text-decoration: none;
+  }
+
+}

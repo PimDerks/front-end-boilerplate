@@ -1,5 +1,6 @@
-/* Breakpoints
-----------------------------------------*/
+/*------------------------------------*\
+    #TYPOGRAPHY-SETTINGS
+\*------------------------------------*/
 
 // Typographic scales which can be used.
 //
@@ -26,14 +27,14 @@ $typographic-scales:(
 // Breakpoints
 $typographic-breakpoints:(
     'xs':   (
-        'font-size': 16,
+        'font-size': 12,
         'line-height': 1.5,
         'scale': map-get($typographic-scales, 'perfect-fifth')
     ),
     's':   (
-            'font-size': 20,
-            'line-height': 1.6,
-            'scale': map-get($typographic-scales, 'fibonacci')
+        'font-size': 16,
+        'line-height': 1.6,
+        'scale': map-get($typographic-scales, 'fibonacci')
     )
 );
 
@@ -156,7 +157,7 @@ $typographic-scale-sizes:(
     // calculate a single unit of baseline
     $unit: $line-height-pixels/$font-size-calculated;
 
-    @debug $line-height-pixels, $font-size-calculated, $unit;
+    // @debug $line-height-pixels, $font-size-calculated, $unit;
 
     @return $unit * $amount;
 }
@@ -246,12 +247,6 @@ $typographic-scale-sizes:(
                 }
             }
         }
-    }
-}
-
-@include respond-min('s'){
-    body {
-        color: green !important;
     }
 }
 

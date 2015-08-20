@@ -8,9 +8,9 @@
 @import '01-utils/opposite-direction';
 @import '01-utils/placeholder';
 @import '01-utils/position';
-@import '01-utils/rem';
 @import '01-utils/respond';
 @import '01-utils/math';
+@import '01-utils/attention';
 
 /* 02 Settings 
 --------------------------------------*/
@@ -18,9 +18,12 @@
 @import '02-settings/breakpoints';
 @import '02-settings/typographic-scale';
 
-/* 03 Reset
+/* 03 Base
 --------------------------------------*/
 @import '03-base/normalize';
+@import '03-base/box-sizing';
+@import '03-base/reset';
+@import '03-base/selection';
 
 /* 04 Generic
 --------------------------------------*/
@@ -37,13 +40,7 @@
 
 /* 05 Objects
 --------------------------------------*/
-@import '05-objects/blank-list';
-@import '05-objects/clearfix';
+@import '05-objects/list-bare';
 @import '05-objects/hide';
 @import '05-objects/target';
 @import '05-objects/triangle';
-
-/* 06 Components
---------------------------------------*/
-
-
