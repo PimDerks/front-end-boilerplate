@@ -97,7 +97,9 @@ var methods = {
                 methods.renderSwigFile(component, config.roots.tmp);
                 if(index === (components.length - 1)){
                     console.log('Succesfully rendered ' + components.length + ' components.');
-                    resolve();
+                    setTimeout(function() {
+                        resolve();
+                    });
                 }
             });
 
@@ -115,7 +117,9 @@ var methods = {
                 methods.renderSwigFile(page, config.roots.www);
                 if (index === (pages.length - 1)) {
                     console.log('Succesfully rendered ' + pages.length + ' pages.');
-                    resolve();
+                    setTimeout(function() {
+                        resolve();
+                    });
                 }
             });
 
