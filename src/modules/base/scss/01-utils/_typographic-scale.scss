@@ -4,6 +4,15 @@
 
 $unit: 'em';
 
+/**
+ * Transforms an absolute unit to a relative unit.
+ * @param {Number} The amount of the absolute unit.
+ * @param {Number} The font-size of the body.
+ * @param {Number} The context of the $pixels in pixels. Only necessary when outputting em's.
+ * @return {String} The calculated relative unit.
+ * @author Pim Derks
+*/
+
 @function rel($pixels, $font-size, $context){
     @if $unit == 'em' {
         @return $pixels/$context + em;
@@ -11,6 +20,15 @@ $unit: 'em';
         @return $pixels/$font-size + rem;
     }
 }
+
+/**
+ * Calculate a relative unit for a certain breakpoint and context
+ * @param {Number} The amount of the absolute unit.
+ * @param {String} The name of the breakpoint to use.
+ * @param {String} The context of the $pixels.
+ * @return A relative unit, as requested.
+ * @author Pim Derks
+*/
 
 @function calc-rel ($pixels, $breakpoint: 'xs', $context: 'base'){
 
@@ -32,6 +50,15 @@ $unit: 'em';
 
 }
 
+/**
+ * Return the required amount of baseline units.
+ * @param {Number} The amount of baseline units required.
+ * @param {String} The name of the breakpoint to use.
+ * @param {String} The context in which we want a baseline unit.
+ * @return {String} The calculated amount of base-lines in a relative unit.
+ * @author Pim Derks
+*/
+
 @function baseline ($amount: 1, $breakpoint: 'xs', $context: 'base'){
 
     // get config for breakpoint
@@ -52,6 +79,14 @@ $unit: 'em';
 
 }
 
+/**
+ * Write props.
+ * @param {List} The properties to write.
+ * @param {List} The config to use.
+ * @param {String} The context in which we want to calculate the properties.
+ * @author Pim Derks
+*/
+
 @mixin write-props ($map, $config, $context) {
 
     // get config values
@@ -65,16 +100,33 @@ $unit: 'em';
     // fill!
     @each $key, $value in $map {
 
-        @if $key == 'font-size'{
-            $out: $value/$font-size + em;
-        } @else {
-            $out: $value/$context + em;
+        @if $unit == 'rem' {
+            $out: $value/$font-size + rem;
+        }
+
+        @if $unit == 'em' {
+
+            @if $key == 'font-size'{
+                $out: $value/$font-size + em;
+            } @else {
+                $out: $value/$context + em;
+            }
+
         }
 
         #{$key}: $out;
 
     }
 }
+
+/**
+ * Calculcate a value.
+ * @param {Number} The properties to write.
+ * @param {List|Number} The scale to use. Can be a number of a list.
+ * @param {Number} The index to use (used for power-calculation or getting the current scale if $scale is a list.
+ * @return The calculated value.
+ * @author Pim Derks
+*/
 
 @function value-scale($value, $scale, $index){
 
@@ -88,6 +140,16 @@ $unit: 'em';
     @return $value;
 
 }
+
+/**
+ * Calculcate the value of a property.
+ * @param {String} The name of the property to calculate.
+ * @param {Number} The amount of the property to calculate.
+ * @param {String} The name of the breakpoint to use.
+ * @param {String} The context in which we want a baseline unit.
+ * @return The calculated value.
+ * @author Pim Derks
+*/
 
 @function calculate-prop-value($prop, $value, $config, $context){
     $index: map-get-index-of-key($typographic-scale-names, $context); // for a non-fixed typographic scale
@@ -110,6 +172,16 @@ $unit: 'em';
 
 }
 
+/**
+ * Calculcate the line-height for a given font-size.
+ * @param {Number} The font-size to get the line-height for.
+ * @param {List} A map containing the config from $typographic-breakpoints.
+ * @param {String} The context in which we want a baseline unit.
+ * @param {Number} Can be used to add extra baseline subunits if necessary.
+ * @return The required line-height in pixels.
+ * @author Pim Derks
+*/
+
 @function get-line-height($font-size, $config, $context: 'base', $extra: 0){
     $return: 0;
     $base-font-size: map-get($config, 'font-size');
@@ -129,9 +201,25 @@ $unit: 'em';
 
 }
 
+
+/**
+ * Calculcate the font-size for a name (e.g. 'alpha').
+ * @param {List} A map containing the config from $typographic-breakpoints.
+ * @param {String} The context of which we want the font-size.
+ * @return The calculated font-size in pixels.
+ * @author Pim Derks
+*/
+
 @function get-font-size($config, $context: 'base'){
     @return calculate-prop-value('font-size', 1, $config, $context);
 }
+
+/**
+ * Calculcate tscale
+ * @param {List} A map containing the config from $typographic-breakpoints.
+ * @param {String} The context of which we want the font-size.
+ * @author Pim Derks
+*/
 
 @function calculate-scale($breakpoint: nth($breakpoints, 1), $context: 'base') {
     $map: ();
@@ -152,6 +240,12 @@ $unit: 'em';
 
 }
 
+/**
+ * Calculcate tscale
+ * @param {String} The breakpoint name
+ * @param {String} The context of which we want the font-size.
+ * @author Pim Derks
+*/
 
 @mixin scale($bp, $context: 'base'){
 
