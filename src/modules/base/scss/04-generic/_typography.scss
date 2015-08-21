@@ -59,7 +59,7 @@ small {
       @each $name in $typographic-scale-names {
         .#{$name},
         %#{$name}{
-          @include scale($bp-name, $name);
+          @include calculate-scale($bp-name, $name);
           margin-bottom: baseline(1, $bp-name, $name);
           border-bottom: baseline(.5, $bp-name, $name) solid red;
           border-top: baseline(.5, $bp-name, $name) solid blue;

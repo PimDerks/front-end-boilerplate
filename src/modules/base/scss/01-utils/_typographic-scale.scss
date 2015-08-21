@@ -80,46 +80,6 @@ $unit: 'em';
 }
 
 /**
- * Write props.
- * @param {List} The properties to write.
- * @param {List} The config to use.
- * @param {String} The context in which we want to calculate the properties.
- * @author Pim Derks
-*/
-
-@mixin write-props ($map, $config, $context) {
-
-    // get config values
-    $font-size: map-get($config, 'font-size');
-    $line-height: map-get($config, 'line-height');
-    $scale: map-get($config, 'scale');
-
-    // get calculated font-size in pixels
-    $context: get-font-size($config, $context);
-
-    // fill!
-    @each $key, $value in $map {
-
-        @if $unit == 'rem' {
-            $out: $value/$font-size + rem;
-        }
-
-        @if $unit == 'em' {
-
-            @if $key == 'font-size'{
-                $out: $value/$font-size + em;
-            } @else {
-                $out: $value/$context + em;
-            }
-
-        }
-
-        #{$key}: $out;
-
-    }
-}
-
-/**
  * Calculcate a value.
  * @param {Number} The properties to write.
  * @param {List|Number} The scale to use. Can be a number of a list.
@@ -182,7 +142,7 @@ $unit: 'em';
  * @author Pim Derks
 */
 
-@function get-line-height($font-size, $config, $context: 'base', $extra: 0){
+@function get-line-height($font-size, $config, $context: 'base', $extra: 1){
     $return: 0;
     $base-font-size: map-get($config, 'font-size');
     $line-height: map-get($config, 'line-height');
@@ -221,44 +181,34 @@ $unit: 'em';
  * @author Pim Derks
 */
 
-@function calculate-scale($breakpoint: nth($breakpoints, 1), $context: 'base') {
-    $map: ();
+@mixin calculate-scale($breakpoint: nth($breakpoints, 1), $context: 'base') {
 
     // get config
     $config: map-get($typographic-breakpoints, $breakpoint);
 
-    // calculate font-size
+    // get config items
+    $base-font-size: map-get($config, 'font-size');
+    $line-height: map-get($config, 'line-height');
+    $line-height-pixels: $base-font-size * $line-height;
+
+    // calculate font-size in pixels
     $font-size-calculated: get-font-size($config, $context);
-    $font-size: ('font-size': $font-size-calculated);
-    $map: map-merge($map, $font-size);
 
-    // calculate line-height
-    $line-height: ('line-height': get-line-height($font-size-calculated, $config));
-    $map: map-merge($map, $line-height);
+    // calculate line-height in pixels
+    $line-height-calculated: get-line-height($font-size-calculated, $config, $context);
 
-    @return $map;
-
-}
-
-/**
- * Calculcate tscale
- * @param {String} The breakpoint name
- * @param {String} The context of which we want the font-size.
- * @author Pim Derks
-*/
-
-@mixin scale($bp, $context: 'base'){
-
-    // calculate scale
-    $map: calculate-scale($bp, $context);
-
-    // convert to relative units
-    $config: map-get($typographic-breakpoints, $bp);
-
-    @if not $config {
-        @error 'No value found for `#{$bp}`. Please make sure it is defined in `$typographic-breakpoints` map.';
+    @if $unit == 'rem'{
+        $font-size-final: $font-size-calculated/$base-font-size + rem;
+        $line-height-final: $line-height-calculated/$base-font-size + rem;
     }
 
-    @include write-props($map, $config, $context);
+    @if $unit == 'em'{
+        $font-size-final: $font-size-calculated/$base-font-size + em;
+        $line-height-final: $line-height-calculated/$font-size-calculated + em;
+    }
+
+    // output
+    font-size: $font-size-final;
+    line-height: $line-height-final;
 
 }
