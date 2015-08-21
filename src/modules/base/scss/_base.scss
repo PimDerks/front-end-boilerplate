@@ -1,47 +1,5 @@
-/* 01 Mixins and helpers
---------------------------------------*/
-@import '01-utils/map-has-nested-keys';
-@import '01-utils/map-get-index-of-key';
-@import '01-utils/map-deep-get';
-@import '01-utils/z-index';
-@import '01-utils/font-face';
-@import '01-utils/opposite-direction';
-@import '01-utils/placeholder';
-@import '01-utils/position';
-@import '01-utils/respond';
-@import '01-utils/math';
-@import '01-utils/attention';
-@import '01-utils/typographic-scale';
-
-/* 02 Settings 
---------------------------------------*/
-@import '02-settings/z-index';
-@import '02-settings/breakpoints';
-@import '02-settings/typographic-scale';
-
-/* 03 Base
---------------------------------------*/
-@import '03-base/normalize';
-@import '03-base/box-sizing';
-@import '03-base/reset';
-@import '03-base/selection';
-
-/* 04 Generic
---------------------------------------*/
-@import '04-generic/images';
-@import '04-generic/forms';
-@import '04-generic/typography';
-@import '04-generic/links';
-@import '04-generic/quotes';
-@import '04-generic/table';
-@import '04-generic/lists';
-@import '04-generic/generic';
-@import '04-generic/layout';
-@import '04-generic/iframe';
-
-/* 05 Objects
---------------------------------------*/
-@import '05-objects/list-bare';
-@import '05-objects/hide';
-@import '05-objects/target';
-@import '05-objects/triangle';
+@import '01-utils/all';
+@import '02-settings/all';
+@import '03-base/all';
+@import '04-generic/all';
+@import '05-objects/all';
