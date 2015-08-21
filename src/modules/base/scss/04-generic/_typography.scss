@@ -59,10 +59,11 @@ small {
       @each $name in $typographic-scale-names {
         .#{$name},
         %#{$name}{
-          @include calculate-scale($bp-name, $name);
+          @include calculate-scale($bp-name, $name, 0);
           margin-bottom: baseline(1, $bp-name, $name);
           border-bottom: baseline(.5, $bp-name, $name) solid red;
           border-top: baseline(.5, $bp-name, $name) solid blue;
+          // padding: baseline(.5, $bp-name, $name) 0;
 
         }
       }
@@ -91,7 +92,7 @@ $base: 16; // browser default
 
     @include respond-min($bp-name) {
 
-      body {
+      html {
         font-size: ($font-size/$base) * 100%;
         line-height: $line-height;
       }

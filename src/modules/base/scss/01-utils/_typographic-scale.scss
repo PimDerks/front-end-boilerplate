@@ -2,7 +2,7 @@
     #TYPOGRAPHIC-SCALE-UTILS
 \*------------------------------------*/
 
-$unit: 'em';
+$unit: 'rem';
 
 /**
  * Transforms an absolute unit to a relative unit.
@@ -14,6 +14,7 @@ $unit: 'em';
 */
 
 @function rel($pixels, $font-size, $context){
+
     @if $unit == 'em' {
         @return $pixels/$context + em;
     } @else if $unit == 'rem' {
@@ -142,13 +143,13 @@ $unit: 'em';
  * @author Pim Derks
 */
 
-@function get-line-height($font-size, $config, $context: 'base', $extra: 1){
+@function get-line-height($font-size, $config, $context: 'base', $extra: 0){
     $return: 0;
     $base-font-size: map-get($config, 'font-size');
     $line-height: map-get($config, 'line-height');
     $line-height-pixels: $base-font-size * $line-height;
     $half: $line-height-pixels/2;
-    @while $return < $font-size {
+    @while $return <= $font-size {
         $return: $return + $half;
     }
 
@@ -181,7 +182,7 @@ $unit: 'em';
  * @author Pim Derks
 */
 
-@mixin calculate-scale($breakpoint: nth($breakpoints, 1), $context: 'base') {
+@mixin calculate-scale($breakpoint: nth($breakpoints, 1), $context: 'base', $extra: 0) {
 
     // get config
     $config: map-get($typographic-breakpoints, $breakpoint);
@@ -195,14 +196,14 @@ $unit: 'em';
     $font-size-calculated: get-font-size($config, $context);
 
     // calculate line-height in pixels
-    $line-height-calculated: get-line-height($font-size-calculated, $config, $context);
+    $line-height-calculated: get-line-height($font-size-calculated, $config, $context, $extra);
 
-    @if $unit == 'rem'{
+    @if $unit == 'rem' {
         $font-size-final: $font-size-calculated/$base-font-size + rem;
         $line-height-final: $line-height-calculated/$base-font-size + rem;
     }
 
-    @if $unit == 'em'{
+    @if $unit == 'em' {
         $font-size-final: $font-size-calculated/$base-font-size + em;
         $line-height-final: $line-height-calculated/$font-size-calculated + em;
     }
