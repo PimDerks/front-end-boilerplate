@@ -52,7 +52,7 @@
                 <p>The following contains address information about the author, in an <code>address</code> element.</p>
 
                 <address>
-                        <a href="#">Author</a>,
+                        <a href="http://">Author</a>,
                         <a href="mailto:author@domain.com">author@domain.com</a>
                 </address>
 
@@ -139,9 +139,9 @@
 
                 <h2>Links</h2>
                 <ul>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#" title="Link with title">Link with title</a></li>
-                        <li><a href="http://www.google.com">External Link</a></li>
+                        <li><a href="/">Link</a></li>
+                        <li><a href="/" title="Link with title">Link with title</a></li>
+                        <li><a href="http://www.">External Link</a></li>
                 </ul>
 
                 <p>This is a text paragraph that contains some
@@ -151,7 +151,7 @@
                         <a href="http://www.useit.com">usability</a> perspective,
                         but they may have use as
                         &#8220;incidental&#8221;, less relevant links. See the document
-                        <cite><a href="links.html">Links Want To Be Links</a></cite>.</p>
+                        <cite><a href="http://">Links Want To Be Links</a></cite>.</p>
 
                 <h2>Forms</h2>
                 <form action=".">
@@ -289,13 +289,44 @@ Default text.
                                 prevent the characters from being displayed at all.</p>
 
                         <table>
-                                <thead><tr><th>Char.</th> <th>Explanation </th> <th>Notes</th></tr></thead>
-                                <tbody><tr><td>ê </td><td>e with circumflex </td><td>Latin 1 character, should be ok</td></tr>
-                                <tr><td>&#8212;</td> <td>em dash </td><td>Windows Latin 1 character, should be ok, too</td></tr>
-                                <tr><td>&#x100;</td> <td>A with macron (line above) </td><td>Latin Extended-A character, not present in all fonts</td></tr>
-                                <tr><td>&Omega;</td> <td>capital omega </td><td>A Greek letter</td></tr>
-                                <tr><td>&#x2212;</td> <td>minus sign </td><td>Unicode minus</td></tr>
-                                <tr><td>&#x2300;</td> <td>diameter sign </td><td>relatively rare in fonts</td></tr>
+                                <thead>
+                                        <tr>
+                                                <th scope="col">Char.</th>
+                                                <th scope="col">Explanation</th>
+                                                <th scope="col">Notes</th>
+                                        </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                                <th scope="row">ê </th>
+                                                <td>e with circumflex</td>
+                                                <td>Latin 1 character, should be ok</td>
+                                        </tr>
+                                        <tr>
+                                                <th scope="row">&#8212;</th>
+                                                <td>em dash </td>
+                                                <td>Windows Latin 1 character, should be ok, too</td>
+                                        </tr>
+                                        <tr>
+                                                <th scope="row">&#x100;</th>
+                                                <td>A with macron (line above) </td>
+                                                <td>Latin Extended-A character, not present in all fonts</td>
+                                        </tr>
+                                        <tr>
+                                                <th scope="row">&Omega;</th>
+                                                <td>capital omega </td>
+                                                <td>A Greek letter</td>
+                                        </tr>
+                                        <tr>
+                                                <th scope="row">&#x2212;</th>
+                                                <td>minus sign </td>
+                                                <td>Unicode minus</td>
+                                        </tr>
+                                        <tr>
+                                                <th scope="row">&#x2300;</th>
+                                                <td>diameter sign</td>
+                                                <td>relatively rare in fonts</td>
+                                        </tr>
                                 </tbody>
                         </table>
                 </aside>

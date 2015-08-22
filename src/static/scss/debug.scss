@@ -5,6 +5,16 @@
 /* Baseline background
 ----------------------------------------------- */
 
+.baseline-button {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  color: white;
+  padding: .75em;
+  background: black;
+  z-index: 10000;
+}
+
 .baseline {
   background-image: linear-gradient(rgba(black, .05) 1px, rgba(black, .05) 50%, transparent 51%, transparent 100%);
   background-position: left top;

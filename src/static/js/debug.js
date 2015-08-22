@@ -9,7 +9,7 @@ var debug = function(config){
     if(config.BASELINE) {
         var toggle = document.createElement('button');
         toggle.type = 'button';
-        toggle.setAttribute('style', 'position: fixed; bottom: 0; right: 0; color: white; padding: .75em; background: black; z-index: 10000;');
+        toggle.className = 'baseline-button';
         toggle.innerHTML = 'Toggle Baseline';
         toggle.addEventListener('click', function () {
             document.body.classList.toggle('baseline');
