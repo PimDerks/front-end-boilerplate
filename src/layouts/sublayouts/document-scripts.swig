@@ -11,4 +11,4 @@
         CSS: true // load debug CSS (baseline, ...)
     }
 </script>
-<script src="/static/js/debug.js" data-inline></script>
+<script src="/static/js/debug.js"></script>
