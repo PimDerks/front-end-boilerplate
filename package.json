@@ -5,6 +5,7 @@
   "devDependencies": {
     "amd-optimize": "^0.5.0",
     "browser-sync": "^2.7.12",
+    "browserify": "^11.0.1",
     "del": "^1.2.0",
     "fs-extra": "^0.22.1",
     "fs-promise": "^0.3.1",
@@ -42,7 +43,7 @@
     "jscs-jsdoc": "^1.1.0",
     "jshint-stylish": "^2.0.1",
     "json-file": "^0.1.0",
-    "lodash": "^3.9.3",
+    "lodash": "^3.10.1",
     "marked": "^0.3.5",
     "mkdirp": "^0.5.1",
     "open": "0.0.5",
@@ -52,6 +53,8 @@
     "swig": "^1.4.2",
     "swig-highlight": "^0.2.0",
     "swig-marked": "0.0.1",
-    "vinyl-ftp": "^0.4.4"
+    "uglifyify": "^3.0.1",
+    "vinyl-ftp": "^0.4.4",
+    "watchify": "^3.3.1"
   }
 }

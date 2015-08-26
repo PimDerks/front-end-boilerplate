@@ -20,7 +20,8 @@ var api = require('./gulp/gulp.rest'),
     ftp = require('./gulp/gulp.ftp'),
     browserSync = require('./gulp/gulp.browsersync')(bs),
     js = require('./gulp/gulp.javascript');
-    swig = require('./gulp/gulp.swig');
+    swig = require('./gulp/gulp.swig'),
+    browserify = require('./gulp/gulp.browserify');
 
 // API
 gulp.task('api-start', api.run);
@@ -29,6 +30,9 @@ gulp.task('api-watch', api.watch);
 // Styleguide
 gulp.task('styleguide-render', styleguide.render);
 gulp.task('styleguide-watch', styleguide.watch);
+
+// Browserify
+gulp.task('browserify', browserify);
 
 // Remove temp/www dir
 gulp.task('clean', clean);
