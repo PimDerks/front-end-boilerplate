@@ -6,8 +6,8 @@ var gulp = require('gulp'),
 
 function bundle() {
     return b.bundle()
-        .pipe(source('out2.js'))
-        .pipe(gulp.dest('./blaat/'));
+        .pipe(source('browserify.js'))
+        .pipe(gulp.dest('./www/static/js/'));
 }
 
 // add custom browserify options here
@@ -20,7 +20,6 @@ var customOpts = {
 var opts = _.assign({}, watchify.args, customOpts);
 var b = watchify(browserify(opts));
 b.on('update', function() {
-    console.log('changing')
     bundle();
 });
 

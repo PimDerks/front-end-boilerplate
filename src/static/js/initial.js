@@ -97,7 +97,7 @@ var config = {
 },
 
 // global var 'require' is automatically used for requireJS initialisation
-require = {
+require2 = {
     'baseUrl': config.scripts.dir,
     'urlArgs': 'bust=' +  config.version,
     'paths': {
@@ -160,8 +160,10 @@ require = {
 
         // load requirejs
         var s = d.createElement('script');
-        s.setAttribute('src', config.scripts.requirejs);
-        s.setAttribute('data-main', config.scripts.main);
+        // s.setAttribute('src', config.scripts.requirejs);
+        // s.setAttribute('data-main', config.scripts.main);
+        s.setAttribute('src', '/static/js/browserify.js');
+
         d.body.appendChild(s);
 
     });
