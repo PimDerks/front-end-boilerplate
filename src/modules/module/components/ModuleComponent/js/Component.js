@@ -26,6 +26,10 @@ exports.prototype = {
         console.log('init component with options', this._options, 'on', new Date(), Object);
     },
 
+    getElement: function(){
+        return this._element;
+    },
+
     /**
      * Clean up when unloading this module.
      *
