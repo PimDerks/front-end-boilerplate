@@ -1,13 +1,17 @@
-var Conditioner = require('./base/js/00-vendor/conditioner/conditioner'),
-    modernizr = require('./base/js/00-vendor/modernizr/modernizr'),
-    component = require('./base/components/Component/js/Component'),
-    component2 = require('./base/components/Component/js/Component2'),
-    monitor1 = require('./base/js/00-vendor/conditioner/monitors/connection'),
-    monitor2 = require('./base/js/00-vendor/conditioner/monitors/element'),
-    monitor3 = require('./base/js/00-vendor/conditioner/monitors/media'),
-    monitor4 = require('./base/js/00-vendor/conditioner/monitors/pointer'),
-    monitor5 = require('./base/js/00-vendor/conditioner/monitors/window');
+'use strict';
 
+// require monitors for conditioner
+require('./base/js/00-vendor/conditioner/monitors/connection');
+require('./base/js/00-vendor/conditioner/monitors/element');
+require('./base/js/00-vendor/conditioner/monitors/media');
+require('./base/js/00-vendor/conditioner/monitors/pointer');
+require('./base/js/00-vendor/conditioner/monitors/window');
+
+// require modules/components
+require('./base/components/Component/js/Component');
+
+var Conditioner = require('./base/js/00-vendor/conditioner/conditioner'),
+    modernizr = require('./base/js/00-vendor/modernizr/modernizr');
 Conditioner.setOptions({
     paths:{
         monitors:'./base/js/00-vendor/conditioner/monitors/'
@@ -21,7 +25,6 @@ Conditioner.setOptions({
 
         },
         toUrl:function(path){
-            // return requirejs.toUrl(path)
         }
     }
 });

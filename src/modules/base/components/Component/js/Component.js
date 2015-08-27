@@ -23,7 +23,9 @@ exports.prototype = {
      * @private
      */
     _initialize: function() {
-        console.log('Init module on', this._element, 'on', new Date());
+        var log = 'Init module on ' + new Date();
+        this._element.innerHTML = log;
+        console.log(log);
     },
 
     /**

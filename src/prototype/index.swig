@@ -4,9 +4,7 @@
 
         <section>
 
-                <div style="height: 100px; background: red; " data-module="./base/components/Component/js/Component"></div>
-                <div style="height: 100px; background: green; " data-module="./base/components/Component/js/Component" data-conditions="media:{(min-width:40em)} and element:{was visible}"></div>
-                <div style="height: 100px; background: blue; " data-module='["./base/components/Component/js/Component", "./base/components/Component/js/Component2"]'></div>
+                <div data-module="./base/components/Component/js/Component" data-conditions="media:{(min-width:40em)} and element:{was visible}"></div>
 
                 {% set classes = ['xsmall', 'small', 'base', 'epsilon', 'delta', 'gamma', 'beta', 'alpha'] %}
                 {% set elements = ['small', 'small', 'p', 'h5', 'h4', 'h3', 'h2', 'h1'] %}
