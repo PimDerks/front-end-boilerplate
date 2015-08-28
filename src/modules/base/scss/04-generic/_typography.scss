@@ -11,6 +11,28 @@ body {
   max-width: 80%;
 }
 
+
+/* Basic vertical rhythm
+----------------------------------------------- */
+
+@each $bp-name, $bp-code in $breakpoints {
+  @if map-has-key($typographic-breakpoints, $bp-name){
+    $scope: map-get($typographic-breakpoints, $bp-name);
+
+    @include respond-min($bp-name){
+      @each $name in $typographic-scale-names {
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre, dl, ol, ul, form, fieldset, legend, figure, table, caption, hr {
+          margin-bottom: baseline(1, $bp-name, $name);
+        }
+      }
+    }
+  }
+}
+
+
+/* Headings
+----------------------------------------------- */
+
 h1,
 .alpha {
   @extend %alpha;
@@ -62,15 +84,14 @@ small {
         %#{$name}{
           @include calculate-scale($bp-name, $name, 0);
           margin-bottom: baseline(1, $bp-name, $name);
-          border-bottom: baseline(.5, $bp-name, $name) solid red;
-          border-top: baseline(.5, $bp-name, $name) solid blue;
-          padding: baseline(.5, $bp-name, $name) 0;
-
+          // border-bottom: baseline(.5, $bp-name, $name) solid red;
+          // border-top: baseline(.5, $bp-name, $name) solid blue;
         }
       }
     }
   }
 }
+
 
 /* Set base font-size
 ----------------------------------------------- */
