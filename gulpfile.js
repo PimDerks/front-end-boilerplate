@@ -2,7 +2,9 @@ var gulp = require('gulp'),
     config = require('./gulp/gulp.config'),
     bs = require('browser-sync').create(),
     util = require('gulp-util'),
-    seq = require('run-sequence');
+    seq = require('run-sequence'),
+    shell = require('gulp-shell'),
+    server = require('karma').Server;
 
 // require
 var api = require('./gulp/gulp.rest'),
@@ -96,18 +98,31 @@ gulp.task('initial', function() {
     });
 });
 
-// devg
+gulp.task('test', shell.task([
+    'gulp js-test',
+    'gulp js-lint'
+]));
+
+gulp.task('js-test', function (done) {
+    console.log('karmaaaa!');
+    new server({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: false
+    }, done).start();
+});
+
+// dev
 gulp.task('dev', function() {
-    seq('api-start', 'watch', 'browserify', 'browser-sync', 'styleguide-render');
+    seq('api-start', 'watch', 'browserify', 'browser-sync', 'styleguide-render', 'js-test');
 });
 
 // build js
 gulp.task('js', function() {
 
     if(util.env.killlint) {
-        seq('js-copy');
+        seq('js-copy', 'js-test');
     } else {
-        seq('js-copy', 'js-lint');
+        seq('js-copy', 'js-test', 'js-lint');
     }
 
 });

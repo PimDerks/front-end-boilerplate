@@ -59,6 +59,7 @@ module.exports.lint = function(){
 
     var src = [];
     src.push(config.roots.src + '/**/*.js');
+    src.push('!' + config.roots.src + '/**/*Spec.js');
     src.push('!' + config.roots.src + '/' + config.paths.modules + '/base/js/00-vendor/**/*.js');
     src.push('!' + config.roots.src + '/' + config.paths.static + '/vendor/**/*.js');
     src.push('!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/shim/**/*.js');
