@@ -158,9 +158,6 @@ $unit: 'em';
         $return: $return + $half;
     }
 
-    @debug $context, $font-size, $line-height-pixels, $return;
-
-
     // extra
     @if $extra {
         $return: $return + ($half * $extra);
