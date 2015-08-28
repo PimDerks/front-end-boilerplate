@@ -5,10 +5,10 @@
 
 <script>
     DEBUG = {
-        A11Y: true, // load a11y helpers/warnings
+        A11Y: false, // load a11y helpers/warnings
         BASELINE: true, // show baseline toggle
-        COUNT: true, // count CSS selectors/rules
+        COUNT: false, // count CSS selectors/rules
         CSS: true // load debug CSS (baseline, ...)
-    }
+    };
 </script>
 <script src="/static/js/debug.js"></script>
