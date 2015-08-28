@@ -23,7 +23,6 @@ exports.prototype = {
      * @private
      */
     _initialize: function() {
-        console.log('init component with options', this._options, 'on', new Date(), Object);
     },
 
     /**
@@ -32,12 +31,6 @@ exports.prototype = {
      */
     getElement: function(){
         return this._element;
-    },
-
-    save: function(cb){
-        setTimeout(function(){
-            cb();
-        }, 1000);
     },
 
     /**

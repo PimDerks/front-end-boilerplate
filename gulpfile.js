@@ -98,13 +98,8 @@ gulp.task('initial', function() {
     });
 });
 
-gulp.task('test', shell.task([
-    'gulp js-test',
-    'gulp js-lint'
-]));
-
+// Karma unit-testing
 gulp.task('js-test', function (done) {
-    console.log('karmaaaa!');
     new server({
         configFile: __dirname + '/karma.conf.js',
         singleRun: false

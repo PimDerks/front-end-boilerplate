@@ -25,7 +25,7 @@ exports.prototype = {
     _initialize: function() {
         var log = 'Init module on ' + new Date();
         this._element.innerHTML = log;
-        console.log(log);
+        console.log(this._options);
     },
 
     /**
@@ -36,7 +36,6 @@ exports.prototype = {
      * @public
      */
     unload: function() {
-        console.log('unload');
     }
 
 };

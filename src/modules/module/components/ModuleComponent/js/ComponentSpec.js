@@ -21,10 +21,4 @@ describe("test", function (){
         expect(element.nodeName.length > 0).to.be.true;
     });
 
-    it("should work asynchronous", function(done){
-        var test = instance.save(function(){
-            done();
-        });
-    });
-
 });
