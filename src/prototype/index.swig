@@ -33,11 +33,6 @@
                 <h5>Duis efficitur, elit quis aliquet dignissim</h5>
                 <p>Sem nibh ullamcorper turpis, sed sodales justo risus eget orci. Quisque consequat ultricies sapien non faucibus. Duis at iaculis eros. Etiam molestie, lectus maximus tincidunt fermentum, diam eros congue quam, id vestibulum tortor elit nec ligula. Mauris sed placerat lectus, at mattis ipsum. Aliquam urna quam, rhoncus at lacinia eget, molestie in ligula. Nulla euismod metus turpis, non aliquet enim egestas non. Maecenas pulvinar mauris ac nisl auctor, lacinia viverra augue placerat. Nunc urna ligula, vulputate vitae arcu nec, scelerisque vestibulum ligula. Vivamus at ante pretium, ornare nisl sit amet, consequat elit. Aliquam imperdiet nunc ac libero gravida, eu commodo arcu convallis. Nulla efficitur, metus sed lobortis egestas, sapien risus varius nunc, et faucibus nisi orci eu enim.</p>
                 <p>Vestibulum nec sem finibus, efficitur sem a, pharetra libero. Cras eu urna aliquam, viverra erat quis, condimentum diam. Morbi interdum tempus velit. Donec in sodales purus, et laoreet ex.</p>
-
-                <h6>Vivamus congue ipsum vitae ligula mollis, ornare interdum ipsum pellentesque.</h6>
-                <p>Vestibulum nec sem finibus, efficitur sem a, pharetra libero. Cras eu urna aliquam, viverra erat quis, condimentum diam. Morbi interdum tempus velit. Donec in sodales purus, et laoreet ex.</p>
-                <p>Etiam feugiat nibh id lectus viverra, ac malesuada eros lacinia. Donec vel tortor pulvinar enim aliquet faucibus sagittis non lorem. Nunc ut purus ac odio dictum condimentum. Morbi dolor ex, rutrum at venenatis ut, congue quis enim. Aliquam at nisi nec augue congue feugiat. Morbi viverra purus quis tortor eleifend, vitae commodo dui accumsan. Integer leo nisi, porttitor id tortor sed, hendrerit laoreet nisi. Donec commodo pellentesque elit nec ullamcorper. Curabitur vel nibh nibh. In non magna viverra, consequat eros ac, ullamcorper felis.</p>
-
                 <h2>Basic block level elements</h2>
 
                 <p>Vestibulum nec sem finibus, efficitur sem a, pharetra libero. Cras eu urna aliquam, viverra erat quis, condimentum diam. Morbi interdum tempus velit. Donec in sodales purus, et laoreet ex.</p>
