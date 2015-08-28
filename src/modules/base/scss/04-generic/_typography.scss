@@ -3,8 +3,8 @@
 \*------------------------------------*/
 
 body {
-  background-color: #fffff8;
-  color: #111;
+  background-color: #FFFFF8;
+  color: #111111;
   font-family: ETBembo, Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
   margin-left: auto;
   margin-right: auto;
@@ -16,12 +16,30 @@ body {
 ----------------------------------------------- */
 
 @each $bp-name, $bp-code in $breakpoints {
-  @if map-has-key($typographic-breakpoints, $bp-name){
+  @if map-has-key($typographic-breakpoints, $bp-name) {
     $scope: map-get($typographic-breakpoints, $bp-name);
 
-    @include respond-min($bp-name){
+    @include respond-min($bp-name) {
       @each $name in $typographic-scale-names {
-        h1, h2, h3, h4, h5, h6, p, blockquote, pre, dl, ol, ul, form, fieldset, legend, figure, table, caption, hr {
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        dl,
+        ol,
+        ul,
+        form,
+        fieldset,
+        legend,
+        figure,
+        table,
+        caption,
+        hr {
           margin-bottom: baseline(1, $bp-name, $name);
         }
       }
@@ -40,7 +58,7 @@ h1,
 }
 
 h2,
-.beta{
+.beta {
   @extend %beta;
   font-style: italic;
   font-weight: 400;
@@ -75,13 +93,13 @@ small {
 }
 
 @each $bp-name, $bp-code in $breakpoints {
-  @if map-has-key($typographic-breakpoints, $bp-name){
+  @if map-has-key($typographic-breakpoints, $bp-name) {
     $scope: map-get($typographic-breakpoints, $bp-name);
 
-    @include respond-min($bp-name){
+    @include respond-min($bp-name) {
       @each $name in $typographic-scale-names {
         .#{$name},
-        %#{$name}{
+        %#{$name} {
           @include calculate-scale($bp-name, $name, 0);
           margin-bottom: baseline(1, $bp-name, $name);
           // border-bottom: baseline(.5, $bp-name, $name) solid red;
@@ -106,7 +124,7 @@ $base: 16; // browser default
     // @warn 'No value found for `#{$bp-name}`. Please make sure it is defined in `$typographic-breakpoints` map.';
   }
 
-  @if map-has_key($typographic-breakpoints, $bp-name) {
+  @if map-has-key($typographic-breakpoints, $bp-name) {
 
     $bp: map-get($breakpoints, $bp-name);
     $font-size: map-get($bp-config, 'font-size');

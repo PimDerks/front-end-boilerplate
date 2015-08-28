@@ -13,13 +13,14 @@ $unit: 'rem';
  * @author Pim Derks
 */
 
-@function rel($pixels, $font-size, $context){
+@function rel($pixels, $font-size, $context) {
 
     @if $unit == 'em' {
         @return $pixels/$context + em;
     } @else if $unit == 'rem' {
         @return $pixels/$font-size + rem;
     }
+
 }
 
 /**
@@ -31,7 +32,7 @@ $unit: 'rem';
  * @author Pim Derks
 */
 
-@function calc-rel ($pixels, $breakpoint: 'xs', $context: 'base'){
+@function calc-rel ($pixels, $breakpoint: 'xs', $context: 'base') {
 
     // get config for breakpoint
     $config: map-get($typographic-breakpoints, $breakpoint);
@@ -60,7 +61,7 @@ $unit: 'rem';
  * @author Pim Derks
 */
 
-@function baseline ($amount: 1, $breakpoint: 'xs', $context: 'base'){
+@function baseline ($amount: 1, $breakpoint: 'xs', $context: 'base') {
 
     // get config for breakpoint
     $config: map-get($typographic-breakpoints, $breakpoint);
@@ -89,7 +90,7 @@ $unit: 'rem';
  * @author Pim Derks
 */
 
-@function value-scale($value, $scale, $index){
+@function value-scale($value, $scale, $index) {
 
     @if type-of($scale) == list {
         $factor: nth($scale, $index); // for a custom typographic scale
@@ -112,7 +113,7 @@ $unit: 'rem';
  * @author Pim Derks
 */
 
-@function calculate-prop-value($prop, $value, $config, $context){
+@function calculate-prop-value($prop, $value, $config, $context) {
     $index: map-get-index-of-key($typographic-scale-names, $context); // for a non-fixed typographic scale
 
     // get config values
@@ -143,7 +144,7 @@ $unit: 'rem';
  * @author Pim Derks
 */
 
-@function get-line-height($font-size, $config, $context: 'base', $extra: 0){
+@function get-line-height($font-size, $config, $context: 'base', $extra: 0) {
     $base-font-size: map-get($config, 'font-size');
     $line-height: map-get($config, 'line-height');
     $line-height-pixels: $base-font-size * $line-height;
@@ -176,7 +177,7 @@ $unit: 'rem';
  * @author Pim Derks
 */
 
-@function get-font-size($config, $context: 'base'){
+@function get-font-size($config, $context: 'base') {
     @return calculate-prop-value('font-size', 1, $config, $context);
 }
 

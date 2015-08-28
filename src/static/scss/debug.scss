@@ -9,18 +9,18 @@
   position: fixed;
   bottom: 0;
   right: 0;
-  color: white;
+  color: #FFFFFF;
   padding: .75em;
-  background: black;
+  background: #000000;
   z-index: 10000;
 }
 
 .baseline {
   background-image: linear-gradient(
-                  rgba(black, .1) 1px,
+                  rgba(#000000, .1) 1px,
                   transparent 1px,
                   transparent 50%,
-                  rgba(black, .25) calc(50% + 1px),
+                  rgba(#000000, .25) calc(50% + 1px),
                   transparent calc(50% + 1px),
                   transparent 100%);
   background-position: left top;
@@ -61,7 +61,7 @@
     // @warn 'No value found for `#{$bp-name}`. Please make sure it is defined in `$typographic-breakpoints` map.';
   }
 
-  @if map-has_key($typographic-breakpoints, $bp-name) {
+  @if map-has-key($typographic-breakpoints, $bp-name) {
 
     $bp: map-get($breakpoints, $bp-name);
     $font-size: map-get($bp-config, 'font-size');
