@@ -26,8 +26,18 @@ exports.prototype = {
         console.log('init component with options', this._options, 'on', new Date(), Object);
     },
 
+    /**
+     * Returns the element the node is currently active on.
+     * @returns {element|*|exports._element}
+     */
     getElement: function(){
         return this._element;
+    },
+
+    save: function(cb){
+        setTimeout(function(){
+            cb();
+        }, 1000);
     },
 
     /**
