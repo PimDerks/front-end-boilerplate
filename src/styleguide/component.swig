@@ -21,8 +21,6 @@
 
         {# Render variants #}
 
-        {% set index = loop.index %}
-
         {% if component.sub.length > 1 %}
                 <section id="component-{{ component.name }}-variants">
                         <h2>Variants of this component</h2>
