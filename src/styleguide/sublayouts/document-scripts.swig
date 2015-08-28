@@ -11,7 +11,6 @@
         return Math.floor(Math.random()*(max-min+1)+min);
     }
 
-
     var button = document.querySelectorAll('.iframe-buttons');
     [].slice.apply(button).forEach(function(b){
 
@@ -49,3 +48,13 @@
 
     });
 </script>
+
+<script>
+    DEBUG = {
+        A11Y: false, // load a11y helpers/warnings
+        BASELINE: true, // show baseline toggle
+        COUNT: false, // count CSS selectors/rules
+        CSS: true // load debug CSS (baseline, ...)
+    };
+</script>
+<script src="/static/js/debug.js"></script>
