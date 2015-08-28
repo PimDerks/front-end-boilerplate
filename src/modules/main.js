@@ -12,6 +12,7 @@ require('./base/components/Component/js/Component');
 
 var Conditioner = require('./base/js/00-vendor/conditioner/conditioner'),
     modernizr = require('./base/js/00-vendor/modernizr/modernizr');
+
 Conditioner.setOptions({
     paths:{
         monitors:'./base/js/00-vendor/conditioner/monitors/'
@@ -29,4 +30,4 @@ Conditioner.setOptions({
     }
 });
 
-Conditioner.init();
+Conditioner.init(config.conditioner);

@@ -52,27 +52,10 @@ function loadCSS( href, before, media, callback ){
 
 var config = {
 
-    // cache bust
-    version: (new Date().getTime()),
-
-    /* location of conditioner config (when using a separate request)
-
-     define('config', function () {
-
-     return {
-     };
-
-     }); */
-
-    // conditioner: '/static/js/config',
-
     // config for conditioner, ideally should be inline to avoid extra request
     conditioner: {
-        'paths': {
-            'monitors': './monitors/'
-        },
         'modules': {
-            'ui/Test': {
+            './base/components/Component/js/Component': {
                 'options': {
                     'key': 'value'
                 }
@@ -85,38 +68,8 @@ var config = {
         ttf: '/static/css/ttf.css',
         woff: '/static/css/woff.css',
         woff2: '/static/css/woff2.css'
-    },
-
-    // location of asynchronously loaded scripts
-    scripts: {
-        requirejs: '/static/js/base/vendor/requirejs/require.js', // src of requirejs lib
-        dir: '/static/js', // root of all scripts loaded via requirejs
-        main: 'main' // gets prefixed with scripts.dir
     }
 
-},
-
-// global var 'require' is automatically used for requireJS initialisation
-require2 = {
-    'baseUrl': config.scripts.dir,
-    'urlArgs': 'bust=' +  config.version,
-    'paths': {
-        // when using a separate request for conditioner config
-        // 'config': config.conditioner
-
-    },
-    map: {
-        '*': {
-            'conditioner': 'base/vendor/conditioner/conditioner',
-            'Observer': 'base/vendor/conditioner/utils/Observer'
-        }
-    },
-    'shim': {
-        'conditioner': {
-            // when using a separate request for conditioner config
-            // 'deps': ['config']
-        }
-    }
 };
 
 (function(window, undefined){
@@ -158,10 +111,8 @@ require2 = {
     // insert requireJS
     d.addEventListener('DOMContentLoaded', function() {
 
-        // load requirejs
+        // load browserify output
         var s = d.createElement('script');
-        // s.setAttribute('src', config.scripts.requirejs);
-        // s.setAttribute('data-main', config.scripts.main);
         s.setAttribute('src', '/static/js/browserify.js');
 
         d.body.appendChild(s);
