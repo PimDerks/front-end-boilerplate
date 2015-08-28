@@ -9,7 +9,8 @@ module.exports = function(browserSync){
             server: {
                 baseDir: config.roots.www
             },
-            open: false
+            open: false,
+            notify: false
         });
 
     }
