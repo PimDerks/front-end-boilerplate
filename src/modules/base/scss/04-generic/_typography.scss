@@ -55,6 +55,7 @@ small {
 @each $bp-name, $bp-code in $breakpoints {
   @if map-has-key($typographic-breakpoints, $bp-name){
     $scope: map-get($typographic-breakpoints, $bp-name);
+
     @include respond-min($bp-name){
       @each $name in $typographic-scale-names {
         .#{$name},
@@ -63,7 +64,7 @@ small {
           margin-bottom: baseline(1, $bp-name, $name);
           border-bottom: baseline(.5, $bp-name, $name) solid red;
           border-top: baseline(.5, $bp-name, $name) solid blue;
-          // padding: baseline(.5, $bp-name, $name) 0;
+          padding: baseline(.5, $bp-name, $name) 0;
 
         }
       }

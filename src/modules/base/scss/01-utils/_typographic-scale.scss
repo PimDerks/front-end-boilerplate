@@ -2,7 +2,7 @@
     #TYPOGRAPHIC-SCALE-UTILS
 \*------------------------------------*/
 
-$unit: 'rem';
+$unit: 'em';
 
 /**
  * Transforms an absolute unit to a relative unit.
@@ -144,14 +144,22 @@ $unit: 'rem';
 */
 
 @function get-line-height($font-size, $config, $context: 'base', $extra: 0){
-    $return: 0;
     $base-font-size: map-get($config, 'font-size');
     $line-height: map-get($config, 'line-height');
     $line-height-pixels: $base-font-size * $line-height;
     $half: $line-height-pixels/2;
+    $return: 0;
+
+    @while $return < $line-height-pixels {
+        $return: $return + $half;
+    }
+
     @while $return <= $font-size {
         $return: $return + $half;
     }
+
+    @debug $context, $font-size, $line-height-pixels, $return;
+
 
     // extra
     @if $extra {
