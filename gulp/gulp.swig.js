@@ -99,7 +99,7 @@ var methods = {
                     console.log('Succesfully rendered ' + components.length + ' components.');
                     setTimeout(function() {
                         resolve();
-                    });
+                    }, 10);
                 }
             });
 

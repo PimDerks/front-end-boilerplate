@@ -8,7 +8,9 @@ var gulp = require('gulp'),
 
 // require
 var api = require('./gulp/gulp.rest'),
+    modules = require('./gulp/gulp.styleguide'),
     styleguide = require('./gulp/gulp.styleguide'),
+    modules = require('./gulp/gulp.modules'),
     clean = require('./gulp/gulp.clean'),
     concat = require('./gulp/gulp.concat'),
     inline = require('./gulp/gulp.inline'),
@@ -22,15 +24,31 @@ var api = require('./gulp/gulp.rest'),
     browserSync = require('./gulp/gulp.browsersync')(bs),
     js = require('./gulp/gulp.javascript');
     swig = require('./gulp/gulp.swig'),
-    browserify = require('./gulp/gulp.browserify');
+    browserify = require('./gulp/gulp.browserify'),
+    docs = require('./gulp/gulp.docs');
 
 // API
 gulp.task('api-start', api.run);
 gulp.task('api-watch', api.watch);
 
+// Modules
+gulp.task('modules-render', modules.render);
+gulp.task('modules-watch', modules.watch);
+
 // Styleguide
 gulp.task('styleguide-render', styleguide.render);
 gulp.task('styleguide-watch', styleguide.watch);
+
+// Docs
+gulp.task('docs-render', docs.render);
+gulp.task('docs-watch', docs.watch);
+
+console.log(docs.render);
+
+// Docs
+gulp.task('docs', function() {
+    seq('html', 'styleguide-render', 'modules-render', 'docs-render');
+});
 
 // Browserify
 gulp.task('browserify', browserify);
@@ -56,7 +74,7 @@ gulp.task('html-watch', swig.watch);
 
 // Overall watch
 gulp.task('www-watch', watchWWW);
-gulp.task('watch', ['api-watch', 'js-watch', 'sass-watch', 'html-watch', 'styleguide-watch', 'www-watch']);
+gulp.task('watch', ['api-watch', 'js-watch', 'sass-watch', 'html-watch', 'styleguide-watch', 'modules-watch', 'docs-watch', 'www-watch']);
 
 // Concat shims
 gulp.task('shim', concat.shim);
@@ -104,7 +122,7 @@ gulp.task('js-test', function (done) {
 
 // dev
 gulp.task('dev', function() {
-    seq('api-start', 'watch', 'browserify', 'browser-sync', 'styleguide-render', 'js-test');
+    seq('api-start', 'watch', 'browserify', 'browser-sync');
 });
 
 // build js

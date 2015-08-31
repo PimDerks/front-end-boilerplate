@@ -2,7 +2,11 @@
 title: Index
 ---
 
-﻿{% extends '../_layouts/default.swig' %}
+﻿{% extends '../_layouts/prototype/default.swig' %}
+
+{% block title %}
+        Index
+{% endblock title %}
 
 {% block content %}
 

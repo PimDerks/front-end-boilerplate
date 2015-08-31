@@ -2,7 +2,11 @@
 title: Page
 ---
 
-﻿{% extends '../../_layouts/inherited.swig' %}
+﻿{% extends '../../_layouts/prototype/inherited.swig' %}
+
+{% block title %}
+    Page
+{% endblock title %}
 
 {% block content %}
     {% parent %}

@@ -16,8 +16,7 @@
     </head>
     <body>
 
-        {% include "../modules/base/components/Header/Header.html" %}
-
+        {% include "../../modules/base/components/Header/Header.html" %}
 
         {% block content %}
             <p>This comes from the default layout.</p>
