@@ -14,7 +14,7 @@ module.exports = (function(){
         // path
         paths: {
             prototype: 'prototype',
-            data: 'data',
+            data: '_data',
             modules: 'modules',
             ui: 'ui',
             assets: 'assets',
@@ -27,7 +27,7 @@ module.exports = (function(){
             img: 'img',
             fonts: 'fonts',
             icons: 'icons',
-            layouts: 'layouts',
+            layouts: '_layouts',
             shim: 'shim',
             media: '_media',
             styleguide: 'styleguide'

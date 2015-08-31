@@ -1,4 +1,8 @@
-﻿﻿{% extends '../layouts/default.swig' %}
+﻿---
+title: Index
+---
+
+﻿{% extends '../_layouts/default.swig' %}
 
 {% block content %}
 

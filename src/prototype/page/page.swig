@@ -1,4 +1,8 @@
-﻿﻿{% extends '../../layouts/inherited.swig' %}
+﻿---
+title: Page
+---
+
+﻿{% extends '../../_layouts/inherited.swig' %}
 
 {% block content %}
     {% parent %}
