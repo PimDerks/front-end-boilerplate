@@ -16,7 +16,6 @@ var api = require('./gulp/gulp.rest'),
     sass = require('./gulp/gulp.sass'),
     swig = require('./gulp/gulp.swig'),
     minify = require('./gulp/gulp.minify'),
-    amd = require('./gulp/gulp.amd'),
     base64 = require('./gulp/gulp.base64'),
     copy = require('./gulp/gulp.copy'),
     ftp = require('./gulp/gulp.ftp'),
@@ -75,9 +74,6 @@ gulp.task('copy-unminified', copy.copyUnminifiedAssets);
 
 // Automatically update files in browser
 gulp.task('browser-sync', browserSync);
-
-// Compile AMD modules
-gulp.task('amd', amd);
 
 // Inline assets
 gulp.task('base64', base64);
@@ -148,7 +144,7 @@ gulp.task('html', function(){
 
 // build
 gulp.task('build', function() {
-    seq('copy-www-static', 'copy-www-media', 'minify', 'inline', 'amd', function(){
+    seq('copy-www-static', 'copy-www-media', 'minify', 'inline', function(){
         process.exit(0);
     });
 });
