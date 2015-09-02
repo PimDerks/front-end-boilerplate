@@ -10,7 +10,7 @@ module.exports = function(browserSync){
                 baseDir: config.roots.www
             },
             open: true,
-            notify: false
+            notify: true
         });
 
     }

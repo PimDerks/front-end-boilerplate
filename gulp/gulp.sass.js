@@ -47,7 +47,7 @@ module.exports.lint = function(){
 module.exports.watch = function(){
 
     // watch sass files
-    gulp.watch(config.roots.src + '/**/*.scss', ['sass']);
+    gulp.watch(config.roots.src + '/**/*.scss', ['output-sass']);
 
 };
 
@@ -76,6 +76,6 @@ module.exports.copyStyleguide = function() {
 module.exports.watchStyleguide = function(){
 
     // watch sass files
-    gulp.watch(config.roots.src + '/' + config.paths.styleguide + '/**/*.scss', ['styleguide-sass']);
+    gulp.watch(config.roots.src + '/' + config.paths.styleguide + '/**/*.scss', ['output-sass-styleguide']);
 
 };

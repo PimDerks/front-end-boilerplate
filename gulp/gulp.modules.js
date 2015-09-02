@@ -374,6 +374,6 @@ module.exports.render = function() {
 
 module.exports.watch = function() {
 
-    gulp.watch(config.roots.src + '/' + config.paths.modules + '/**/*', ['styleguide-render']);
+    gulp.watch(config.roots.src + '/' + config.paths.modules + '/**/*', ['output-styleguide']);
 
 };

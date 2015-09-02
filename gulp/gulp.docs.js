@@ -141,6 +141,6 @@ module.exports.render = function() {
 
 module.exports.watch = function() {
 
-    gulp.watch(config.roots.src + '/index.swig', ['styleguide-render']);
+    gulp.watch(config.roots.src + '/index.swig', ['output-styleguide']);
 
 };

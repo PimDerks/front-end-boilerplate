@@ -9,7 +9,8 @@ var gulp = require('gulp'),
     fse = require('fs-extra'),
     Promise = require('./gulp.promise'),
     htmlhint = require("gulp-htmlhint"),
-    w3cjs = require('gulp-w3cjs');
+    w3cjs = require('gulp-w3cjs'),
+    gutil = require('gulp-util');
 
     require('swig-highlight').apply(swig);
 
@@ -24,13 +25,17 @@ module.exports.render = function() {
     var dest = config.roots.www + '/' + config.paths.styleguide;
 
     return gulp.src(src)
-        .pipe(gulpSwig())
+        .pipe(gulpSwig({
+            defaults: {
+                cache: false
+            }
+        }))
         .pipe(gulp.dest(dest));
 
 };
 
 module.exports.watch = function() {
 
-    gulp.watch(config.roots.src + '/' + config.paths.styleguide + '/**/*.swig', ['styleguide-render']);
+    gulp.watch(config.roots.src + '/' + config.paths.styleguide + '/**/*.swig', ['output-styleguide']);
 
 };

@@ -219,6 +219,6 @@ module.exports.watch = function(){
     src.push(config.roots.src + '/' + config.roots.data + '/**/*');
 
     // watch data
-    gulp.watch(src, ['html']);
+    gulp.watch(src, ['output-html']);
 
 };

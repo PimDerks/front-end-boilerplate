@@ -29,7 +29,7 @@ var api = require('./gulp/gulp.rest'),
     docs = require('./gulp/gulp.docs');
 
 // Testing
-gulp.task('js-test', function (done) {
+gulp.task('test-js', function (done) {
     new server({
         configFile: __dirname + '/karma.conf.js',
         singleRun: false
@@ -100,7 +100,7 @@ gulp.task('base64', base64);
 gulp.task('minify-css', minify.minifyCSS);
 gulp.task('minify-js', minify.minifyJS);
 gulp.task('minify-img', minify.minifyImg);
-gulp.task('minify', ['minifyCSS', 'minifyJS', 'minifyImg', 'copy-unminified']);
+gulp.task('minify', ['minify-css', 'minify-js', 'minify-img', 'copy-unminified']);
 
 // Deploy
 gulp.task('deploy', ftp);
