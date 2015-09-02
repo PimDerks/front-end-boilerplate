@@ -7,7 +7,7 @@
         <title>
             {% block title %}
                 Default title
-            {% endblock %} - {{ data.settings.project }}
+            {% endblock %} - Styleguide
         </title>
 
         {% include "sublayouts/document-head-includes.swig" %}

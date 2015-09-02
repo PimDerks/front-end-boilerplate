@@ -19,3 +19,4 @@
 <meta name="msapplication-config" content="/static/img/icons/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="/static/css/screen.css" />
+<link rel="stylesheet" href="/styleguide/static/css/styleguide.css" />

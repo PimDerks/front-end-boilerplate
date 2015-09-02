@@ -10,7 +10,13 @@ title: Colors
 
 {% block content %}
 
-Here come the colors.
+<ul class="styleguide-colors bare-list">
+    {% for i in Array(25) %}
+        <li>
+            <div class="styleguide-colors__color"></div>
+        </li>
+    {% endfor %}
+</ul>
 
 {% endblock %}
 

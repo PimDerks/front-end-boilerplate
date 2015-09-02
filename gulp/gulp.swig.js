@@ -211,7 +211,9 @@ module.exports.watch = function(){
     var src = [];
 
     // swig
-    src.push(config.roots.src + '/**/*.swig');
+    src.push(config.roots.src + '/' + config.paths.prototype + '/**/*.swig');
+    src.push(config.roots.src + '/' + config.paths.layouts + '/**/*.swig');
+    src.push(config.roots.src + '/' + config.paths.modules + '/**/*.swig');
 
     // data
     src.push(config.roots.src + '/' + config.roots.data + '/**/*');

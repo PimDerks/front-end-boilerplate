@@ -5,9 +5,9 @@
 
 <script>
     DEBUG = {
-        A11Y: false, // load a11y helpers/warnings
+        A11Y: true, // load a11y helpers/warnings
         BASELINE: true, // show baseline toggle
-        COUNT: false, // count CSS selectors/rules
+        COUNT: true, // count CSS selectors/rules
         CSS: true // load debug CSS (baseline, ...)
     };
 </script>

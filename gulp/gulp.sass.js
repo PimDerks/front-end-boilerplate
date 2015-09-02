@@ -50,3 +50,32 @@ module.exports.watch = function(){
     gulp.watch(config.roots.src + '/**/*.scss', ['sass']);
 
 };
+
+module.exports.copyStyleguide = function() {
+
+    var src = [];
+    src.push(config.roots.src + '/' + config.paths.styleguide + '/' + config.paths.static + '/' + config.paths.sass + '/**/*.scss');
+
+    var dest = config.roots.www + '/' + config.paths.styleguide + '/' + config.paths.static + '/' + config.paths.css;
+
+    // all files in root of /scss/
+    return gulp.src(src)
+        .pipe(plumber(function(error) {
+            gutil.log(gutil.colors.red(error.message));
+            this.emit('end');
+        }))
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(autoprefixer('last 1 version', '> 5%', 'ie 9'))
+        .pipe(sourcemaps.write('.'))
+        .pipe(plumber.stop())
+        .pipe(gulp.dest(dest));
+
+};
+
+module.exports.watchStyleguide = function(){
+
+    // watch sass files
+    gulp.watch(config.roots.src + '/' + config.paths.styleguide + '/**/*.scss', ['styleguide-sass']);
+
+};
