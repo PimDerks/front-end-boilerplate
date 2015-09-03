@@ -4,10 +4,15 @@ title: Elements
 
 ﻿{% extends '../_layouts/styleguide/default.swig' %}
 
+{% set title = 'Elements' %}
+
 {% block title %}
-    Elements
+    {{ title }}
 {% endblock title %}
 
+{% block header %}
+    {{ title }}
+{% endblock header %}
 {% block content %}
 
     <h1>Testing display of HTML elements</h1>

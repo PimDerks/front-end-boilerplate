@@ -5,22 +5,29 @@
         {% include "sublayouts/document-head.swig" %}
 
         <title>
-            {% block title %}
-                Default title
-            {% endblock %} - Styleguide
+            {% block title %}Page Title{% endblock %} - Styleguide
         </title>
 
         {% include "sublayouts/document-head-includes.swig" %}
 
     </head>
-    <body>
+    <body class="styleguide">
 
-        {% block content %}
-            <p>This comes from the default layout.</p>
-        {% endblock %}
+        <header>
+            <h1>
+                {% block header %}
+                    Page Title
+                {% endblock %}
+            </h1>
+        </header>
 
-        {% set index = data.index %}
-        {% include "sublayouts/index.swig" with index %}
+        <main>
+            {% block content %}
+                <p>This comes from the default layout.</p>
+            {% endblock %}
+        </main>
+
+        {% include "sublayouts/index.swig" %}
 
         {% include "sublayouts/document-scripts.swig" %}
 

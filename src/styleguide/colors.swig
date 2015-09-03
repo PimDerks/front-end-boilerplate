@@ -4,9 +4,15 @@ title: Colors
 
 ﻿{% extends '../_layouts/styleguide/default.swig' %}
 
+{% set title = 'Colors' %}
+
 {% block title %}
-    Colors
+    {{ title }}
 {% endblock title %}
+
+{% block header %}
+    {{ title }}
+{% endblock header %}
 
 {% block content %}
 

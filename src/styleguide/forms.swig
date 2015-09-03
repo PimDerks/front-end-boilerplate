@@ -4,9 +4,15 @@ title: Forms
 
 ﻿{% extends '../_layouts/styleguide/default.swig' %}
 
+{% set title = 'Forms' %}
+
 {% block title %}
-    Forms
+    {{ title }}
 {% endblock title %}
+
+{% block header %}
+    {{ title }}
+{% endblock header %}
 
 {% block content %}
 

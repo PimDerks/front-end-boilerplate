@@ -1,8 +1,8 @@
 @import '../../../modules/base/scss/01-utils/all';
 @import '../../../modules/base/scss/02-settings/all';
 @import '../../../modules/base/scss/03-base/all';
-@import '../../../modules/base/scss/04-generic/all';
 @import '../../../modules/base/scss/05-objects/all';
+@import '../../../modules/base/scss/04-generic/all';
 @import '../../../modules/base/scss/06-trumps/all';
 
 .styleguide {
@@ -53,4 +53,19 @@
 
   }
 
+  .grid-placeholder {
+    background: rgba(grey, .25);
+    display: block;
+    float: none;
+    padding: baseline(1);
+    text-align: center;
+    width: 100%;
+
+    *:last-child {
+      margin-bottom: 0;
+    }
+
+  }
+
 }
+

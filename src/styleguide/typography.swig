@@ -4,9 +4,15 @@ title: Typography
 
 ﻿{% extends '../_layouts/styleguide/default.swig' %}
 
+{% set title = 'Typography' %}
+
 {% block title %}
-    Typography
+    {{ title }}
 {% endblock title %}
+
+{% block header %}
+    {{ title }}
+{% endblock header %}
 
 {% block content %}
 
