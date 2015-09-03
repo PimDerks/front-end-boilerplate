@@ -1,7 +1,7 @@
 <!--[if IE 9]>
-<script src="/static/js/shim.js"></script>
+<script src="/prototype/static/js/shim.js"></script>
 <![endif]-->
-<script src="/static/js/initial.js" data-inline></script>
+<script src="/prototype/static/js/initial.js" data-inline></script>
 
 <script>
     DEBUG = {
@@ -11,4 +11,4 @@
         CSS: true // load debug CSS (baseline, ...)
     };
 </script>
-<script src="/static/js/debug.js"></script>
+<script src="/prototype/static/js/debug.js"></script>

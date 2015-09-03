@@ -74,7 +74,7 @@ var debug = function(config){
      */
 
     if(config.CSS) {
-        loadCSS('/static/css/debug.css');
+        loadCSS('/prototype/static/css/debug.css');
     }
 
 };

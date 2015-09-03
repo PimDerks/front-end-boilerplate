@@ -65,10 +65,11 @@ var config = {
 
     // location of asynchronously loaded fonts
     fonts: {
-        ttf: '/static/css/ttf.css',
-        woff: '/static/css/woff.css',
-        woff2: '/static/css/woff2.css'
+        ttf: '/prototype/static/css/ttf.css',
+        woff: '/prototype/static/css/woff.css',
+        woff2: '/prototype/static/css/woff2.css'
     }
+
 
 };
 
@@ -113,7 +114,7 @@ var config = {
 
         // load browserify output
         var s = d.createElement('script');
-        s.setAttribute('src', '/static/js/browserify.js');
+        s.setAttribute('src', '/prototype/static/js/browserify.js');
 
         d.body.appendChild(s);
 

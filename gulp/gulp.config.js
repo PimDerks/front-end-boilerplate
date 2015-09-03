@@ -29,7 +29,7 @@ module.exports = (function(){
             icons: 'icons',
             layouts: '_layouts',
             shim: 'shim',
-            media: '_media',
+            media: 'media',
             styleguide: 'styleguide'
         },
 

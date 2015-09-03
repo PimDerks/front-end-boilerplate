@@ -12,9 +12,9 @@ var gulp = require('gulp'),
 module.exports.copy = function() {
 
     var src = [];
-    src.push(config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/*.scss');
+    src.push(config.roots.src + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.sass + '/*.scss');
 
-    var dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.css;
+    var dest = config.roots.www + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.css;
 
     // all files in root of /scss/
     return gulp.src(src)

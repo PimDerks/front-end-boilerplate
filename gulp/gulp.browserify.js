@@ -5,9 +5,10 @@ var gulp = require('gulp'),
     _ = require('lodash');
 
 function bundle() {
+    var dest = config.roots.www + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.js;
     return b.bundle()
         .pipe(source('browserify.js'))
-        .pipe(gulp.dest('./www/static/js/'));
+        .pipe(gulp.dest(dest));
 }
 
 // add custom browserify options here

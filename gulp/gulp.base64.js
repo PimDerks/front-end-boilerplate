@@ -4,8 +4,8 @@ var gulp = require('gulp'),
 
 module.exports = function(){
 
-    var src = config.roots.dest + '/' + config.paths.static + '/**/*.css',
-        dest = config.roots.dest + '/' + config.paths.staticMin;
+    var src = config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.static + '/**/*.css',
+        dest = config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.staticMin;
 
     return gulp.src(src)
         .pipe(base64({

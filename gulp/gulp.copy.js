@@ -4,13 +4,13 @@ var gulp = require('gulp')
 module.exports.copyAssets = function () {
 
     var src = [];
-        src.push(config.roots.src + '/' + config.paths.static + '/**/*'); // all assets
-        src.push('!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.sass); // ignore scss folder
-        src.push('!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js); // ignore js folder
-        src.push('!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/**/*'); // ignore scss files
-        src.push('!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/**/*'); // ignore js files
+        src.push(config.roots.src + '/' + config.paths.prototype + '/' + config.paths.static + '/**/*'); // all assets
+        src.push('!' + config.roots.src + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.sass); // ignore scss folder
+        src.push('!' + config.roots.src + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.js); // ignore js folder
+        src.push('!' + config.roots.src + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.sass + '/**/*'); // ignore scss files
+        src.push('!' + config.roots.src + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.js + '/**/*'); // ignore js files
 
-    var dest = config.roots.www + '/' + config.paths.static;
+    var dest = config.roots.www + '/' + config.paths.prototype + '/' + config.paths.static;
 
     return gulp.src(src)
         .pipe(gulp.dest(dest));
@@ -20,10 +20,10 @@ module.exports.copyAssets = function () {
 module.exports.copyBuildStatic = function () {
 
     var src = [];
-        src.push(config.roots.www + '/' + config.paths.static + '/**/*');
-        src.push('!' + config.roots.www + '/' + config.paths.static + '/**/*.map');
+        src.push(config.roots.www + '/' + config.paths.prototype + '/' + config.paths.static + '/**/*');
+        src.push('!' + config.roots.www + config.paths.prototype + '/' + '/' + config.paths.static + '/**/*.map');
 
-    var dest = config.roots.dest + '/' + config.paths.static;
+    var dest = config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.static;
 
     return gulp.src(src)
         .pipe(gulp.dest(dest));
@@ -63,15 +63,15 @@ return gulp.src(src)
 module.exports.copyUnminifiedAssets = function () {
 
     var src = [];
-        src.push(config.roots.dest + '/' + config.paths.static + '/**/*');
-        src.push('!' + config.roots.dest + '/' + config.paths.static + '/' + config.paths.css);
-        src.push('!' + config.roots.dest + '/' + config.paths.static + '/' + config.paths.css + '/**/*');
-        src.push('!' + config.roots.dest + '/' + config.paths.static + '/' + config.paths.img);
-        src.push('!' + config.roots.dest + '/' + config.paths.static + '/' + config.paths.img + '/**/*');
-        src.push('!' + config.roots.dest + '/' + config.paths.static + '/' + config.paths.js);
-        src.push('!' + config.roots.dest + '/' + config.paths.static + '/' + config.paths.js + '/**/*');
+        src.push(config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.static + '/**/*');
+        src.push('!' + config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.css);
+        src.push('!' + config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.css + '/**/*');
+        src.push('!' + config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.img);
+        src.push('!' + config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.img + '/**/*');
+        src.push('!' + config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.js);
+        src.push('!' + config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.js + '/**/*');
 
-    var dest = config.roots.dest + '/' + config.paths.staticMin;
+    var dest = config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.staticMin;
 
     return gulp.src(src)
         .pipe(gulp.dest(dest));
