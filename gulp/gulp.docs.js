@@ -4,7 +4,8 @@ var gulp = require('gulp'),
     path = require('path'),
     config = require('./gulp.config'),
     utils = require('./gulp.utils'),
-    fs = require('fs');
+    fs = require('fs'),
+    fm = require('front-matter');
 
     require('swig-highlight').apply(swig);
 
