@@ -6,7 +6,8 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
     config = require('./gulp.config'),
-    plumber = require('gulp-plumber');
+    plumber = require('gulp-plumber'),
+    util = require('gulp-util');
 
 module.exports.copy = function() {
 
@@ -46,8 +47,13 @@ module.exports.lint = function(){
 
 module.exports.watch = function(){
 
+    var tasks = ['output-sass'];
+    if(!util.env.killlint) {
+        tasks.push('lint-sass');
+    }
+
     // watch sass files
-    gulp.watch(config.roots.src + '/**/*.scss', ['output-sass']);
+    gulp.watch(config.roots.src + '/**/*.scss', tasks);
 
 };
 

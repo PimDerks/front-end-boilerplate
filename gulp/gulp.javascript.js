@@ -3,7 +3,8 @@ var gulp = require('gulp'),
     sourcemaps = require('gulp-sourcemaps'),
     config = require('./gulp.config'),
     jshint = require('gulp-jshint'),
-    jscs = require('gulp-jscs');
+    jscs = require('gulp-jscs'),
+    util = require('gulp-util');
 
 module.exports.copy = function(){
 
@@ -50,8 +51,13 @@ module.exports.copyModules = function() {
 
 module.exports.watch = function() {
 
+    var tasks = ['output-js', 'output-js-modules'];
+    if(!util.env.killlint) {
+        tasks.push('lint-js');
+    }
+
     // Watch js files. Tasks are defined in the main gruntfile.
-    gulp.watch(config.roots.src + '/**/*.js', ['output-js', 'output-js-modules']);
+    gulp.watch(config.roots.src + '/**/*.js', tasks);
 
 };
 

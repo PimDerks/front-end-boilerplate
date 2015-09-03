@@ -5,9 +5,9 @@ var gulp = require('gulp'),
     utils = require('./gulp.utils'),
     fs = require('fs'),
     fse = require('fs-extra'),
-    // Promise = require('./gulp.promise'),
     htmlhint = require("gulp-htmlhint"),
-    w3cjs = require('gulp-w3cjs');
+    w3cjs = require('gulp-w3cjs'),
+    util = require('gulp-util');
 
 var methods = {
 
@@ -218,7 +218,12 @@ module.exports.watch = function(){
     // data
     src.push(config.roots.src + '/' + config.roots.data + '/**/*');
 
+    var tasks = ['output-html'];
+    if(!util.env.killlint) {
+        tasks.push('lint-html');
+    }
+
     // watch data
-    gulp.watch(src, ['output-html']);
+    gulp.watch(src, tasks);
 
 };

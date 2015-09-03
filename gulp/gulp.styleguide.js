@@ -5,12 +5,7 @@ var gulp = require('gulp'),
     path = require('path'),
     config = require('./gulp.config'),
     utils = require('./gulp.utils'),
-    fs = require('fs'),
-    fse = require('fs-extra'),
-    Promise = require('./gulp.promise'),
-    htmlhint = require("gulp-htmlhint"),
-    w3cjs = require('gulp-w3cjs'),
-    gutil = require('gulp-util');
+    fs = require('fs');
 
     require('swig-highlight').apply(swig);
 

@@ -6,7 +6,6 @@ var gulp = require('gulp'),
     utils = require('./gulp.utils'),
     fs = require('fs'),
     fse = require('fs-extra'),
-    Promise = require('./gulp.promise'),
     htmlhint = require("gulp-htmlhint"),
     w3cjs = require('gulp-w3cjs');
 
@@ -22,8 +21,6 @@ var methods = {
     },
 
     getDocumentation: function(file){
-
-        var result;
 
         // get directory
         var base = path.dirname(file);
@@ -350,7 +347,7 @@ var methods = {
 
     },
 
-    renderStyleguide: function(data){
+    renderModules: function(data){
 
         // render preview for each component
         methods.renderPreviews(data);
@@ -368,7 +365,7 @@ var methods = {
 module.exports.render = function() {
 
     var data = methods.getComponents();
-    methods.renderStyleguide(data);
+    methods.renderModules(data);
 
 };
 
