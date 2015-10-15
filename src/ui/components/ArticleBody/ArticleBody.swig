@@ -1,3 +1,7 @@
+---
+title: article Body 1
+---
+
 <!-- Data parsed in should be in the ArticleBody variable. If not available, use the default data in the ArticleBody.json file -->
 {% if !ArticleBody %}
     {% set ArticleBody = data.ArticleBody %}

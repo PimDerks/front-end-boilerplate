@@ -192,14 +192,24 @@ var methods = {
         // check is a JSON file exists with the same file in the same directory
         var local = fse.readJsonSync(json, { throws: false });
         if(local){
-            data.data['local'] = local;
+            data.data['loca\l'] = local;
         }
+
+        // extract front matter
+        var fmData = fs.readFileSync(src, 'utf8');
+
+        fmData = fm(fmData);
+
+        data.data['fm'] = fmData.attributes;
+
+        var oldSrc = src;
+        src = fmData.body;
 
         // invalidate the swig cache
         swig.invalidateCache();
 
         // render template using swig
-        var swiggedContent = swig.renderFile(src, data);
+        var swiggedContent = swig.render(src, { locals: data, filename: oldSrc });
 
         // strip /tmp/ dir from filename (ugly work around)
         var removeDir = config.roots.tmp.replace('./','');
