@@ -10,8 +10,9 @@ module.exports.copy = function(){
 
     var src = [];
         src.push(config.roots.src + '/**/*.js');
-        src.push('!' + config.roots.src + '/' + config.paths.modules);
-        src.push('!' + config.roots.src + '/' + config.paths.modules + '/**/*');
+        src.push('!' + config.roots.src + '/**/*Spec.js');
+        src.push('!' + config.roots.src + '/' + config.paths.ui);
+        src.push('!' + config.roots.src + '/' + config.paths.ui + '/**/*');
         src.push('!' + config.roots.src + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.js + '/' + config.paths.shim);
         src.push('!' + config.roots.src + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.js + '/' + config.paths.shim + '/**/*');
 
@@ -26,7 +27,8 @@ module.exports.copy = function(){
 module.exports.copyModules = function() {
 
     var src = [];
-        src.push(config.roots.src + '/' + config.paths.modules + '/**/*.js');
+        src.push(config.roots.src + '/' + config.paths.ui + '/**/*.js');
+        src.push('!' + config.roots.src + '/' + config.paths.ui + '/**/*Spec.js');
 
     var dest = config.roots.www + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.js;
 
@@ -66,7 +68,7 @@ module.exports.lint = function(){
     var src = [];
     src.push(config.roots.src + '/**/*.js');
     src.push('!' + config.roots.src + '/**/*Spec.js');
-    src.push('!' + config.roots.src + '/' + config.paths.modules + '/base/js/00-vendor/**/*.js');
+    src.push('!' + config.roots.src + '/' + config.paths.ui + '/base/js/00-vendor/**/*.js');
     src.push('!' + config.roots.src + '/' + config.paths.prototype + '/' + config.paths.static + '/vendor/**/*.js');
     src.push('!' + config.roots.src + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.js + '/shim/**/*.js');
     src.push('!' + config.roots.src + '/' + config.paths.prototype + '/' + config.paths.static + '/' + config.paths.js + '/initial.js');

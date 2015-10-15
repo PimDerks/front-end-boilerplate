@@ -55,7 +55,7 @@ var config = {
     // config for conditioner, ideally should be inline to avoid extra request
     conditioner: {
         'modules': {
-            './base/components/Component/js/Component': {
+            './components/Component/Component': {
                 'options': {
                     'key': 'value'
                 }
@@ -65,11 +65,10 @@ var config = {
 
     // location of asynchronously loaded fonts
     fonts: {
-        ttf: '/prototype/static/css/ttf.css',
-        woff: '/prototype/static/css/woff.css',
-        woff2: '/prototype/static/css/woff2.css'
+        ttf: '/prototype/static/scss/ttf.css',
+        woff: '/prototype/static/scss/woff.css',
+        woff2: '/prototype/static/scss/woff2.css'
     }
-
 
 };
 
@@ -103,9 +102,6 @@ var config = {
     } else if( ua.indexOf('Android') > -1 && ua.indexOf('like Gecko') > -1 && ua.indexOf('Chrome') === -1 ){
         fontFileUrl = config.fonts.ttf;
     }
-
-    // force ttf for now
-    fontFileUrl = config.fonts.ttf;
 
     loadCSS(fontFileUrl);
 

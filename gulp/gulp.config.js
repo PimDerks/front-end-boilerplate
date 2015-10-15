@@ -15,7 +15,6 @@ module.exports = (function(){
         paths: {
             prototype: 'prototype',
             data: '_data',
-            modules: 'modules',
             ui: 'ui',
             assets: 'assets',
             static: 'static',

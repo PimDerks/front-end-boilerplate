@@ -22,7 +22,7 @@ module.exports.minifyJS = function() {
         dest = config.roots.dest + '/' + config.paths.prototype + '/' + config.paths.staticMin;
 
     return gulp.src(src)
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest(dest));
 
 };

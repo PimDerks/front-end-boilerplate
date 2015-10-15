@@ -12,10 +12,10 @@ var debug = function(config){
         toggle.className = 'baseline-button';
         toggle.innerHTML = 'Toggle Baseline';
         toggle.addEventListener('click', function () {
-            document.body.classList.toggle('baseline');
+            document.body.classList.toggle('u-baseline');
         });
         document.body.appendChild(toggle);
-        document.body.classList.add('baseline');
+        document.body.classList.add('u-baseline');
     }
 
     /*
@@ -74,7 +74,7 @@ var debug = function(config){
      */
 
     if(config.CSS) {
-        loadCSS('/prototype/static/css/debug.css');
+        loadCSS('/prototype/static/scss/debug.css');
     }
 
 };

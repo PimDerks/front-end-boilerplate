@@ -18,4 +18,4 @@
 <meta name="msapplication-TileImage" content="/prototype/static/img/icons/mstile-144x144.png">
 <meta name="msapplication-config" content="/prototype/static/img/icons/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="/prototype/static/css/screen.css" />
+<link rel="stylesheet" href="/prototype/static/scss/screen.css" />

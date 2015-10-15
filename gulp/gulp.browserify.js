@@ -13,7 +13,7 @@ function bundle() {
 
 // add custom browserify options here
 var customOpts = {
-    entries: ['./src/modules/main.js'],
+    entries: ['./src/ui/main.js'],
     debug: true,
     poll: 100
 };

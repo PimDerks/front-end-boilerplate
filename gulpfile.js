@@ -1,9 +1,7 @@
 var gulp = require('gulp'),
     config = require('./gulp/gulp.config'),
     bs = require('browser-sync').create(),
-    util = require('gulp-util'),
     seq = require('run-sequence'),
-    shell = require('gulp-shell'),
     server = require('karma').Server,
     exec = require('child_process').exec;
 
@@ -11,7 +9,7 @@ var gulp = require('gulp'),
 var api = require('./gulp/gulp.rest'),
     modules = require('./gulp/gulp.styleguide'),
     styleguide = require('./gulp/gulp.styleguide'),
-    modules = require('./gulp/gulp.modules'),
+    ui = require('./gulp/gulp.ui'),
     clean = require('./gulp/gulp.clean'),
     concat = require('./gulp/gulp.concat'),
     inline = require('./gulp/gulp.inline'),
@@ -24,8 +22,8 @@ var api = require('./gulp/gulp.rest'),
     ftp = require('./gulp/gulp.ftp'),
     browserSync = require('./gulp/gulp.browsersync')(bs),
     js = require('./gulp/gulp.javascript');
-    swig = require('./gulp/gulp.swig'),
-    browserify = require('./gulp/gulp.browserify'),
+browserify = require('./gulp/gulp.browserify'),
+    critical = require('./gulp/gulp.critical'),
     docs = require('./gulp/gulp.docs');
 
 // Testing
@@ -40,18 +38,20 @@ gulp.task('test-js', function (done) {
 gulp.task('lint-sass', sass.lint);
 gulp.task('lint-js', js.lint);
 gulp.task('lint-html', swig.lint);
+gulp.task('lint', ['lint-sass', 'lint-js', 'lint-html']);
 
 // Outputting DEV
 gulp.task('output-js', js.copy);
 gulp.task('output-js-modules', js.copyModules);
 gulp.task('output-sass', sass.copy);
 gulp.task('output-html', swig.copy);
+gulp.task('output', ['output-js', 'output-js-modules', 'output-sass', 'output-html']);
 
 // Outputting DOCS
-gulp.task('output-modules', modules.render);
+gulp.task('output-ui', ui.render);
 gulp.task('output-styleguide', styleguide.render);
-gulp.task('output-sass-styleguide', sass.copyStyleguide);
 gulp.task('output-docs', docs.render);
+gulp.task('output-doc', ['output-ui', 'output-styleguide', 'output-docs']);
 
 // Copy task
 gulp.task('copy-assets', copy.copyAssets);
@@ -60,6 +60,8 @@ gulp.task('copy-www-html', copy.copyBuildHTML);
 gulp.task('copy-www-static', copy.copyBuildStatic);
 gulp.task('copy-www-media', copy.copyBuildMedia);
 gulp.task('copy-unminified', copy.copyUnminifiedAssets);
+gulp.task('copy', ['copy-assets', 'copy-media']);
+gulp.task('copy-build', ['copy-www-static', 'copy-www-media', 'copy-unminified']);
 
 // Watching DEV
 gulp.task('watch-api', api.watch);
@@ -70,10 +72,10 @@ gulp.task('watch-www', watchWWW);
 gulp.task('watch', ['watch-api', 'watch-modules', 'watch-js', 'watch-sass', 'watch-html', 'watch-www']);
 
 // Watching DOC
-gulp.task('watch-modules', modules.watch);
+gulp.task('watch-modules', ui.watch);
 gulp.task('watch-docs', docs.watch);
 gulp.task('watch-styleguide', styleguide.watch);
-gulp.task('watch-styleguide-sass', sass.watchStyleguide);
+gulp.task('watch-doc', ['watch-docs', 'watch-modules', 'watch-modules', 'watch-styleguide']);
 
 // Start API
 gulp.task('api-start', api.run);
@@ -102,6 +104,9 @@ gulp.task('minify-js', minify.minifyJS);
 gulp.task('minify-img', minify.minifyImg);
 gulp.task('minify', ['minify-css', 'minify-js', 'minify-img', 'copy-unminified']);
 
+// Critical CSS
+gulp.task('critical', critical);
+
 // Deploy
 gulp.task('deploy', ftp);
 
@@ -115,18 +120,22 @@ gulp.task('deploy', ftp);
 
 gulp.task('initial', function() {
 
-    seq('clean', 'output-js', 'output-js-modules', 'output-sass', 'output-html', 'shim', 'copy-assets', 'copy-media', 'styleguide', 'output-modules', function(){
+    seq('clean', 'output-js', 'output-js-modules', 'output-sass', 'output-html', 'shim', 'copy-assets', 'copy-media', 'output-styleguide', 'output-ui', function(){
 
         // We use a timeout around this because the styleguide and modules tasks
         // don't return a stream, so Gulp doesn't know when they are finished.
         setTimeout(function(){
-            exec('gulp output-docs'); // render the index
+            exec('gulp output-doc'); // render the index
         }, 100);
 
         console.log("Initial task finished. Now run 'gulp dev' to start developing.");
-
     });
 
+});
+
+// Run this when you want to start working on docs
+gulp.task('docs', function(){
+    seq('output-doc', 'watch-doc');
 });
 
 // Run this when you want to start developing.
@@ -138,24 +147,16 @@ gulp.task('dev', function() {
 // Build project
 
 gulp.task('build', function() {
-    seq('copy-www-static', 'copy-www-media', 'minify', 'inline', function(){
+    seq('copy-www-static', 'copy-www-media', 'minify', 'inline', 'base64', function(){
         process.exit(0);
     });
 });
 
-// Render the styleguide
-
-gulp.task('styleguide', ['output-styleguide', 'output-sass-styleguide']);
-
-// Work on the styleguide
-
-gulp.task('styleguide-dev', ['styleguide', 'watch-styleguide', 'watch-styleguide-sass', 'browser-sync']);
-
 // Test and lint code. Please note that the test-js task runs on the /www/ folder (for now).
 
 gulp.task('test', function() {
-    seq('lint-js', 'lint-sass', 'test-js', function(){
-        console.log('Test completed.')
+    seq('lint', 'test-js', function(){
+        console.log('Test completed.');
         process.exit(0);
     });
 });

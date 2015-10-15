@@ -7,7 +7,9 @@ var gulp = require('gulp'),
     fse = require('fs-extra'),
     htmlhint = require("gulp-htmlhint"),
     w3cjs = require('gulp-w3cjs'),
-    util = require('gulp-util');
+    util = require('gulp-util'),
+    through2 = require('through2'),
+    fm = require('front-matter');
 
 var methods = {
 
@@ -30,6 +32,8 @@ var methods = {
 
         var result = [];
 
+        // Please note that modules get rendered from the tmp directory, so we can use pre-rendered components and modules.
+
         utils.walk(path.join(config.roots.tmp, config.paths.prototype), function(path){
 
             var ext = utils.getExtension(path);
@@ -45,17 +49,32 @@ var methods = {
 
     },
 
+    getModules: function(){
+
+        var result = [];
+
+        // Please note that modules get rendered from the tmp directory, so we can use pre-rendered components and modules.
+
+        utils.walk(path.join(config.roots.tmp, config.paths.ui), function(path){
+
+            if(utils.getExtension(path) === 'swig' && path.indexOf('modules') >= 0 && path.indexOf('components') < 0){
+                result.push(path);
+            }
+
+        });
+
+        return result;
+
+    },
+
     getComponents: function(){
 
         var result = [];
 
-        utils.walk(path.join(config.roots.src, config.paths.modules), function(path){
+        utils.walk(path.join(config.roots.src, config.paths.ui), function(path){
 
-            var ext = utils.getExtension(path);
-
-            switch(ext) {
-                case 'swig':
-                    result.push(path);
+            if(utils.getExtension(path) === 'swig' && path.indexOf('components') > 0){
+                result.push(path);
             }
 
         });
@@ -70,8 +89,21 @@ var methods = {
             data: {}
         };
 
-        // get data files
+        // get data files from /data/ directory
         utils.walk(path.join(config.roots.src, config.paths.data), function(path){
+
+            var name = utils.stripExtension(utils.getFileName(path)),
+                ext = utils.getExtension(path);
+
+            if(ext === 'json'){
+                // read file
+                data.data[name] = JSON.parse(fs.readFileSync(path, 'utf8'));
+            }
+
+        });
+
+        // get data files from /components/
+        utils.walk(path.join(config.roots.src, config.paths.ui, 'components'), function(path){
 
             var name = utils.stripExtension(utils.getFileName(path)),
                 ext = utils.getExtension(path);
@@ -87,6 +119,27 @@ var methods = {
 
     },
 
+    renderModules: function(){
+
+        return new Promise(function(resolve, reject){
+
+            var modules = methods.getModules();
+
+            modules.forEach(function(module, index){
+
+                methods.renderSwigFile(module, config.roots.tmp);
+                if(index === modules.length - 1){
+                    console.log('Successfully rendered ' + modules.length + ' modules.');
+                    setTimeout(function() {
+                        resolve();
+                    }, 10);
+                }
+            });
+
+        });
+
+    },
+
     renderComponents: function(){
 
         return new Promise(function(resolve, reject){
@@ -96,7 +149,7 @@ var methods = {
             components.forEach(function(component, index){
                 methods.renderSwigFile(component, config.roots.tmp);
                 if(index === (components.length - 1)){
-                    console.log('Succesfully rendered ' + components.length + ' components.');
+                    console.log('Successfully rendered ' + components.length + ' components.');
                     setTimeout(function() {
                         resolve();
                     }, 10);
@@ -116,7 +169,7 @@ var methods = {
             pages.forEach(function (page, index) {
                 methods.renderSwigFile(page, config.roots.www);
                 if (index === (pages.length - 1)) {
-                    console.log('Succesfully rendered ' + pages.length + ' pages.');
+                    console.log('Successfully rendered ' + pages.length + ' pages.');
                     setTimeout(function() {
                         resolve();
                     });
@@ -179,7 +232,7 @@ module.exports.copy = function() {
     methods.copy(config.roots.src, config.roots.tmp).then(function() {
 
         // log
-        console.log('Rendering components...');
+        // console.log('Rendering components...');
 
         // return promise
         return methods.renderComponents();
@@ -187,7 +240,14 @@ module.exports.copy = function() {
     }).then(function(){
 
         // log
-        console.log('Rendering pages...');
+        // console.log('Rendering modules...');
+
+        return methods.renderModules();
+
+    }).then(function(){
+
+        // log
+        // console.log('Rendering pages...');
 
         // return a promise render templates
         return methods.renderPrototype();
@@ -198,12 +258,24 @@ module.exports.copy = function() {
 
 };
 
+var ignoredErrors = [];
+ignoredErrors.push('A “meta” element with an “http-equiv” attribute whose value is “X-UA-Compatible” must have a “content” attribute with the value “IE=edge”.');
+
 module.exports.lint = function(){
     return gulp.src(config.roots.www + '/**/*.html')
         .pipe(w3cjs())
+        .pipe(through2.obj(function(file, enc, cb){
+            cb(null, file);
+            if (!file.w3cjs.success){
+                file.w3cjs.messages.forEach(function(m){
+                    if(ignoredErrors.indexOf(m.message) === -1){
+                        console.log(m.message + ': ' + m.extract);
+                    }
+                });
+            }
+        }))
         .pipe(htmlhint())
         .pipe(htmlhint.failReporter());
-
 };
 
 module.exports.watch = function(){
@@ -213,10 +285,12 @@ module.exports.watch = function(){
     // swig
     src.push(config.roots.src + '/' + config.paths.prototype + '/**/*.swig');
     src.push(config.roots.src + '/' + config.paths.layouts + '/**/*.swig');
-    src.push(config.roots.src + '/' + config.paths.modules + '/**/*.swig');
+    src.push(config.roots.src + '/' + config.paths.ui + '/**/*.swig');
 
     // data
-    src.push(config.roots.src + '/' + config.roots.data + '/**/*');
+    src.push(config.roots.src + '/'     + config.paths.prototype + '/**/*.json');
+    src.push(config.roots.src + '/' + config.paths.data + '/**/*.json');
+    src.push(config.roots.src + '/' + config.paths.ui + '/**/*.json');
 
     var tasks = ['output-html'];
     if(!util.env.killlint) {

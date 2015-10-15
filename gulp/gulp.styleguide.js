@@ -21,11 +21,34 @@ module.exports.render = function() {
 
     var dest = config.roots.www + '/' + config.paths.styleguide;
 
+    function getData(){
+
+        var data = {
+            data: {}
+        };
+
+        // get data files
+        utils.walk(path.join(config.roots.src, config.paths.data), function(path){
+
+            var name = utils.stripExtension(utils.getFileName(path)),
+                ext = utils.getExtension(path);
+
+            if(ext === 'json'){
+                // read file
+                data.data[name] = JSON.parse(fs.readFileSync(path, 'utf8'));
+            }
+
+        });
+
+        data.pages = getPages();
+
+        return data;
+
+    };
+
     function getPages(){
 
-        var result = {
-            pages: []
-        };
+        var result = [];
 
         // read files from subdirectory
         var root = config.roots.src + '/' + config.paths.styleguide;
@@ -41,7 +64,7 @@ module.exports.render = function() {
                     fm: fm(data).attributes
                 };
 
-                result.pages.push(obj);
+                result.push(obj);
 
             }
 
@@ -56,7 +79,7 @@ module.exports.render = function() {
             defaults: {
                 cache: false
             },
-            data: getPages()
+            data: getData()
         }))
         .pipe(gulp.dest(dest));
 
@@ -67,6 +90,7 @@ module.exports.watch = function() {
     var src = [];
     src.push(config.roots.src + '/' + config.paths.styleguide + '/**/*.swig');
     src.push(config.roots.src + '/' + config.paths.layouts + '/' + config.paths.styleguide + '/**/*.swig');
+    src.push(config.roots.src + '/' + config.paths.data + '/**/*');
 
     gulp.watch(src, ['output-styleguide']);
 

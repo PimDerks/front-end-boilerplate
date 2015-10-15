@@ -1,8 +1,8 @@
-{% include "sublayouts/document-open.swig" %}
+{% include "../shared/document-open.swig" %}
 
     <head>
 
-        {% include "sublayouts/document-head.swig" %}
+        {% include "../shared/document-head.swig" %}
 
         <title>
             {% block title %}Page Title{% endblock %} - Styleguide
@@ -27,8 +27,6 @@
             {% endblock %}
         </main>
 
-        {% include "sublayouts/index.swig" %}
-
         {% include "sublayouts/document-scripts.swig" %}
 
-{% include "sublayouts/document-foot.swig" %}
+{% include "../shared/document-foot.swig" %}

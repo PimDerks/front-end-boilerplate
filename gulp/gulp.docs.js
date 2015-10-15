@@ -4,27 +4,29 @@ var gulp = require('gulp'),
     path = require('path'),
     config = require('./gulp.config'),
     utils = require('./gulp.utils'),
-    fs = require('fs'),
-    fm = require('front-matter');
+    fs = require('fs');
 
-    require('swig-highlight').apply(swig);
+require('swig-highlight').apply(swig);
 
-    markedSwig.useFilter(swig);
-    markedSwig.useTag(swig);
+markedSwig.useFilter(swig);
+markedSwig.useTag(swig);
 
 var methods = {
 
     getFiles: function(dir){
 
-        var result = [];
+        var result = [],
+            directory = path.join(config.roots.www, dir);
 
-        utils.walk(path.join(config.roots.www, dir), function(file){
+        if(fs.existsSync(directory)) {
+            utils.walk(directory, function (file) {
 
-            if(path.extname(file) === '.html'){
-                result.push(file);
-            }
+                if (path.extname(file) === '.html') {
+                    result.push(file);
+                }
 
-        });
+            });
+        }
 
         return result;
 
@@ -32,17 +34,18 @@ var methods = {
 
     getModules: function(){
 
-        var result = [];
+        var result = [],
+            directory = path.join(config.roots.www, config.paths.ui);
 
-        utils.walk(path.join(config.roots.www, config.paths.modules), function(file){
+        if(fs.existsSync(directory)) {
+            utils.walk(directory, function (file) {
 
-            if(path.extname(file) === '.html' && file.indexOf('/preview/') < 0 && file.indexOf('index.html') < 0){
-                result.push(file);
-            }
+                if (path.extname(file) === '.html' && file.indexOf('/preview/') < 0 && file.indexOf('index.html') < 0) {
+                    result.push(file);
+                }
 
-        });
-
-        console.log(result);
+            });
+        }
 
         return result;
 
@@ -53,10 +56,9 @@ var methods = {
 
         var data = {
             'pages': methods.getFiles(config.paths.prototype),
-            'modules': methods.getModules(),
+            'components': methods.getModules(),
             'styleguide': methods.getFiles(config.paths.styleguide)
         };
-
         return data;
 
     },
@@ -92,6 +94,7 @@ var methods = {
 
         var obj = {
             pages: [],
+            components: [],
             modules: [],
             styleguide: []
         };
@@ -105,8 +108,8 @@ var methods = {
             obj['styleguide'].push(methods.extractData(page));
         });
 
-        data.modules.forEach(function(page){
-            obj['modules'].push(methods.extractData(page));
+        data.components.forEach(function(page){
+            obj['components'].push(methods.extractData(page));
         });
 
         // invalidate the swig cache
@@ -141,6 +144,6 @@ module.exports.render = function() {
 
 module.exports.watch = function() {
 
-    gulp.watch(config.roots.src + '/index.swig', ['output-styleguide']);
+    gulp.watch(config.roots.src + '/index.swig', ['output-doc']);
 
 };
