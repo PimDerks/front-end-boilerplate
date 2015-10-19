@@ -4,10 +4,9 @@ var gulp = require('gulp'),
 
 module.exports = function(){
 
-    // empty and remove www and tmp directories
+    // empty and remove www and dest directories
     var src = [];
     src.push(config.roots.www);
-    src.push(config.roots.tmp);
     src.push(config.roots.dest);
 
     return gulp.src(src)

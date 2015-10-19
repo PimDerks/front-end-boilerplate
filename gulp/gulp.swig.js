@@ -32,9 +32,9 @@ var methods = {
 
         var result = [];
 
-        // Please note that modules get rendered from the tmp directory, so we can use pre-rendered components and modules.
+        // Please note that modules get directly rendered from the src directory, There's no need for pre-rendering.
 
-        utils.walk(path.join(config.roots.tmp, config.paths.prototype), function(path){
+        utils.walk(path.join(config.roots.src, config.paths.prototype), function(path){
 
             var ext = utils.getExtension(path);
 
@@ -53,9 +53,9 @@ var methods = {
 
         var result = [];
 
-        // Please note that modules get rendered from the tmp directory, so we can use pre-rendered components and modules.
+        // Please note that modules get directly rendered from the src directory, There's no need for pre-rendering.
 
-        utils.walk(path.join(config.roots.tmp, config.paths.ui), function(path){
+        utils.walk(path.join(config.roots.src, config.paths.ui), function(path){
 
             if(utils.getExtension(path) === 'swig' && path.indexOf('modules') >= 0 && path.indexOf('components') < 0){
                 result.push(path);
@@ -127,7 +127,7 @@ var methods = {
 
             modules.forEach(function(module, index){
 
-                methods.renderSwigFile(module, config.roots.tmp);
+                methods.renderSwigFile(module, config.roots.src);
                 if(index === modules.length - 1){
                     console.log('Successfully rendered ' + modules.length + ' modules.');
                     setTimeout(function() {
@@ -147,7 +147,7 @@ var methods = {
             var components = methods.getComponents();
 
             components.forEach(function(component, index){
-                methods.renderSwigFile(component, config.roots.tmp);
+                methods.renderSwigFile(component, config.roots.src);
                 if(index === (components.length - 1)){
                     console.log('Successfully rendered ' + components.length + ' components.');
                     setTimeout(function() {
@@ -211,13 +211,9 @@ var methods = {
         // render template using swig
         var swiggedContent = swig.render(src, { locals: data, filename: oldSrc });
 
-        // strip /tmp/ dir from filename (ugly work around)
-        var removeDir = config.roots.tmp.replace('./','');
-        name = name.replace(removeDir + path.sep, '');
-
         // strip /src/ dir from filename (ugly work around)
-        var removeDir2 = config.roots.src.replace('./','');
-        name = name.replace(removeDir2 + path.sep, '');
+        var removeDir = config.roots.src.replace('./','');
+        name = name.replace(removeDir + path.sep, '');
 
         // write rendered template to file
 
@@ -239,32 +235,20 @@ var methods = {
 
 module.exports.copy = function() {
 
-    methods.copy(config.roots.src, config.roots.tmp).then(function() {
-
-        // log
+        // log rendering components
         // console.log('Rendering components...');
 
-        // return promise
-        return methods.renderComponents();
+        methods.renderComponents();
 
-    }).then(function(){
-
-        // log
+        // log rendering modules
         // console.log('Rendering modules...');
 
-        return methods.renderModules();
+        methods.renderModules();
 
-    }).then(function(){
-
-        // log
+        // log rendering pages
         // console.log('Rendering pages...');
 
-        // return a promise render templates
-        return methods.renderPrototype();
-
-    }).catch(function(err){
-        console.log("Error:", err);
-    });
+        methods.renderPrototype();
 
 };
 

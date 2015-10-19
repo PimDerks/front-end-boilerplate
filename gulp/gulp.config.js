@@ -6,7 +6,6 @@ module.exports = (function(){
         roots: {
             src: './src',
             www: './www',
-            tmp: './tmp',
             dest: './dest',
             api: './api'
         },
