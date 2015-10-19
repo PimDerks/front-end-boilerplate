@@ -1,11 +1,11 @@
 ﻿---
-title: Page
+title: Page title
 ---
 
 ﻿{% extends '../_layouts/prototype/default.swig' %}
 
 {% block title %}
-    Page
+    {{ data.fm.title }}
 {% endblock title %}
 
 {% block content %}
