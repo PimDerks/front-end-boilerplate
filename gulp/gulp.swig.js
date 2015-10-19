@@ -192,7 +192,7 @@ var methods = {
         // check is a JSON file exists with the same file in the same directory
         var local = fse.readJsonSync(json, { throws: false });
         if(local){
-            data.data['loca\l'] = local;
+            data.data['local'] = local;
         }
 
         // extract front matter
@@ -200,6 +200,7 @@ var methods = {
 
         fmData = fm(fmData);
 
+        // get front matter attributes
         data.data['fm'] = fmData.attributes;
 
         var oldSrc = src;

@@ -16,8 +16,9 @@
     <body>
 
         {% block content %}
-            {% set includeURL = '../../' + url.replace('src','') %}
-            {% include includeURL %}
+            {% autoescape false %}
+                {{ previewHTML }}
+            {% endautoescape %}
         {% endblock %}
 
         {% include "../prototype/sublayouts/document-scripts.swig" %}

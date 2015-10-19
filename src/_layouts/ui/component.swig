@@ -6,7 +6,7 @@
 
         <title>
                 {% block title %}
-                        {{ component.name }}
+                        {{ fm.title }}
                 {% endblock %} - Components Library
         </title>
 
@@ -17,7 +17,7 @@
 
 {% block content %}
 
-        <h1>{{ component.name }}</h1>
+        <h1>{{ fm.title }}</h1>
 
         {# Render base #}
 

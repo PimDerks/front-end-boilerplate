@@ -6,8 +6,7 @@ var gulp = require('gulp'),
     utils = require('./gulp.utils'),
     fs = require('fs'),
     fse = require('fs-extra'),
-    htmlhint = require("gulp-htmlhint"),
-    w3cjs = require('gulp-w3cjs');
+    fm = require('front-matter');
 
     require('swig-highlight').apply(swig);
 
@@ -249,7 +248,7 @@ var methods = {
         // template of styleguide
         var template = path.join(config.roots.src, config.paths.layouts, config.paths.ui, 'preview.swig');
 
-        // loop through components
+        // loop through components§
         data.components.forEach(function(c){
 
             c.sub.forEach(function(s) {
@@ -273,6 +272,20 @@ var methods = {
                 if(local){
                     compiledData.data['local'] = local;
                 }
+
+                // extract front matter
+                var fmData = fs.readFileSync(compiledData.url, 'utf8');
+
+                fmData = fm(fmData);
+
+                // get front matter attributes
+                compiledData.data['fm'] = fmData.attributes;
+
+                // render component
+                var renderedComponent = swig.render(fmData.body, { locals: compiledData, filename: s.url });
+
+
+                compiledData['previewHTML'] = renderedComponent;
 
                 // render template using swig
                 var swiggedContent = swig.renderFile(template, compiledData);
@@ -314,6 +327,13 @@ var methods = {
             var compiledData = {};
             compiledData['component'] = c;
             compiledData['src'] = data;
+
+            var fmData = fs.readFileSync(compiledData.component.sub[0].url, 'utf8');
+
+            fmData = fm(fmData);
+
+            // get front matter attributes
+            compiledData['fm'] = fmData.attributes;
 
             // render template using swig
             var swiggedContent = swig.renderFile(template, compiledData);
