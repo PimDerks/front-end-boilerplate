@@ -127,7 +127,7 @@ var methods = {
 
             modules.forEach(function(module, index){
 
-                methods.renderSwigFile(module, config.roots.src);
+                methods.renderSwigFile(module, config.roots.tmp);
                 if(index === modules.length - 1){
                     console.log('Successfully rendered ' + modules.length + ' modules.');
                     setTimeout(function() {
@@ -147,7 +147,7 @@ var methods = {
             var components = methods.getComponents();
 
             components.forEach(function(component, index){
-                methods.renderSwigFile(component, config.roots.src);
+                methods.renderSwigFile(component, config.roots.tmp);
                 if(index === (components.length - 1)){
                     console.log('Successfully rendered ' + components.length + ' components.');
                     setTimeout(function() {

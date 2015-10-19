@@ -7,6 +7,7 @@ module.exports = (function(){
             src: './src',
             www: './www',
             dest: './dest',
+            tmp: './tmp',
             api: './api'
         },
 
