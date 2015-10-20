@@ -6,8 +6,7 @@ var gulp = require('gulp'),
     path = require('path'),
     config = require('./gulp.config'),
     utils = require('./gulp.utils'),
-    fs = require('fs'),
-    fm = require('front-matter');
+    fs = require('fs');
 
     require('swig-highlight').apply(swig);
 
@@ -56,12 +55,12 @@ module.exports.render = function() {
 
             if(path.extname(f) === '.swig'){
 
-                var data = fs.readFileSync(f, 'utf8');
+                var fmData = utils.getFontMatterData(f);
 
                 // fill object
                 var obj = {
                     url: f.replace('src/','/').replace('.swig','.html'),
-                    fm: fm(data).attributes
+                    fm: fmData.attributes
                 };
 
                 result.push(obj);

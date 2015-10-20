@@ -83,7 +83,7 @@ var methods = {
         var obj = {
             title: title,
             url: url
-        }
+        };
 
         return obj;
 

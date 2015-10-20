@@ -1,11 +1,8 @@
 var path = require('path'),
-    _ = require('lodash'),
-    util = require('gulp-util'),
     fs = require('fs'),
-    fse = require('fs-extra'),
-    jsonfile = require('json-file'),
     mkdirp = require('mkdirp'),
-    dirname = path.dirname;
+    dirname = path.dirname,
+    fm = require('front-matter');
 
 module.exports = {
 
@@ -42,6 +39,14 @@ module.exports = {
     getFileName:function(file){
         // remove extension
         return path.basename(file);
+    },
+
+    getFontMatterData: function(d){
+        // extract front matter
+        var fmData = fs.readFileSync(d, 'utf8');
+        fmData = fm(fmData);
+
+        return fmData;
     }
 
 };

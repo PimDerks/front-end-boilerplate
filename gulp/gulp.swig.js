@@ -8,8 +8,7 @@ var gulp = require('gulp'),
     htmlhint = require("gulp-htmlhint"),
     w3cjs = require('gulp-w3cjs'),
     util = require('gulp-util'),
-    through2 = require('through2'),
-    fm = require('front-matter');
+    through2 = require('through2');
 
 var methods = {
 
@@ -195,10 +194,9 @@ var methods = {
             data.data['local'] = local;
         }
 
-        // extract front matter
-        var fmData = fs.readFileSync(src, 'utf8');
 
-        fmData = fm(fmData);
+        // get FontMatter data
+        var fmData = utils.getFontMatterData(src);
 
         // get front matter attributes
         data.data['fm'] = fmData.attributes;
