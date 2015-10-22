@@ -55,7 +55,7 @@ module.exports.render = function() {
 
             if(path.extname(f) === '.swig'){
 
-                var fmData = utils.getFontMatterData(f);
+                var fmData = utils.getFrontMatterData(f);
 
                 // fill object
                 var obj = {

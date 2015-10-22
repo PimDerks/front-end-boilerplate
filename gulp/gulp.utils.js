@@ -41,7 +41,7 @@ module.exports = {
         return path.basename(file);
     },
 
-    getFontMatterData: function(d){
+    getFrontMatterData: function(d){
         // extract front matter
         var fmData = fs.readFileSync(d, 'utf8');
         fmData = fm(fmData);
