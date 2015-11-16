@@ -325,7 +325,7 @@ var methods = {
             compiledData['src'] = data;
 
             // get FontMatter data
-            var fmData = utils.getFontMatterData(compiledData.component.sub[0].url);
+            var fmData = utils.getFrontMatterData(compiledData.component.sub[0].url);
 
             // get front matter attributes
             compiledData['fm'] = fmData.attributes;
