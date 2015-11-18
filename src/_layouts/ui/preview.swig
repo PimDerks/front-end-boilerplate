@@ -6,7 +6,7 @@
 
         <title>
             {% block title %}
-                {{ src.name }}
+                {{ data.fm.title }}
             {% endblock %} - Preview
         </title>
 
