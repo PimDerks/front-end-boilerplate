@@ -269,10 +269,12 @@ var methods = {
                     json = name + '.json';
 
                 // check is a JSON file exists with the same file in the same directory
-                var local = fse.readJsonSync(json, { throws: false });
-                if(local){
-                    compiledData.data['local'] = local;
-                }
+                fs.stat(json, function(err, stats){
+                    if(!err){
+                        compiledData['local'] = fse.readJsonSync(json, { throws: false });
+                    }
+                });
+
 
                 // get FrontMatter data
                 var fmData = utils.getFrontMatterData(compiledData.url);
