@@ -7,10 +7,10 @@ var gulp = require('gulp'),
     fs = require('fs'),
     fse = require('fs-extra');
 
-    require('swig-highlight').apply(swig);
+require('swig-highlight').apply(swig);
 
-    markedSwig.useFilter(swig);
-    markedSwig.useTag(swig);
+markedSwig.useFilter(swig);
+markedSwig.useTag(swig);
 
 var methods = {
 
@@ -54,7 +54,7 @@ var methods = {
             'component': split[1],
             'subcomponent': split[2]
         };
-         //console.log(obj)
+        //console.log(obj)
         // replace dirs
         return obj;
 
@@ -120,7 +120,7 @@ var methods = {
                 if(filename === component || temp === filename) {
                     var r = methods.getFile(f, component);
                     result.push(r);
-                //
+                    //
                 }
 
             });
@@ -161,8 +161,28 @@ var methods = {
         // get expected data-format
         temp['data'] = methods.getData(c, name) ? methods.getFile(methods.getData(c), name) : null;
 
+        var docs = null,
+            fm = null;
+
         // get documentation
-        temp['doc'] = methods.getDocumentation(c) ? methods.getFile(methods.getDocumentation(c), name) : null;
+        if(methods.getDocumentation(c)){
+
+            // get documentation
+            var docFile = methods.getFile(methods.getDocumentation(c), name);
+
+            // strip frontmatter from file
+            var fmData = utils.getFrontMatterData(docFile.url);
+
+            // fm attributes
+            fm = fmData.attributes;
+
+            // set docs to the body of the document
+            docs = fmData.body;
+
+        }
+
+        temp['fm'] = fm;
+        temp['doc'] = docs;
 
         return temp;
 
@@ -275,7 +295,6 @@ var methods = {
                     }
                 });
 
-
                 // get FrontMatter data
                 var fmData = utils.getFrontMatterData(compiledData.url);
 
@@ -326,11 +345,7 @@ var methods = {
             compiledData['component'] = c;
             compiledData['src'] = data;
 
-            // get FontMatter data
-            var fmData = utils.getFrontMatterData(compiledData.component.sub[0].url);
-
-            // get front matter attributes
-            compiledData['fm'] = fmData.attributes;
+            console.log(c);
 
             // render template using swig
             var swiggedContent = swig.renderFile(template, compiledData);
@@ -366,7 +381,7 @@ module.exports.render = function() {
 
     // render components
     var components = methods.getComponents();
-        // modules = methods.getModules();
+    // modules = methods.getModules();
 
     methods.renderUI(components);
     // console.log(components)
