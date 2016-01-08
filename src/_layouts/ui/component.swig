@@ -6,7 +6,7 @@
 
         <title>
                 {% block title %}
-                        {{ fm.title }}
+                        {{ component.sub[0].fm.title }}
                 {% endblock %} - Components Library
         </title>
 
@@ -17,7 +17,7 @@
 
 {% block content %}
 
-        <h1>{{ fm.title }}</h1>
+        <h1>{{ component.sub[0].fm.title }}</h1>
 
         {# Render base #}
 

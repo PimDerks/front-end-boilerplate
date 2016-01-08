@@ -21,8 +21,7 @@ var api = require('./gulp/gulp.rest'),
     copy = require('./gulp/gulp.copy'),
     ftp = require('./gulp/gulp.ftp'),
     browserSync = require('./gulp/gulp.browsersync')(bs),
-    js = require('./gulp/gulp.javascript');
-browserify = require('./gulp/gulp.browserify'),
+    js = require('./gulp/gulp.javascript'),
     critical = require('./gulp/gulp.critical'),
     docs = require('./gulp/gulp.docs');
 
@@ -79,9 +78,6 @@ gulp.task('watch-doc', ['watch-docs', 'watch-modules', 'watch-modules', 'watch-s
 
 // Start API
 gulp.task('api-start', api.run);
-
-// Browserify
-gulp.task('browserify', browserify);
 
 // Automatically update files in browser
 gulp.task('browser-sync', browserSync);
@@ -141,7 +137,7 @@ gulp.task('docs', function(){
 // Run this when you want to start developing.
 
 gulp.task('dev', function() {
-    seq('api-start', 'watch', 'browserify', 'browser-sync');
+    seq('api-start', 'watch', 'browser-sync');
 });
 
 // Build project

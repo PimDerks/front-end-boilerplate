@@ -7,10 +7,10 @@ var gulp = require('gulp'),
     fs = require('fs'),
     fse = require('fs-extra');
 
-require('swig-highlight').apply(swig);
+    require('swig-highlight').apply(swig);
 
-markedSwig.useFilter(swig);
-markedSwig.useTag(swig);
+    markedSwig.useFilter(swig);
+    markedSwig.useTag(swig);
 
 var methods = {
 
@@ -54,7 +54,7 @@ var methods = {
             'component': split[1],
             'subcomponent': split[2]
         };
-        //console.log(obj)
+         //console.log(obj)
         // replace dirs
         return obj;
 
@@ -120,7 +120,7 @@ var methods = {
                 if(filename === component || temp === filename) {
                     var r = methods.getFile(f, component);
                     result.push(r);
-                    //
+                //
                 }
 
             });
@@ -345,8 +345,6 @@ var methods = {
             compiledData['component'] = c;
             compiledData['src'] = data;
 
-            console.log(c);
-
             // render template using swig
             var swiggedContent = swig.renderFile(template, compiledData);
 
@@ -381,7 +379,7 @@ module.exports.render = function() {
 
     // render components
     var components = methods.getComponents();
-    // modules = methods.getModules();
+        // modules = methods.getModules();
 
     methods.renderUI(components);
     // console.log(components)

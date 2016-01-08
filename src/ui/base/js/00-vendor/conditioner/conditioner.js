@@ -2766,11 +2766,11 @@
     // CommonJS
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = factory(
-        require, require('./utils/Observer'), require('./utils/Promise'), require('./utils/contains'), require('./utils/matchesSelector'), require('./utils/mergeObjects'));
+        require, require('Observer'), require('Promise'), require('contains'), require('matchesSelector'), require('mergeObjects'));
     }
     // AMD
     else if (typeof define === 'function' && define.amd) {
-        define(['require', './utils/Observer', './utils/Promise', './utils/contains', './utils/matchesSelector', './utils/mergeObjects'], factory);
+        define(['require', 'Observer', 'Promise', 'contains', 'matchesSelector', 'mergeObjects'], factory);
     }
     // Browser globals
     else {

@@ -27,8 +27,8 @@ module.exports.copy = function() {
         }))
         //.pipe(debug())
         .pipe(sourcemaps.init())
-        .pipe(sass({outputStyle: 'compressed'}))
-        .pipe(autoprefixer('last 1 version', '> 5%', 'ie 9'))
+        .pipe(sass({ outputStyle: 'compressed'}))
+        .pipe(autoprefixer('last 2 version', '> 5%', 'ie 10'))
         .pipe(sourcemaps.write('.'))
         .pipe(plumber.stop())
         .pipe(gulp.dest(dest));

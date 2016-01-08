@@ -7,7 +7,7 @@
 {% block content %}
         <div class="styleguide-wrapper">
                 <nav class="styleguide-nav">
-                        <img src="/prototype/static/img/placeholder.png" alt="logo" />
+                        <img src="/prototype/static/assets/img/placeholder.png" alt="logo" />
                         <ul>
                                 <li>
                                         <span>Styleguide</span>

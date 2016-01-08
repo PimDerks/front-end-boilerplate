@@ -16,7 +16,7 @@
     </head>
     <body>
 
-        <img src="/prototype/static/img/placeholder.png" />
+        <img src="/prototype/static/assets/img/placeholder.png" />
 
         <div id="skip-links">
             <ul>

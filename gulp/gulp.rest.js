@@ -6,11 +6,11 @@ module.exports.run = function(){
 
     // Options not require
     var options = {
-        port: 8000,
+        port: 3005,
         root: ['./'],
         rewriteNotFound: false,
         rewriteTemplate: 'index.html',
-        corsEnable: false, // Set true to enable CORS
+        corsEnable: true, // Set true to enable CORS
         corsOptions: {}, // CORS options, default all origins
         headers: {} // Set headers for all response, default blank
     };
